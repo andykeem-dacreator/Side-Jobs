@@ -1,6 +1,9 @@
 const conn = require('./conn');
 const User = require('./User');
 
+User.hasMany(Task);
+Task.belongsTo(User);
+
 const syncAndSeed = async()=> {
   await conn.sync({ force: true });
   const [moe, lucy, larry, ethyl] = await Promise.all([
@@ -20,7 +23,10 @@ const syncAndSeed = async()=> {
 };
 
 
+
+
 module.exports = {
   syncAndSeed,
   User,
+  Task
 };
