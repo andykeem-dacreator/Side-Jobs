@@ -55,6 +55,25 @@ const syncAndSeed = async () => {
     }),
   ]);
 
+  const [task1, task2] = await Promise.all([
+    Task.create({
+      title: 'Bring me a dozen eggs',
+      description: 'Pick up a dozen eggs form the market and bring them to 123 Main St.',
+      price: 15,
+      city: 'New York',
+      state: 'NY',
+      category: 'shopping'
+    }),
+    Task.create({
+      title: 'Organize my calendar',
+      description: 'Put important dates on my google calendar and organize it',
+      price: 25,
+      city: 'New York',
+      state: 'NY',
+      category: 'virtual'
+    })
+  ]);
+
   return {
     users: {
       moe,
@@ -62,8 +81,13 @@ const syncAndSeed = async () => {
       larry,
       ethyl,
     },
+    tasks: {
+      task1,
+      task2
+    }
   };
 };
+
 
 module.exports = {
   syncAndSeed,
