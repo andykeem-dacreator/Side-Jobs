@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
-import { attemptLogin } from '../store';
+import { attemptLogin, register } from '../store';
 import { useDispatch } from 'react-redux';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const [changeForm, setChangeForm] = useState(true);
   const [credentials, setCredentials] = useState({
     username: '',
-    password: ''
+    password: '',
+    email: '',
+    firstName: '',
+    lastName: '',
   });
   const [error, setError] = useState('');
 
-  const onChange = ev => {
+  const onChange = (ev) => {
     setCredentials({ ...credentials, [ev.target.name]: ev.target.value });
   };
 
-  const login = async ev => {
+  const login = async (ev) => {
     ev.preventDefault();
     try {
       await dispatch(attemptLogin(credentials));
@@ -23,26 +27,72 @@ const Login = () => {
     }
   };
 
+  const create = async (ev) => {
+    ev.preventDefault();
+    const updatedCredentials = { ...credentials, avatar: getRandomAvatar() };
+    try {
+      await dispatch(register(updatedCredentials));
+    } catch (ex) {
+      setError('Invalid Input, please try again');
+    }
+  };
+
+  const getRandomAvatar = () => {
+    return `https://avatars.githubusercontent.com/u/${Math.floor(
+      Math.random() * 1000
+    )}`;
+  };
+
   return (
     <div>
-      <h2>Login</h2>
-      <form onSubmit={login}>
+      <h1>{changeForm ? 'Login' : 'Create Account'}</h1>
+      <form onSubmit={changeForm ? login : create}>
         <input
           placeholder="username"
-          value={credentials.username}
           name="username"
+          value={credentials.username}
           onChange={onChange}
         />
         <input
           placeholder="password"
-          type='password'
           name="password"
           value={credentials.password}
           onChange={onChange}
         />
-        {error && <div>{error}</div>}
-        <button>Login</button>
+        {!changeForm && (
+          <>
+            <input
+              placeholder="confirm password"
+              name="confirmPassword"
+              value={credentials.confirmPassword || ''}
+              onChange={onChange}
+            />
+            <input
+              placeholder="email"
+              name="email"
+              value={credentials.email || ''}
+              onChange={onChange}
+            />
+            <input
+              placeholder="first name"
+              name="firstName"
+              value={credentials.firstName || ''}
+              onChange={onChange}
+            />
+            <input
+              placeholder="last name"
+              name="lastName"
+              value={credentials.lastName || ''}
+              onChange={onChange}
+            />
+          </>
+        )}
+        <button>{changeForm ? 'Login' : 'Create Account'}</button>
       </form>
+      <button onClick={() => setChangeForm(!changeForm)}>
+        {changeForm ? 'Create Account' : 'Login'}
+      </button>
+      {error && <p>{error}</p>}
     </div>
   );
 };

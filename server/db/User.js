@@ -28,6 +28,9 @@ const User = conn.define('user', {
   },
   email: {
     type: STRING,
+    validate : {
+      isEmail : true
+    }
   },
   wallet: {
     type: FLOAT,
