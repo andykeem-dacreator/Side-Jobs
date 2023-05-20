@@ -61,7 +61,7 @@ const syncAndSeed = async () => {
       )}`,
     }),
  ]);
-   
+
 
   const [task1, task2] = await Promise.all([
     Task.create({
