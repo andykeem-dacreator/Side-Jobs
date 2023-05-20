@@ -1,12 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../store';
-const bcrypt = require('bcrypt');
 
 const Profile = () => {
   const { auth } = useSelector((state) => state);
   const [username, setUsername] = useState('');
-  const [currentPassword, setCurrentPassword] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -18,7 +16,6 @@ const Profile = () => {
   useEffect(() => {
     if (auth.id) {
       setUsername(auth.username);
-      setCurrentPassword('');
       setPassword('');
       setEmail(auth.email);
       setFirstName(auth.firstName);
@@ -43,24 +40,10 @@ const Profile = () => {
     if (password.length === 0) {
       dispatch(updateUser({ username, email, firstName, lastName, avatar }));
     } else {
-      // Check if current password matches
-      if (!bcrypt.compare(currentPassword, auth.password)) {
-        alert('Current password is incorrect.');
-        return;
-      }
       dispatch(
-        updateUser({
-          username,
-          currentPassword,
-          password,
-          email,
-          firstName,
-          lastName,
-          avatar,
-        })
+        updateUser({ username, password, email, firstName, lastName, avatar })
       );
     }
-    setCurrentPassword('');
     setPassword('');
   };
 
@@ -78,20 +61,10 @@ const Profile = () => {
           />
         </label>
         <label>
-          Current Password:
-          <input
-            value={currentPassword}
-            placeholder="Current password"
-            type="password"
-            onChange={(ev) => setCurrentPassword(ev.target.value)}
-          />
-        </label>
-        <label>
-          New Password:
+          Password:
           <input
             value={password}
             placeholder="New password"
-            type="password"
             onChange={(ev) => setPassword(ev.target.value)}
           />
         </label>
