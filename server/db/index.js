@@ -15,12 +15,10 @@ const syncAndSeed = async () => {
     return;
   }
 
- 
+
   await conn.sync({ force: true });
   const [moe, lucy, larry, ethyl] = await Promise.all([
 
-    User.create({ username: 'ethyl', password: '123' }),
-    
     User.create({
       username: 'moe',
       password: '123',
