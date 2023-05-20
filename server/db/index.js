@@ -2,16 +2,25 @@ const conn = require('./conn');
 const User = require('./User');
 const Task = require('./Task');
 const { faker } = require('@faker-js/faker');
+const Review = require('./Review');
 
 User.hasMany(Task);
 Task.belongsTo(User);
+Review.belongsTo(User);
+User.hasMany(Review);
+Review.belongsTo(Task);
 
 const syncAndSeed = async () => {
   if (process.env.NO_SEED) {
     return;
   }
+
+ 
   await conn.sync({ force: true });
   const [moe, lucy, larry, ethyl] = await Promise.all([
+
+    User.create({ username: 'ethyl', password: '123' }),
+    
     User.create({
       username: 'moe',
       password: '123',
@@ -53,7 +62,8 @@ const syncAndSeed = async () => {
         Math.random() * 1000
       )}`,
     }),
-  ]);
+ ]);
+   
 
   const [task1, task2] = await Promise.all([
     Task.create({

@@ -36,6 +36,7 @@ const Task = conn.define('task', {
   taskDoerId: {
     type: STRING,
   },
+
 });
 
 module.exports = Task;
