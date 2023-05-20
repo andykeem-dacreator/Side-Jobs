@@ -1,4 +1,5 @@
 const conn = require('./conn');
+const { faker } = require('@faker-js/faker');
 const { STRING, UUID, UUIDV4, TEXT, BOOLEAN } = conn.Sequelize;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -10,43 +11,23 @@ const User = conn.define('user', {
     primaryKey: true,
     defaultValue: UUIDV4,
   },
+  avatar: {
+    type: TEXT,
+  },
   username: {
     type: STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
-    unique: true,
   },
   password: {
     type: STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
   },
   firstName: {
     type: STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
   },
   lastName: {
     type: STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
   },
   email: {
     type: STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-      isEmail: true,
-    },
-    unique: true,
   },
 });
 
