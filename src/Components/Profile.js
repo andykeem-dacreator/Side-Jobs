@@ -10,6 +10,7 @@ const Profile = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [avatar, setAvatar] = useState('');
+  const [updateMessage, setUpdateMessage] = useState('');
   const dispatch = useDispatch();
   const ref = useRef();
 
@@ -45,6 +46,7 @@ const Profile = () => {
       );
     }
     setPassword('');
+    setUpdateMessage('Profile updated successfully!');
   };
 
   return (
@@ -98,6 +100,7 @@ const Profile = () => {
         </label>
         <button type="submit">Update Profile</button>
       </form>
+      {updateMessage && <p>{updateMessage}</p>}
     </div>
   );
 };

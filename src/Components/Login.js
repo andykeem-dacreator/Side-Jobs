@@ -17,10 +17,7 @@ const Login = () => {
   const login = async ev => {
     ev.preventDefault();
     try {
-      const success = await dispatch(attemptLogin(credentials));
-      if (!success) {
-        setError('Invalid credentials');
-      }
+      await dispatch(attemptLogin(credentials));
     } catch (ex) {
       setError('Invalid combination of username and password');
     }

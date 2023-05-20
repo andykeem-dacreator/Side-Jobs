@@ -1,6 +1,6 @@
 const conn = require('./conn');
 const { faker } = require('@faker-js/faker');
-const { STRING, UUID, UUIDV4, TEXT, BOOLEAN } = conn.Sequelize;
+const { STRING, UUID, UUIDV4, TEXT, BOOLEAN, FLOAT } = conn.Sequelize;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const JWT = process.env.JWT;
@@ -28,6 +28,14 @@ const User = conn.define('user', {
   },
   email: {
     type: STRING,
+  },
+  wallet: {
+    type: FLOAT,
+    defaultValue: 10,
+  },
+  isAdmin: {
+    type: BOOLEAN,
+    defaultValue: false,
   },
 });
 

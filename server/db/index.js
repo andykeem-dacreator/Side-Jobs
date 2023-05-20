@@ -21,6 +21,7 @@ const syncAndSeed = async () => {
       avatar: `https://avatars.githubusercontent.com/u/${Math.floor(
         Math.random() * 1000
       )}`,
+      isAdmin: true,
     }),
     User.create({
       username: 'lucy',
