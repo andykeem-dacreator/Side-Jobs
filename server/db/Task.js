@@ -1,11 +1,11 @@
 const conn = require('./conn');
-const { STRING, TEXT, UUID, UUIDV4, FLOAT } = conn.Sequelize;
+const { STRING, TEXT, UUID, UUIDV4, FLOAT, ENUM } = conn.Sequelize;
 
 const Task = conn.define('task', {
   id: {
     type: UUID,
     primaryKey: true,
-    defaultValue: UUIDV4
+    defaultValue: UUIDV4,
   },
   title: {
     type: TEXT,
@@ -23,11 +23,19 @@ const Task = conn.define('task', {
     type: TEXT,
   },
   category: {
-    type: ENUM('virtual', 'shopping', 'misc', 'moving', 'sport', 'gaming', 'photography'),
+    type: ENUM(
+      'virtual',
+      'shopping',
+      'misc',
+      'moving',
+      'sport',
+      'gaming',
+      'photography'
+    ),
   },
   taskDoerId: {
-    type: STRING
-  }
+    type: STRING,
+  },
 });
 
 module.exports = Task;

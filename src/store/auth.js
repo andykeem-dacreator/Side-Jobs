@@ -43,4 +43,18 @@ export const register = (credentials)=> {
   };
 };
 
+export const updateUser = (user) => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem('token');
+    if (token) {
+      const response = await axios.put('/api/auth', user, {
+        headers: {
+          authorization: token,
+        },
+      });
+      dispatch({ type: 'SET_AUTH', auth: response.data });
+    }
+  };
+};
+
 export default auth;
