@@ -9,14 +9,28 @@ app.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
       attributes: {
-        exclude: ['password']
-      }
+        exclude: ['password'],
+      },
     });
     res.send(users);
   } catch (ex) {
     next(ex);
   }
 });
+
+app.get('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id, {
+      attributes: {
+        exclude: ['password'],
+      },
+    });
+    res.send(user);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
 
 app.delete('/:id', async (req, res, next) => {
   try {
@@ -26,7 +40,5 @@ app.delete('/:id', async (req, res, next) => {
   } catch (ex) {
     next(ex);
   }
-}
-);
-
+});
 
