@@ -22,7 +22,7 @@ const Tasks = ()=> {
         })
       }
     </div>
-  )
+  );
 };
 
-export default Tasks
+export default Tasks;

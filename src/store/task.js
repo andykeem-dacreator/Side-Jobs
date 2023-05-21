@@ -23,7 +23,6 @@ const tasks = (state = [], action)=> {
 export const fetchTasks = ()=> {
   return async(dispatch) => {
     const response = await axios.get('/api/tasks');
-    //console.log(response.data)
     dispatch({ type: 'SET_TASKS', tasks: response.data });
   };
 };

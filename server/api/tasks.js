@@ -4,11 +4,10 @@ const { Task } = require('../db');
 
 module.exports = app;
 
-app.get('/', async(req, res, next)=> {
+app.get('/', async (req, res, next) => {
   try {
     res.send(await Task.findAll());
-  } 
-  catch (error) {
+  } catch (error) {
     next(error);
   }
 });

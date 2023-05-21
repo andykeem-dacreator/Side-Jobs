@@ -16,14 +16,8 @@ const Review = conn.define('review', {
   comment: {
     type: TEXT,
   },
-  // userId: {
-  //   type: STRING,//
-  // },
-  // taskId: {
-  //   type: STRING//
-  // },
   taskDoerId: {
-    type: STRING //
+    type: STRING
   }
 });
 
