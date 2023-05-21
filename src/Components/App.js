@@ -6,6 +6,7 @@ import Tasks from './Tasks';
 import TaskDetail from './TaskDetail';
 import AddTask from './AddTask';
 import UpdateTask from './UpdateTask';
+import ControlPanel from './ControlPanel';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchTasks, fetchUsers } from '../store';
 import { Link, Routes, Route } from 'react-router-dom';
@@ -52,7 +53,7 @@ const App = () => {
           </nav>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/controlPanel" element={<ControlPanel />} />
+            <Route path="/ControlPanel" element={<ControlPanel />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/tasks" element={<Tasks />} />
           </Routes>
