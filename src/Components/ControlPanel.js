@@ -36,7 +36,9 @@ const ControlPanel = () => {
         {users.map((user) => (
           <div key={user.id}>
             <div>
-              {user.firstName} {user.lastName}
+              <Link to={`/users/${user.id}`}>
+                {user.firstName} {user.lastName}
+              </Link>
             </div>
             {!user.isAdmin && (
               <div>

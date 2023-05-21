@@ -7,6 +7,7 @@ import TaskDetail from './TaskDetail';
 import AddTask from './AddTask';
 import UpdateTask from './UpdateTask';
 import ControlPanel from './ControlPanel';
+import PublicProfile from './PublicProfile';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchTasks, fetchUsers } from '../store';
 import { Link, Routes, Route } from 'react-router-dom';
@@ -36,6 +37,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/users/:id" element={<PublicProfile />} />
             <Route path="/tasks" element={<Tasks />} />
             <Route path="/tasks/:id" element={<TaskDetail />} />
             <Route path="/addTask" element={<AddTask />} />
@@ -50,12 +52,17 @@ const App = () => {
             <Link to ="/controlPanel">Control Panel</Link>
             <Link to="/profile">Profile</Link>
             <Link to="/tasks">Tasks</Link>
+            <Link to="/addTask">Add Task</Link>
           </nav>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/ControlPanel" element={<ControlPanel />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/users/:id" element={<PublicProfile />} />
             <Route path="/tasks" element={<Tasks />} />
+            <Route path="/tasks/:id" element={<TaskDetail />} />
+            <Route path="/addTask" element={<AddTask />} />
+            <Route path="/updateTask" element={<UpdateTask />} />
           </Routes>
         </div>
       )}
