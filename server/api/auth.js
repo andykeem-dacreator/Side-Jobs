@@ -44,12 +44,4 @@ app.put('/', isLoggedIn, async(req, res, next)=> {
   }
 });
 
-app.get('/users', isLoggedIn, async (req, res, next) => {
-  try {
-    const users = await User.findAll();
-    res.send(users);
-  } catch (ex) {
-    next(ex);
-  }
-});
 
