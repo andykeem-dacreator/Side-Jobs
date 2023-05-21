@@ -4,7 +4,8 @@ import Login from './Login';
 import Profile from './Profile';
 import Tasks from './Tasks';
 import TaskDetail from './TaskDetail';
-import AddTask from './AddTask'
+import AddTask from './AddTask';
+import UpdateTask from './UpdateTask';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchTasks } from '../store';
 import { Link, Routes, Route } from 'react-router-dom';
@@ -12,7 +13,7 @@ import { Link, Routes, Route } from 'react-router-dom';
 const App = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(loginWithToken());
     dispatch(fetchTasks());
@@ -36,6 +37,7 @@ const App = () => {
             <Route path="/tasks" element={<Tasks />} />
             <Route path="/tasks/:id" element={<TaskDetail />} />
             <Route path="/addTask" element={<AddTask />} />
+            <Route path="/updateTask" element={<UpdateTask />} />
           </Routes>
         </div>
       )}
