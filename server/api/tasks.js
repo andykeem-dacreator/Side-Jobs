@@ -11,3 +11,33 @@ app.get('/', async (req, res, next) => {
     next(error);
   }
 });
+
+app.post('/', async(req, res, next)=> {
+  try {
+    res.status(201).send(await Task.create(req.body));
+  } 
+  catch (error) {
+    next(error);
+  }
+});
+
+app.put('/:id', async(req, res, next) => {
+  try {
+    const task = await Task.findByPk(req.params.id);
+    res.send(await task.update(req.body));
+  } 
+  catch (error) {
+    next(error);
+  }
+});
+
+app.delete('/:id', async(req, res, next)=> {
+  try {
+    const task = await Task.findByPk(req.params.id);
+    await task.destroy();
+    res.sendStatus(204);
+  } 
+  catch (error) {
+    next(error);
+  }
+})
