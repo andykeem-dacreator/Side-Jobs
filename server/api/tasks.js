@@ -1,13 +1,22 @@
 const express = require('express');
 const app = express.Router();
-const { Task } = require('../db');
+const { Task, User } = require('../db');
 
 module.exports = app;
 
 app.get('/', async (req, res, next) => {
   try {
-    res.send(await Task.findAll());
-  } catch (error) {
+    res.send(await Task.findAll({ include: [
+      {
+        model: User, as: 'taskCreator'
+      },
+      {
+        model: User, as: 'taskDoer'
+      }
+      
+      ] }));
+  } 
+  catch (error) {
     next(error);
   }
 });

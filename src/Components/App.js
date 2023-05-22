@@ -6,20 +6,25 @@ import Tasks from './Tasks';
 import TaskDetail from './TaskDetail';
 import AddTask from './AddTask';
 import UpdateTask from './UpdateTask';
+import AddReview from './AddReview';
+import Reviews from './Reviews';
 import ControlPanel from './ControlPanel';
 import PublicProfile from './PublicProfile';
 import { useSelector, useDispatch } from 'react-redux';
-import { loginWithToken, fetchTasks, fetchUsers } from '../store';
+import { loginWithToken, fetchTasks, fetchUsers, fetchReviews } from '../store';
+
+
 import { Link, Routes, Route } from 'react-router-dom';
 
 const App = () => {
-  const { auth } = useSelector((state) => state);
+  const { auth, reviews } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loginWithToken());
     dispatch(fetchTasks());
     dispatch(fetchUsers());
+    dispatch(fetchReviews());
   }, []);
 
   return (
@@ -33,6 +38,7 @@ const App = () => {
             <Link to="/profile">Profile</Link>
             <Link to="/tasks">Tasks</Link>
             <Link to="/addTask">Add Task</Link>
+            <Link to="/reviews">My Reviews ({reviews.length})</Link>
           </nav>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -42,6 +48,9 @@ const App = () => {
             <Route path="/tasks/:id" element={<TaskDetail />} />
             <Route path="/addTask" element={<AddTask />} />
             <Route path="/updateTask" element={<UpdateTask />} />
+            <Route path="/tasks/:id/review/new" element={<AddReview />} />
+            <Route path="/reviews" element={<Reviews />}/>
+            <Route path="/users/:id" element={<UserDetail />}/>
           </Routes>
         </div>
       )}
@@ -63,6 +72,9 @@ const App = () => {
             <Route path="/tasks/:id" element={<TaskDetail />} />
             <Route path="/addTask" element={<AddTask />} />
             <Route path="/updateTask" element={<UpdateTask />} />
+            <Route path="/tasks/:id/review/new" element={<AddReview />} />
+            <Route path="/reviews" element={<Reviews />}/>
+            <Route path="/users/:id" element={<UserDetail />}/>
           </Routes>
         </div>
       )}

@@ -1,5 +1,5 @@
 const conn = require('./conn');
-const { STRING, TEXT, UUID, UUIDV4, FLOAT, ENUM } = conn.Sequelize;
+const { STRING, TEXT, UUID, UUIDV4, FLOAT, ENUM, BOOLEAN } = conn.Sequelize;
 
 const Task = conn.define('task', {
   id: {
@@ -34,9 +34,11 @@ const Task = conn.define('task', {
     ),
   },
   taskDoerId: {
-    type: STRING,
+    type: UUID,
   },
-
+  isComplete: {
+    type: BOOLEAN
+  }
 });
 
 module.exports = Task;
