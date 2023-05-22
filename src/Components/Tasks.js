@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 const Tasks = ()=> {
   const { auth, tasks } = useSelector(state => state);
 
+//console.log('auth.id:', auth.id)
   return (
     <div className = 'tasks-page-layout'>
       <h2>Tasks</h2>

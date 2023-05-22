@@ -5,7 +5,8 @@ const { faker } = require('@faker-js/faker');
 const Review = require('./Review');
 
 User.hasMany(Task);
-Task.belongsTo(User);
+Task.belongsTo(User, { as: 'taskCreator', foreignKey: 'userId' });
+Task.belongsTo(User, { as: 'taskDoer', foreignKey: 'taskDoerId' });
 Review.belongsTo(User);
 User.hasMany(Review);
 Review.belongsTo(Task);
@@ -71,7 +72,9 @@ const syncAndSeed = async () => {
       price: 15,
       city: 'New York',
       state: 'NY',
-      category: 'shopping'
+      category: 'shopping',
+      userId: larry.id,
+      taskDoerId: ethyl.id
     }),
     Task.create({
       title: 'Organize my calendar',
@@ -80,6 +83,17 @@ const syncAndSeed = async () => {
       city: 'New York',
       state: 'NY',
       category: 'virtual'
+    })
+  ]);
+  
+  const [review1] = await Promise.all([
+    Review.create({
+      rating: 5,
+      title: 'great job',
+      comment: 'great job bringing the eggs on time',
+      userId: larry.id,
+      taskId: task1.id,
+      taskDoerId: ethyl.id
     })
   ]);
 
@@ -102,4 +116,5 @@ module.exports = {
   syncAndSeed,
   User,
   Task,
+  Review
 };
