@@ -11,6 +11,10 @@ const PublicProfile = () => {
   //find first task where the taskDoerId === id. then i can get the taskDoer's name
   const task = tasks.find(task => task.taskDoerId === id);
   //createReview component should show if the task that taskcreator made doesn't have review yet
+
+  if (!user) {
+      return null;
+  }
   if(!task){
     return null;
   }

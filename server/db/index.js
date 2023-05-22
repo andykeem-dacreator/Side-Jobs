@@ -83,9 +83,17 @@ const syncAndSeed = async () => {
       city: 'New York',
       state: 'NY',
       category: 'virtual'
+    }),
+    Task.create({
+      title: 'Walk the dog',
+      description: 'Carry 500 lb dog down the stairs',
+      price: 300,
+      city: 'New York',
+      state: 'NY',
+      category: 'moving',
     })
   ]);
-  
+
   const [review1] = await Promise.all([
     Review.create({
       rating: 5,
@@ -106,7 +114,10 @@ const syncAndSeed = async () => {
     },
     tasks: {
       task1,
-      task2
+      task2,
+    },
+    reviews: {
+      review1,
     }
   };
 };
