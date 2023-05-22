@@ -50,7 +50,6 @@ const App = () => {
             <Route path="/updateTask" element={<UpdateTask />} />
             <Route path="/tasks/:id/review/new" element={<AddReview />} />
             <Route path="/reviews" element={<Reviews />}/>
-            <Route path="/users/:id" element={<UserDetail />}/>
           </Routes>
         </div>
       )}
