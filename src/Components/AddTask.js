@@ -4,17 +4,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const AddTask = ()=> {
+  const { auth } = useSelector(state => state);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [price, setPrice] = useState('');
+  const [category, setCategory] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const categories = ['virtual',
+    'shopping',
+    'misc',
+    'moving',
+    'sport',
+    'gaming',
+    'photography'];
   const create = async(ev)=> {
     ev.preventDefault();
-    await dispatch(createTask({ title, description, city, state, price }));
+    await dispatch(createTask({ title, description, city, state, price, category, userId: auth.id }));
     navigate('/tasks')
   };
 
@@ -42,6 +51,15 @@ const AddTask = ()=> {
           Price:
           <input value={ price } onChange={ ev=> setPrice(ev.target.value)} placeholder='Price' />
         </label>
+        <select name="categories" id="task-category" onChange = { ev => setCategory(ev.target.value)}>
+          {
+            categories.map(category => {
+              return (
+                  <option key={category} value={`${category}`}>{`${category}`}</option>
+              )
+            })
+          }
+        </select>
         <button>Add</button>
       </form>
     </div>

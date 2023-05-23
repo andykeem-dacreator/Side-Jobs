@@ -7,7 +7,7 @@ const Tasks = ()=> {
   const { auth, tasks } = useSelector(state => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const unassignedTasks = tasks.filter(task => task.taskDoerId === null);
+  const unassignedTasks = tasks.filter(task => task.taskDoerId === null && task.userId !== auth.id);
 
   const update = async(task) => {
       await dispatch(updateTask({id:task.id, taskDoerId: auth.id}));
