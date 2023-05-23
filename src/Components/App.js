@@ -10,12 +10,11 @@ import AddReview from './AddReview';
 import Reviews from './Reviews';
 import ControlPanel from './ControlPanel';
 import PublicProfile from './PublicProfile';
-import MyTasks from './MyTasks';
+import ToDoList from './ToDoList';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchTasks, fetchUsers, fetchReviews } from '../store';
-
-
 import { Link, Routes, Route } from 'react-router-dom';
+import MyTasks from "./MyTasks";
 
 const App = () => {
   const { auth, reviews } = useSelector((state) => state);
@@ -30,17 +29,18 @@ const App = () => {
 
   return (
     <div>
-      <h1>FS App Template</h1>
+      <h1>Side Quests</h1>
       {auth.id ? '' : <Login />}
       {!!auth.id && !auth.isAdmin && (
         <div>
           <nav>
             <Link to="/">Home</Link>
             <Link to="/profile">Profile</Link>
-            <Link to="/tasks">Tasks</Link>
+            <Link to="/tasks">  Public Tasks</Link>
             <Link to="/addTask">Add Task</Link>
-            <Link to="/reviews">My Reviews ({reviews.length})</Link>
-            <Link to="/myTasks">My Tasks</Link>
+            <Link to="/reviews">My Reviews </Link>
+            <Link to="/toDoList">To Do List</Link>
+            <Link to="/myTasks">Created Tasks</Link>
           </nav>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -52,6 +52,7 @@ const App = () => {
             <Route path="/updateTask" element={<UpdateTask />} />
             <Route path="/tasks/:id/review/new" element={<AddReview />} />
             <Route path="/reviews" element={<Reviews />}/>
+            <Route path="/toDoList" element={<ToDoList />}/>
             <Route path="/myTasks" element={<MyTasks />}/>
           </Routes>
         </div>
@@ -64,7 +65,9 @@ const App = () => {
             <Link to="/profile">Profile</Link>
             <Link to="/tasks">Tasks</Link>
             <Link to="/addTask">Add Task</Link>
-            <Link to="/myTasks">My Tasks</Link>
+            <Link to="/reviews">My Reviews </Link>
+            <Link to="/toDoList">To Do List</Link>
+            <Link to="/myTasks">Created Tasks</Link>
           </nav>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -77,6 +80,7 @@ const App = () => {
             <Route path="/updateTask" element={<UpdateTask />} />
             <Route path="/tasks/:id/review/new" element={<AddReview />} />
             <Route path="/reviews" element={<Reviews />}/>
+            <Route path="/toDoList" element={<ToDoList />}/>
             <Route path="/myTasks" element={<MyTasks />}/>
           </Routes>
         </div>
