@@ -4,7 +4,10 @@ const Task = require('./Task');
 const { faker } = require('@faker-js/faker');
 const Review = require('./Review');
 
-User.hasMany(Task);
+//User.hasMany(Task);
+User.hasMany(Task, { foreignKey: 'userId', as: 'createdTasks' });
+User.hasMany(Task, { foreignKey: 'taskDoerId', as: 'performedTasks' });
+
 Task.belongsTo(User, { as: 'taskCreator', foreignKey: 'userId' });
 Task.belongsTo(User, { as: 'taskDoer', foreignKey: 'taskDoerId' });
 Review.belongsTo(User);
