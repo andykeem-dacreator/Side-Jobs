@@ -31,33 +31,36 @@ const Reviews = () => {
   //   dispatch(updateReview())
   // };
   return (
-    <ul>
-      {
-        filteredReviews.map(review =>{
-          const showUpdateForm = showUpdateFormMap[review.id] || false;
-          
-          return (
+    <div>
+      <h2>My Reviews</h2>
+      <ul>
+        {
+          filteredReviews.map(review =>{
+            const showUpdateForm = showUpdateFormMap[review.id] || false;
             
-            <li key={ review.id }>
-              <Link to={`/users/${review.taskDoerId}`}>{ review.title } </Link>
-              <button onClick={ ()=> handleUpdateClick(review.id) }>{showUpdateForm ? 'Cancel Update' : 'Go to Update'}</button>
-              {/*<Tooltip title="Delete">
-                <IconButton onClick={ () => destroy(review) }><DeleteIcon /></IconButton>
-              </Tooltip>*/}
-              <button onClick={ () => destroy(review) }>X</button>
-              {
-                showUpdateForm && (
-                <UpdateReview review={review}/>
-                )
-              }
-             
-            </li>
-            
-          );
-        })
-      }
-    </ul>
-    );
+            return (
+              
+              <li key={ review.id }>
+                <Link to={`/users/${review.taskDoerId}`}>{ review.title } </Link>
+                <button onClick={ ()=> handleUpdateClick(review.id) }>{showUpdateForm ? 'Cancel Update' : 'Go to Update'}</button>
+                {/*<Tooltip title="Delete">
+                  <IconButton onClick={ () => destroy(review) }><DeleteIcon /></IconButton>
+                </Tooltip>*/}
+                <button onClick={ () => destroy(review) }>X</button>
+                {
+                  showUpdateForm && (
+                  <UpdateReview review={review}/>
+                  )
+                }
+              
+              </li>
+              
+            );
+          })
+        }
+      </ul>
+    </div> 
+  );
 };
 
 export default Reviews;

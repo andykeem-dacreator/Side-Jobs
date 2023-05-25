@@ -30,7 +30,9 @@ const Task = conn.define('task', {
       'moving',
       'sport',
       'gaming',
-      'photography'
+      'photography',
+      'beauty',
+      'cleaning'
     ),
   },
   taskDoerId: {

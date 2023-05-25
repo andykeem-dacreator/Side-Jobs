@@ -16,7 +16,7 @@ const MyTasks = () => {
     return (
         <div className='myTasks-container'>
             <div>
-                <h1>Created Tasks</h1>
+                <h2>Created Tasks</h2>
             </div>
             <div>
                 <ul>
