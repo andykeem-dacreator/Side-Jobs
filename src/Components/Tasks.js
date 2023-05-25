@@ -11,7 +11,7 @@ const Tasks = ()=> {
 
   const update = async(task) => {
       await dispatch(updateTask({id:task.id, taskDoerId: auth.id}));
-      navigate('/myTasks')
+      navigate('/toDoList')
   }
   return (
     <div className = 'tasks-page-layout'>

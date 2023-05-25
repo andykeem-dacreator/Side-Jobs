@@ -1,25 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { deleteTask } from "../store";
 import UpdateTask from "./UpdateTask";
 
 const TaskDetail = () => {
   const { id } = useParams();
-  const { tasks } = useSelector((state) => state);
-  const task = tasks.find((t) => t.id === id);
+  const { tasks, auth, reviews } = useSelector((state) => state);
+  let task = tasks.find((t) => t.id === id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const review = reviews.find(review => review.taskId === id);
+  //console.log('REVIEW:', review)
+   useEffect(()=>{
+    task = tasks.find((t) => t.id === id);
 
+  }, [tasks]);
+  
   if (!task) {
     return null;
   }
+
+ 
   const destroy = async (task) => {
     await dispatch(deleteTask(task));
     navigate("/tasks");
   };
-
-  return (
+  // let review;
+  
+ 
+   return (
+    
     <div>
       <div className="task-detail">
         <h1>Task Detail</h1>
@@ -33,6 +44,10 @@ const TaskDetail = () => {
       </div>
       <div>
         <UpdateTask />
+        <pre>
+          { JSON.stringify(task, null, 2) }
+        </pre>
+         { task.isComplete && task.taskDoerId && !review ? <Link to={`/tasks/${task.id}/review/new`}><button>Leave a Review</button></Link> : ''} 
       </div>
     </div>
   );

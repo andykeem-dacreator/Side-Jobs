@@ -32,7 +32,17 @@ app.post('/', async(req, res, next)=> {
 
 app.put('/:id', async(req, res, next) => {
   try {
-    const task = await Task.findByPk(req.params.id);
+    const task = await Task.findByPk(req.params.id, {
+      include: [
+      {
+        model: User, as: 'taskCreator'
+      },
+      {
+        model: User, as: 'taskDoer'
+      }
+      
+      ]
+    });
     res.send(await task.update(req.body));
   } 
   catch (error) {

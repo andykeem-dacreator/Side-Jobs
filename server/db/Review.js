@@ -16,35 +16,27 @@ const Review = conn.define('review', {
   comment: {
     type: TEXT,
   },
-  // taskDoerId: {
-  //   type: STRING
-  // }
-  userId: {
-    type: UUID
-  },
-  taskId: {
-    type: UUID,
-    //allowNull: false,
-    references: {
-      model: 'tasks',
-      key: 'id',
-    }
-  },
   taskDoerId: {
-    type: UUID,
-    //allowNull: false,
-    references: {
-      model: 'users',
-      key: 'id'
-    }
-  },
-} , {
-  indexes: [
-    {
-      unique: true,
-      fields: ['taskId', 'taskDoerId'],
-    },
-  ]
-});
+    type: UUID
+  }
+}
+// , {
+//   indexes: [
+//     {
+//       unique: true,
+//       fields: ['taskId']
+//     }
+//   ],
+//   validate: {
+//     async uniqueReviewPerTask() {
+//       const existingReview = await Review.findOne({
+//           where: {
+//             taskId: this.taskId
+//           }
+//         });
+//     }
+//   }
+// }
+);
 
 module.exports = Review;
