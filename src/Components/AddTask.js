@@ -29,7 +29,7 @@ const AddTask = ()=> {
 
   return (
     <div className = 'add-task'>
-      <h2>Add a Task</h2>
+      <h2>Post a Job</h2>
       <form onSubmit={ create }>
         <label>
           Title:

@@ -7,7 +7,7 @@ const ToDoList = () => {
     return (
         <div className='myTasks-container'>
             <div>
-                <h1>To Do List</h1>
+                <h2>Accepted Jobs</h2>
             </div>
             <div>
                 <ul>
