@@ -4,12 +4,19 @@ const Task = require('./Task');
 const { faker } = require('@faker-js/faker');
 const Review = require('./Review');
 
-User.hasMany(Task);
+//User.hasMany(Task);
+User.hasMany(Task, { as: 'createdTasks', foreignKey: 'userId' });
+User.hasMany(Task, { as: 'performedTasks', foreignKey: 'taskDoerId' });
+
 Task.belongsTo(User, { as: 'taskCreator', foreignKey: 'userId' });
 Task.belongsTo(User, { as: 'taskDoer', foreignKey: 'taskDoerId' });
-Review.belongsTo(User);
-User.hasMany(Review);
+//Review.belongsTo(User);
+Review.belongsTo(User, { as: 'taskCreator', foreignKey: 'userId'});
 Review.belongsTo(Task);
+
+//User.hasMany(Review);
+User.hasMany(Review);
+Task.hasOne(Review);
 
 const syncAndSeed = async () => {
   if (process.env.NO_SEED) {
@@ -82,7 +89,8 @@ const syncAndSeed = async () => {
       price: 25,
       city: 'New York',
       state: 'NY',
-      category: 'virtual'
+      category: 'virtual',
+      userId: larry.id,
     }),
     Task.create({
       title: 'Walk the dog',

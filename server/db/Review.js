@@ -17,8 +17,26 @@ const Review = conn.define('review', {
     type: TEXT,
   },
   taskDoerId: {
-    type: STRING
+    type: UUID
   }
-});
+}
+// , {
+//   indexes: [
+//     {
+//       unique: true,
+//       fields: ['taskId']
+//     }
+//   ],
+//   validate: {
+//     async uniqueReviewPerTask() {
+//       const existingReview = await Review.findOne({
+//           where: {
+//             taskId: this.taskId
+//           }
+//         });
+//     }
+//   }
+// }
+);
 
 module.exports = Review;

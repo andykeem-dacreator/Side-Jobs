@@ -34,7 +34,7 @@ const PublicProfile = () => {
       }
       </ol>
       <div>
-      { task.userId === auth.id ? <Link to={`/tasks/${task.id}/review/new`}><button>Leave a Review</button></Link>: ''}
+      {/*{ task.userId === auth.id ? <Link to={`/tasks/${task.id}/review/new`}><button>Leave a Review</button></Link>: ''}*/}
     </div>
     </div>
   );

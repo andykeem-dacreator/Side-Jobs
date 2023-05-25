@@ -52,9 +52,12 @@ const AddTask = ()=> {
           <input value={ price } onChange={ ev=> setPrice(ev.target.value)} placeholder='Price' />
         </label>
         <select name="categories" id="task-category" onChange = { ev => setCategory(ev.target.value)}>
+          <option value=''>Select a Category</option>
           {
+            
             categories.map(category => {
               return (
+                  
                   <option key={category} value={`${category}`}>{`${category}`}</option>
               )
             })
