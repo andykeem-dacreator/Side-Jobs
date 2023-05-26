@@ -54,13 +54,13 @@ const App = () => {
       {!!auth.id && !auth.isAdmin && (
         <div class='navbar'>
           <nav id="menu">
-            <Link to="/">Home</Link>
+            <Link to="/" style={{color: theme === 'dark' ? 'white' : 'black'}}>Home</Link>
             <Link to="/profile">Profile</Link>
             <div className={`dropdown ${dropdownOpen ? 'open' : ''}`}>
               <span onClick={toggleDropdown}>Jobs{' '}</span>
               <div className='dropdown-content'>
                 <li>
-                  <Link to="/tasks">Available Jobs</Link>
+                  <Link to="/tasks" style={{color: 'white'}}>Available Jobs</Link>
                 </li>
                 <li>
                   <Link to="/addTask">Post a Job</Link>
