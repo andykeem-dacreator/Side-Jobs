@@ -11,26 +11,20 @@ const TaskDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const review = reviews.find(review => review.taskId === id);
-  //console.log('REVIEW:', review)
-   useEffect(()=>{
-    task = tasks.find((t) => t.id === id);
-
-  }, [tasks]);
+  // useEffect(()=>{
+  //   task = tasks.find((t) => t.id === id);
+  // }, [tasks]);
   
   if (!task) {
     return null;
   }
 
- 
   const destroy = async (task) => {
     await dispatch(deleteTask(task));
     navigate("/tasks");
   };
-  // let review;
-  
  
    return (
-    
     <div>
       <div className="task-detail">
         <h1>Task Detail</h1>
