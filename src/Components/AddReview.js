@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { createReview } from '../store';
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const AddReview = () => {
-  const { auth, tasks } = useSelector(state => state);
+  const { auth, tasks, users } = useSelector(state => state);
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,6 +21,11 @@ const AddReview = () => {
   const task = tasks.find(task => task.id === id);
 
   if(!task){
+    return null;
+  }
+
+  const user = users.find(user => user.id === task.taskDoerId );
+  if(!user){
     return null;
   }
 
@@ -33,12 +42,13 @@ const AddReview = () => {
 
   return (
     <div>
-      <h2>Create a Review for: { task.taskDoer.username }</h2>
+      <h2>Create a Review for: { user.username }</h2>
+      <h3>Job: { task.title }</h3>
       <form onSubmit={ create }>
-        <input value={ rating } onChange={ ev => setRating(Number(ev.target.value)) } placeholder='rating' />
-        <input value={ title } onChange={ ev => setTitle(ev.target.value) } placeholder='title' />
-        <input value={ comment } onChange={ ev => setComment(ev.target.value) } placeholder='written review' />
-        <button>Add Review</button>
+        <Rating value={ rating } onChange={ ev => setRating(Number(ev.target.value)) } placeholder='rating' />
+        <TextField  id="outlined-basic" label="Title" variant="outlined" value={ title } onChange={ ev => setTitle(ev.target.value) } />
+        <TextField  id="outlined-basic" label="Comment" variant="outlined" value={ comment } onChange={ ev => setComment(ev.target.value) } />
+        <Button variant="outlined" type="submit">Add Review</Button>
       </form>
     </div>
     );

@@ -15,7 +15,6 @@ app.get('/', async(req, res, next)=> {
 
 app.post('/', async(req, res, next)=> {
   try{
-    console.log('review POST req.body:', req.body)
     const reviews = await Review.findAll();
     for (const r of reviews){
       if(r.taskId === req.body.taskId){

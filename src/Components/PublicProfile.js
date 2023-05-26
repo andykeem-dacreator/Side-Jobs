@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
+import Rating from '@mui/material/Rating';
 
 const PublicProfile = () => {
   const { users, auth, tasks, reviews} = useSelector((state) => state);
@@ -25,9 +27,10 @@ const PublicProfile = () => {
         filteredReviews.map(review =>{
           return (
             <li key={ review.id }>
-              { review.rating } <br/>
-              { review.title } <br/>
-              { review.comment }
+              {/*{ review.rating } <br/>*/}
+              <Rating name="read-only" value={review.rating} readOnly /> <br/>
+              <Typography variant='h6'>{ review.title }</Typography> <br/>
+              <Typography variant='body1'>{ review.comment }</Typography>
             </li>
           );
         })

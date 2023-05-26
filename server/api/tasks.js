@@ -32,8 +32,7 @@ app.post('/', async(req, res, next)=> {
 
 app.put('/:id', async(req, res, next) => {
   try {
-    const task = await Task.findByPk(req.params.id, {
-      include: [
+    const task = await Task.findByPk(req.params.id, { include: [
       {
         model: User, as: 'taskCreator'
       },
@@ -41,8 +40,7 @@ app.put('/:id', async(req, res, next) => {
         model: User, as: 'taskDoer'
       }
       
-      ]
-    });
+      ] });
     res.send(await task.update(req.body));
   } 
   catch (error) {
