@@ -52,7 +52,7 @@ const App = () => {
       <h1>Side Quests</h1>
       {auth.id ? '' : <Login />}
       {!!auth.id && !auth.isAdmin && (
-        <div class='navbar'>
+        <div className='navbar'>
           <nav id="menu">
             <Link to="/" style={{color: theme === 'dark' ? 'white' : 'black'}}>Home</Link>
             <Link to="/profile">Profile</Link>
@@ -60,7 +60,7 @@ const App = () => {
               <span onClick={toggleDropdown}>Jobs{' '}</span>
               <div className='dropdown-content'>
                 <li>
-                  <Link to="/tasks" style={{color: 'white'}}>Available Jobs</Link>
+                  <Link to="/tasks">Available Jobs</Link>
                 </li>
                 <li>
                   <Link to="/addTask">Post a Job</Link>

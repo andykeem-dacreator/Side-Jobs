@@ -34,7 +34,7 @@ const User = conn.define('user', {
   },
   wallet: {
     type: FLOAT,
-    defaultValue: 10,
+    defaultValue: 1000,
   },
   isAdmin: {
     type: BOOLEAN,

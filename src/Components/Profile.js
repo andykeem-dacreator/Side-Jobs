@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateUser } from '../store';
+import { updateAuth } from '../store';
 
 const Profile = () => {
   const { auth } = useSelector((state) => state);
@@ -39,10 +39,10 @@ const Profile = () => {
   const updateProfile = (ev) => {
     ev.preventDefault();
     if (password.length === 0) {
-      dispatch(updateUser({ username, email, firstName, lastName, avatar }));
+      dispatch(updateAuth({ username, email, firstName, lastName, avatar }));
     } else {
       dispatch(
-        updateUser({ username, password, email, firstName, lastName, avatar })
+        updateAuth({ username, password, email, firstName, lastName, avatar })
       );
     }
     setPassword('');
