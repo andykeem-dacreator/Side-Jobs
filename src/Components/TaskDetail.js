@@ -34,10 +34,10 @@ const TaskDetail = () => {
           Location: {task.city}, {task.state}
         </div>
         <div className="task-price">Price: {task.price}</div>
-        <button onClick={() => destroy(task)}>Delete</button>
+        { task.taskDoerId === auth.id ? '': <button onClick={() => destroy(task)}>Delete</button>}
       </div>
       <div>
-        <UpdateTask />
+        { task.taskDoerId === auth.id ? '': <UpdateTask />}
         <pre>
           { JSON.stringify(task, null, 2) }
         </pre>
