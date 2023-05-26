@@ -41,7 +41,7 @@ export const register = (credentials) => {
   };
 };
 
-export const updateUser = (user) => {
+export const updateAuth = (user) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem('token');
     if (token) {

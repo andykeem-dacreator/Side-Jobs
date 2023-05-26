@@ -1,16 +1,21 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link , useNavigate } from 'react-router-dom';
+import {updateTask, updateUser} from "../store";
 
-import {updateTask} from "../store";
 const MyTasks = () => {
-    const {auth, tasks} = useSelector(state => state);
+    const {users, auth, tasks} = useSelector(state => state);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     let filteredTasks = tasks.filter((task) => task.userId === auth.id)
 
     const update = async(task) => {
+        console.log('task', task);
+        const taskDoer = users.find((user) => user.id === task.taskDoerId);
+        console.log('taskdoer', taskDoer);
         await dispatch(updateTask({id:task.id, isComplete: true}));
+        await dispatch(updateUser({id:taskDoer.id, wallet: taskDoer.wallet + task.price}));
+        await dispatch(updateUser({id:auth.id, wallet: auth.wallet - task.price}));
         navigate('/myTasks')
     }
     return (
