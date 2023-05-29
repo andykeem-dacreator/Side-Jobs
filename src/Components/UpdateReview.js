@@ -2,7 +2,18 @@ import React, { useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateReview } from '../store';
 import { useParams } from 'react-router-dom';
-
+ import {
+   Modal,
+   FormControl,
+   Rating,
+   TextField,
+   Button,
+   Typography
+//   IconButton,
+//   DeleteIcon,
+//   Tooltip,
+//   EditIcon
+ } from '@mui/material'
 const UpdateReview = ({review}) => {
   const { auth, reviews, tasks } = useSelector(state => state);
   const dispatch = useDispatch();
@@ -36,10 +47,13 @@ const UpdateReview = ({review}) => {
     <>
       <h3>Edit Review</h3>
       <form onSubmit={ update }>
-        <input value={ rating } onChange={ ev => setRating(Number(ev.target.value)) } placeholder='rating'/>
-        <input value={ title } onChange={ ev => setTitle(ev.target.value) } placeholder='title' />
-        <input value={ comment } onChange={ ev => setComment(ev.target.value) } placeholder='comment' />
-        <button>Update</button>
+        <Typography component="legend">Rating</Typography>
+        <Rating value={ rating } onChange={ ev => setRating(Number(ev.target.value)) } placeholder='rating' />
+        <FormControl>
+        <TextField margin='normal' id="outlined-basic" label="Title" variant="outlined" value={ title } onChange={ ev => setTitle(ev.target.value) } />
+        </FormControl>
+        <TextField margin='normal' id="outlined-basic" label="Comment" variant="outlined" value={ comment } onChange={ ev => setComment(ev.target.value) } />
+        <Button margin='normal' variant="outlined" type="submit">Update</Button>
       </form>
     </>
     );

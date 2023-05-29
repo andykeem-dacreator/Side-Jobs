@@ -35,7 +35,7 @@ const MyTasks = () => {
                                     <div className = 'task-price'>Price: {task.price}</div>
                                     <div className = 'task-location'>Location: {task.city}, {task.state}</div>
                                 </Link>
-                                <button onClick={() => update(task)}>Task Complete</button>
+                                { task.taskDoerId && <button onClick={() => update(task)}>Task Complete</button>}
                             </li>
                         )
                     })

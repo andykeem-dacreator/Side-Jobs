@@ -41,7 +41,7 @@ const TaskDetail = () => {
         <pre>
           { JSON.stringify(task, null, 2) }
         </pre>
-         { task.isComplete && task.taskDoerId && !review ? <Link to={`/tasks/${task.id}/review/new`}><button>Leave a Review</button></Link> : ''} 
+         { auth.id === task.userId && task.isComplete && task.taskDoerId && !review ? <Link to={`/tasks/${task.id}/review/new`}><button>Leave a Review</button></Link> : ''} 
       </div>
     </div>
   );
