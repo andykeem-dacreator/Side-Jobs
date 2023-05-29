@@ -40,6 +40,9 @@ const User = conn.define('user', {
     type: BOOLEAN,
     defaultValue: false,
   },
+  aboutMe: {
+    type: TEXT
+  }
 });
 
 User.addHook('beforeSave', async (user) => {

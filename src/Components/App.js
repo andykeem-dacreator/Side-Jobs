@@ -16,24 +16,38 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchTasks, fetchUsers, fetchReviews } from '../store';
 import { Link, Routes, Route } from 'react-router-dom';
 import MyTasks from "./MyTasks";
+import {
+  IconButton,
+  Box,
+  useTheme,
+  ThemeProvider,
+  createTheme,
+  
+ } from '@mui/material';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+
+const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 const App = () => {
   const { auth, reviews } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const [theme, setTheme] = useState('light');
+ // const [theme, setTheme] = useState('light');
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+  const theme = useTheme();
+  const colorMode = React.useContext(ColorModeContext);
+  
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const toggleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
-    };
+  // const toggleTheme = () => {
+  //   if (theme === 'light') {
+  //     setTheme('dark');
+  //   } else {
+  //     setTheme('light');
+  //   }
+  //   };
 
   useEffect(() => {
     dispatch(loginWithToken());
@@ -42,13 +56,22 @@ const App = () => {
     dispatch(fetchReviews());
   }, []);
 
+  // useEffect(() => {
+  //     document.body.className = theme;
+  //   }, [theme]);
   useEffect(() => {
-      document.body.className = theme;
-    }, [theme]);
-
+      document.body.className = theme.palette.mode;
+    }, [theme.palette.mode]);
   return (
-    <div className={`App ${theme}`}>
-      <button onClick={toggleTheme}>{theme === 'light' ? 'Dark Mode': 'Light Mode'}</button>
+    <div> 
+    
+      
+    {theme.palette.mode} mode
+      <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+        {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+      </IconButton>
+    
+      
       <h1>Side Quests</h1>
       {auth.id ? '' : <Login />}
       {!!auth.id && !auth.isAdmin && (
@@ -121,8 +144,38 @@ const App = () => {
           </Routes>
         </div>
       )}
+      
     </div>
   );
 };
+export default function ToggleColorMode() {
+  const [mode, setMode] = React.useState('light');
+  const colorMode = React.useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+      },
+    }),
+    [],
+  );
 
-export default App;
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+    [mode],
+  );
+
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
+
+//export default App;

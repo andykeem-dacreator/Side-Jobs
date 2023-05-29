@@ -68,6 +68,7 @@ const syncAndSeed = async () => {
       avatar: `https://avatars.githubusercontent.com/u/${Math.floor(
         Math.random() * 1000
       )}`,
+      aboutMe: 'I am a jack of all trades, so I can handle pretty much whatever you throw at me, but I love cleaning and organizing the most!',
     }),
     User.create({
       username: 'andy',
