@@ -11,6 +11,7 @@ import Reviews from './Reviews';
 import ControlPanel from './ControlPanel';
 import PublicProfile from './PublicProfile';
 import ToDoList from './ToDoList';
+import Navbar from './Navbar';
 import About from './About';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchTasks, fetchUsers, fetchReviews } from '../store';
@@ -22,12 +23,24 @@ import {
   useTheme,
   ThemeProvider,
   createTheme,
-  
+  AppBar,
+  Toolbar,
+  Typography,
+  Menu,
+  MenuIcon,
+  Container,
+  Avatar,
+  Button,
+  Tooltip,
+  MenuItem,
+  AdbIcon
  } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+// const pages = ['Home', 'Profile', 'Available Jobs', 'Post a Job', 'Jobs I Accepted', 'Created Tasks', 'My Reviews', 'About'];
+// const settings = ['Profile', 'Account', 'Dashboard', ]
 
 const App = () => {
   const { auth, reviews } = useSelector((state) => state);
@@ -36,6 +49,7 @@ const App = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
+
   
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -64,21 +78,14 @@ const App = () => {
     }, [theme.palette.mode]);
   return (
     <div> 
-    
-      
-    {theme.palette.mode} mode
-      <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
-        {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-      </IconButton>
-    
-      
-      <h1>Side Quests</h1>
+      {/* <h1>Side Quests</h1> */}
       {auth.id ? '' : <Login />}
       {!!auth.id && !auth.isAdmin && (
         <div className='navbar'>
           <nav id="menu">
-            <Link to="/" style={{color: theme === 'dark' ? 'white' : 'black'}}>Home</Link>
-            <Link to="/profile">Profile</Link>
+            <Navbar style={{color: theme === 'dark' ? 'white' : 'black'}}/>
+            {/* <Link to="/" style={{color: theme === 'dark' ? 'white' : 'black'}}>Home</Link>
+            <Link to="/profile" style={{color: theme === 'dark' ? 'white' : 'black'}}>Profile</Link>
             <div className={`dropdown ${dropdownOpen ? 'open' : ''}`}>
               <span onClick={toggleDropdown}>Jobs{' '}</span>
               <div className='dropdown-content'>
@@ -98,7 +105,7 @@ const App = () => {
             </div>
             <Link to="/reviews">My Reviews</Link>
             <Link to="/about">About</Link>
-
+            <Link to='/navtest'>test</Link> */}
           </nav>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -113,14 +120,15 @@ const App = () => {
             <Route path="/toDoList" element={<ToDoList />} />
             <Route path="/myTasks" element={<MyTasks />} />
             <Route path="/about" element={<About />} />
+            <Route path='/navtest' element={<Navbar />} />
           </Routes>
         </div>
       )}
       {!!auth.id && auth.isAdmin && (
         <div>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to ="/controlPanel">Control Panel</Link>
+          <nav className='navbar'>
+            <Link to="/" style={{color: theme === 'dark' ? 'white' : 'black'}}>Home</Link>
+            <Link to ="/controlPanel" >Control Panel</Link>
             <Link to="/profile">Profile</Link>
             <Link to="/tasks">Available Jobs</Link>
             <Link to="/addTask">Add Task</Link>
@@ -144,7 +152,10 @@ const App = () => {
           </Routes>
         </div>
       )}
-      
+          {theme.palette.mode} mode
+      <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+        {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+      </IconButton>
     </div>
   );
 };

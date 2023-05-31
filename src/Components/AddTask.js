@@ -24,7 +24,7 @@ const AddTask = ()=> {
   const create = async(ev)=> {
     ev.preventDefault();
     await dispatch(createTask({ title, description, city, state, price, category, userId: auth.id }));
-    navigate('/tasks')
+    navigate('/myTasks')
   };
 
   return (
