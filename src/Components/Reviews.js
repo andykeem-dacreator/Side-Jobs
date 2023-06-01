@@ -58,7 +58,7 @@ const Reviews = () => {
   return (
     <div>
       <Typography variant='h4'>My Reviews of Jobs I Posted</Typography>
-      <ul>
+      <ol>
         {
           filteredReviews.map(review =>{
             const showUpdateForm = showUpdateFormMap[review.id] || false;
@@ -73,7 +73,6 @@ const Reviews = () => {
                   Job: { task.title }
                   <br/>
                   Review Title: <Link to={`/users/${review.taskDoerId}`}>{ review.title } </Link>
-                  {/*<IconButton onClick={ ()=> handleUpdateClick(review.id) }>{showUpdateForm ? <Tooltip title="Edit"><EditIcon /></Tooltip>:  <Tooltip title="Edit"><EditIcon /></Tooltip>}</IconButton>*/}
                   <IconButton onClick={ ()=> handleUpdateClick(review.id) }>
                     {showUpdateForm}
                     <Tooltip title="Edit Review">
@@ -99,7 +98,7 @@ const Reviews = () => {
                   </Dialog>)}
                 </li>
             )})}
-      </ul>
+      </ol>
     </div> 
   );
 };

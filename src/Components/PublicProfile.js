@@ -26,9 +26,7 @@ const PublicProfile = () => {
   const user = users.find((user) => user.id === id);
   const dispatch = useDispatch();
   const filteredReviews = reviews.filter(review => review.taskDoerId === id);
-  //find first task where the taskDoerId === id. then i can get the taskDoer's name
-  //const task = tasks.find(task => task.taskDoerId === id);
-  //createReview component should show if the task that taskcreator made doesn't have review yet
+ 
   const [sortedReviews, setSortedReviews] = useState([]);
   const [sortOption, setSortOption] = useState('');
   const [filterCategory, setFilterCategory] = useState('');
@@ -43,8 +41,9 @@ const PublicProfile = () => {
     'beauty',
     'cleaning',
     ];
-    
+ 
  // const task = tasks.find(task => task.category === filterCategory);
+  //let filteredByCategory;
   
    useEffect(() => {
     const filteredByCategory = filteredReviews.filter((review) => {
@@ -62,7 +61,10 @@ const PublicProfile = () => {
           if (sortOption === 1) {
             return b.rating - a.rating;
           }
-          return a.rating - b.rating;
+          else if(sortOption === 2 ){
+            return a.rating - b.rating;
+          }
+          return 0;
         })
         
     );
@@ -96,7 +98,7 @@ const PublicProfile = () => {
         <Divider />
       </List>
    
-      <Typography variant='h5'>Reviews ({reviews.length})</Typography>
+      <Typography variant='h5'>Reviews ({sortedReviews.length})</Typography>
       <Stack
         direction='row'
       >
@@ -138,7 +140,9 @@ const PublicProfile = () => {
           const createdAt = new Date(review.createdAt);
           const taskCreator = users.find(user => user.id === review.userId);
           const task = tasks.find(task => task.id === review.taskId);
-          
+          if(!task){
+            return null;
+          }
           return (
           <React.Fragment key={review.id}>
             <ListItem key={ review.id }
