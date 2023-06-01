@@ -1,17 +1,17 @@
-const conn = require('./conn');
-const User = require('./User');
-const Task = require('./Task');
-const { faker } = require('@faker-js/faker');
-const Review = require('./Review');
+const conn = require("./conn");
+const User = require("./User");
+const Task = require("./Task");
+const { faker } = require("@faker-js/faker");
+const Review = require("./Review");
 
 //User.hasMany(Task);
-User.hasMany(Task, { as: 'createdTasks', foreignKey: 'userId' });
-User.hasMany(Task, { as: 'performedTasks', foreignKey: 'taskDoerId' });
+User.hasMany(Task, { as: "createdTasks", foreignKey: "userId" });
+User.hasMany(Task, { as: "performedTasks", foreignKey: "taskDoerId" });
 
-Task.belongsTo(User, { as: 'taskCreator', foreignKey: 'userId' });
-Task.belongsTo(User, { as: 'taskDoer', foreignKey: 'taskDoerId' });
+Task.belongsTo(User, { as: "taskCreator", foreignKey: "userId" });
+Task.belongsTo(User, { as: "taskDoer", foreignKey: "taskDoerId" });
 //Review.belongsTo(User);
-Review.belongsTo(User, { as: 'taskCreator', foreignKey: 'userId'});
+Review.belongsTo(User, { as: "taskCreator", foreignKey: "userId" });
 Review.belongsTo(Task);
 
 //User.hasMany(Review);
@@ -23,14 +23,12 @@ const syncAndSeed = async () => {
     return;
   }
 
-
   await conn.sync({ force: true });
   const [moe, lucy, larry, ethyl, andy] = await Promise.all([
-
     User.create({
-      username: 'moe',
-      password: '123',
-      firstName: 'Moe',
+      username: "moe",
+      password: "123",
+      firstName: "Moe",
       lastName: faker.person.lastName(),
       email: faker.internet.email(),
       avatar: `https://avatars.githubusercontent.com/u/${Math.floor(
@@ -39,9 +37,9 @@ const syncAndSeed = async () => {
       isAdmin: true,
     }),
     User.create({
-      username: 'lucy',
-      password: '123',
-      firstName: 'Lucy',
+      username: "lucy",
+      password: "123",
+      firstName: "Lucy",
       lastName: faker.person.lastName(),
       email: faker.internet.email(),
       avatar: `https://avatars.githubusercontent.com/u/${Math.floor(
@@ -50,9 +48,9 @@ const syncAndSeed = async () => {
       isAdmin: true,
     }),
     User.create({
-      username: 'larry',
-      password: '123',
-      firstName: 'Larry',
+      username: "larry",
+      password: "123",
+      firstName: "Larry",
       lastName: faker.person.lastName(),
       email: faker.internet.email(),
       avatar: `https://avatars.githubusercontent.com/u/${Math.floor(
@@ -60,170 +58,219 @@ const syncAndSeed = async () => {
       )}`,
     }),
     User.create({
-      username: 'ethyl',
-      password: '123',
-      firstName: 'Ethyl',
+      username: "ethyl",
+      password: "123",
+      firstName: "Ethyl",
       lastName: faker.person.lastName(),
       email: faker.internet.email(),
       avatar: `https://avatars.githubusercontent.com/u/${Math.floor(
         Math.random() * 1000
       )}`,
-      aboutMe: 'I am a jack of all trades, so I can handle pretty much whatever you throw at me, but I love cleaning and organizing the most!',
+      aboutMe:
+        "I am a jack of all trades, so I can handle pretty much whatever you throw at me, but I love cleaning and organizing the most!",
     }),
     User.create({
-      username: 'andy',
-      password: '123',
-      firstName: 'Andy',
-      lastName: 'The Greatest',
+      username: "andy",
+      password: "123",
+      firstName: "Andy",
+      lastName: "The Greatest",
       email: faker.internet.email(),
       avatar: `https://avatars.githubusercontent.com/u/${Math.floor(
         Math.random() * 1000
       )}`,
       isAdmin: true,
-    })
- ]);
+    }),
+  ]);
 
-
-  const [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10, task11 ] = await Promise.all([
+  const [
+    task1,
+    task2,
+    task3,
+    task4,
+    task5,
+    task6,
+    task7,
+    task8,
+    task9,
+    task10,
+    task11,
+  ] = await Promise.all([
     Task.create({
-      title: 'Bring me a dozen eggs',
-      description: 'Pick up a dozen eggs form the market and bring them to 123 Main St.',
+      title: "Bring me a dozen eggs",
+      description:
+        "Pick up a dozen eggs form the market and bring them to 123 Main St.",
       price: 15,
-      city: 'New York',
-      state: 'NY',
-      category: 'shopping',
+      city: "New York",
+      state: "NY",
+      category: "shopping",
       userId: larry.id,
-      taskDoerId: ethyl.id
+      taskDoerId: ethyl.id,
+      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
     Task.create({
-      title: 'Organize my calendar',
-      description: 'Put important dates on my google calendar and organize it',
+      title: "Organize my calendar",
+      description: "Put important dates on my google calendar and organize it",
       price: 25,
-      city: 'New York',
-      state: 'NY',
-      category: 'virtual',
+      city: "New York",
+      state: "NY",
+      category: "virtual",
       userId: ethyl.id,
-      taskDoerId: larry.id
+      taskDoerId: larry.id,
+      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
     Task.create({
-      title: 'Walk the dog',
-      description: 'Carry 500 lb dog down the stairs',
+      title: "Walk the dog",
+      description: "Carry 500 lb dog down the stairs",
       price: 300,
-      city: 'New York',
-      state: 'NY',
-      category: 'moving',
+      city: "New York",
+      state: "NY",
+      category: "moving",
       userId: larry.id,
-      taskDoerId: ethyl.id
+      taskDoerId: ethyl.id,
+      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
     Task.create({
-      title: '4th player needed for FortNite',
-      description: 'FortNite took away trios so we need a 4th member for our team',
+      title: "4th player needed for FortNite",
+      description:
+        "FortNite took away trios so we need a 4th member for our team",
       price: 15,
-      city: 'Los Angeles',
-      state: 'CA',
-      category: 'gaming',
+      city: "Los Angeles",
+      state: "CA",
+      category: "gaming",
       userId: larry.id,
-      taskDoerId: ethyl.id
+      taskDoerId: ethyl.id,
+      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
     Task.create({
-      title: 'NEED HAIR PERSON',
-      description: 'Have a wedding coming up TOMORROW and my hair person cancelled and need it done ASAP',
+      title: "NEED HAIR PERSON",
+      description:
+        "Have a wedding coming up TOMORROW and my hair person cancelled and need it done ASAP",
       price: 450,
-      city: 'Colorado Springs',
-      state: 'CO',
-      category: 'beauty',
+      city: "Colorado Springs",
+      state: "CO",
+      category: "beauty",
       userId: lucy.id,
-      taskDoerId: ethyl.id
+      taskDoerId: ethyl.id,
+      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
     Task.create({
-      title: 'Party Entertainment',
-      description: 'Need a professional dancing robot for upcoming Barmitzvah',
+      title: "Party Entertainment",
+      description: "Need a professional dancing robot for upcoming Barmitzvah",
       price: 50,
-      city: 'New York',
-      state: 'NY',
-      category: 'misc',
+      city: "New York",
+      state: "NY",
+      category: "misc",
       userId: moe.id,
-      taskDoerId: lucy.id
+      taskDoerId: lucy.id,
+      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
     Task.create({
-      title: 'Last minute SAT tutor',
-      description: 'My SAT exam is this Saturday and need tutoring ASAP',
+      title: "Last minute SAT tutor",
+      description: "My SAT exam is this Saturday and need tutoring ASAP",
       price: 45,
-      city: 'New York',
-      state: 'NY',
-      category: 'virtual',
+      city: "New York",
+      state: "NY",
+      category: "virtual",
       userId: ethyl.id,
-      taskDoerId: moe.id
+      taskDoerId: moe.id,
+      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
     Task.create({
-      title: 'Looking for housekeeping',
-      description: 'I have an open house scheduled for next weekend and need someone to clean the house and prep it',
+      title: "Looking for housekeeping",
+      description:
+        "I have an open house scheduled for next weekend and need someone to clean the house and prep it",
       price: 125,
-      city: 'Phoenix',
-      state: 'AZ',
-      category: 'cleaning',
+      city: "Phoenix",
+      state: "AZ",
+      category: "cleaning",
       userId: larry.id,
-      taskDoerId: ethyl.id
+      taskDoerId: ethyl.id,
+      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
     Task.create({
-      title: 'Professional Blackjack Player assistance',
-      description: 'I lost 10 thousand dollars and can not go home without some of it back. I have 15 dollars left.... please help me!',
+      title: "Professional Blackjack Player assistance",
+      description:
+        "I lost 10 thousand dollars and can not go home without some of it back. I have 15 dollars left.... please help me!",
       price: 15,
-      city: 'Las Vegas',
-      state: 'NV',
-      category: 'misc',
+      city: "Las Vegas",
+      state: "NV",
+      category: "misc",
       userId: moe.id,
-      taskDoerId: lucy.id
+      taskDoerId: lucy.id,
+      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
     Task.create({
-      title: 'Expand lemonade business',
-      description: 'I run a successful lemonade stand business and looking to open another one down the block. I need help moving a small table and lemonade pitcher there.',
+      title: "Expand lemonade business",
+      description:
+        "I run a successful lemonade stand business and looking to open another one down the block. I need help moving a small table and lemonade pitcher there.",
       price: 5,
-      city: 'Miami',
-      state: 'FL',
-      category: 'moving',
+      city: "Miami",
+      state: "FL",
+      category: "moving",
       userId: andy.id,
-      taskDoerId: lucy.id
+      taskDoerId: lucy.id,
+      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
     Task.create({
-      title: 'Plus one for wedding',
-      description: 'Just broke up with my gf and now need a new plus one for a wedding next month',
+      title: "Plus one for wedding",
+      description:
+        "Just broke up with my gf and now need a new plus one for a wedding next month",
       price: 100,
-      city: 'Philadelphia',
-      state: 'PA',
-      category: 'misc',
+      city: "Philadelphia",
+      state: "PA",
+      category: "misc",
       userId: larry.id,
-      taskDoerId: lucy.id
+      taskDoerId: lucy.id,
+      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
     Task.create({
-      title: 'FISH!!!',
-      description: 'My local supermarket is sold out of fish and need someone to bring me one for the weekend',
+      title: "FISH!!!",
+      description:
+        "My local supermarket is sold out of fish and need someone to bring me one for the weekend",
       price: 100,
-      city: 'Long Island',
-      state: 'NY',
-      category: 'misc',
+      city: "Long Island",
+      state: "NY",
+      category: "misc",
       userId: lucy.id,
+      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
     Task.create({
-      title: 'Need a wedding watch',
-      description: 'The local AD refuses to sell me a watch and I need to get my husband a plain jane sub for his wedding watch',
+      title: "Need a wedding watch",
+      description:
+        "The local AD refuses to sell me a watch and I need to get my husband a plain jane sub for his wedding watch",
       price: 15000,
-      city: 'San Francisco',
-      state: 'CA',
-      category: 'shopping',
+      city: "San Francisco",
+      state: "CA",
+      category: "shopping",
       userId: lucy.id,
-    })
+      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+    }),
   ]);
 
   const [review1] = await Promise.all([
     Review.create({
       rating: 5,
-      title: 'great job',
-      comment: 'great job bringing the eggs on time',
+      title: "great job",
+      comment: "great job bringing the eggs on time",
       userId: larry.id,
       taskId: task1.id,
-      taskDoerId: ethyl.id
-    })
+      taskDoerId: ethyl.id,
+      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+    }),
   ]);
 
   return {
@@ -232,7 +279,7 @@ const syncAndSeed = async () => {
       lucy,
       larry,
       ethyl,
-      andy
+      andy,
     },
     tasks: {
       task1,
@@ -245,18 +292,17 @@ const syncAndSeed = async () => {
       task8,
       task9,
       task10,
-      task11
+      task11,
     },
     reviews: {
       review1,
-    }
+    },
   };
 };
-
 
 module.exports = {
   syncAndSeed,
   User,
   Task,
-  Review
+  Review,
 };
