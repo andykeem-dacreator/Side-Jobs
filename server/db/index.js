@@ -191,9 +191,27 @@ const syncAndSeed = async () => {
       price: 100,
       city: 'Philadelphia',
       state: 'PA',
-      category: 'virtual',
+      category: 'misc',
       userId: larry.id,
       taskDoerId: lucy.id
+    }),
+    Task.create({
+      title: 'FISH!!!',
+      description: 'My local supermarket is sold out of fish and need someone to bring me one for the weekend',
+      price: 100,
+      city: 'Long Island',
+      state: 'NY',
+      category: 'misc',
+      userId: lucy.id,
+    }),
+    Task.create({
+      title: 'Need a wedding watch',
+      description: 'The local AD refuses to sell me a watch and I need to get my husband a plain jane sub for his wedding watch',
+      price: 15000,
+      city: 'San Francisco',
+      state: 'CA',
+      category: 'shopping',
+      userId: lucy.id,
     })
   ]);
 

@@ -116,45 +116,19 @@ function ResponsiveAppBar() {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))} */}
-              <MenuItem>
-                <Link to={"/"} style={{color: 'white'}}>Home</Link>
-              </MenuItem>
-              <MenuItem
-                onMouseOver={handleJobOpen}
-                onMouseLeave={handleJobClose}
-              >
-                <Link to={"/tasks"} style={{color: 'white'}}>Jobs</Link>
-                <Menu
-                  anchorEl={anchorElJob}
-                  open={Boolean(anchorElJob)}
-                  onClose={handleJobClose}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                  }}
-                  // getContentAnchorEl={null}
-                >
-                  <MenuItem onClick={handleJobClose}>
-                    <Link to={"/tasks"}>Available Jobs</Link>
-                  </MenuItem>
-                  <MenuItem onClick={handleJobClose}>
-                    <Link to={"/addTask"} style={{color: 'black'}}>Post a Job</Link>
-                  </MenuItem>
-                  <MenuItem onClick={handleJobClose}>
-                    <Link to={"/toDoList"} style={{color: 'black'}}>Jobs I Accepted</Link>
-                  </MenuItem>
-                  <MenuItem onClick={handleJobClose}>
-                    <Link to={"/myTasks"} style={{color: 'black'}}>My Posted Jobs</Link>
-                  </MenuItem>
-                </Menu>
-              </MenuItem>
-              <MenuItem>
-                <Link to={"/about"} style={{color: 'white'}}>About</Link>
-              </MenuItem>
+
+            <MenuItem>
+              <Link to={"/"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Home</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to={"/tasks"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Available Jobs</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to={"/addTask"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Post A Job</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to={"/about"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>About</Link>
+            </MenuItem>
             </Menu>
           </Box>
           {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
@@ -236,11 +210,6 @@ function ResponsiveAppBar() {
               <MenuItem>
                 <button onClick={handleLogout} style={{color: 'black'}}>Logout</button>
               </MenuItem>
-                {/* <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">test</Typography>
-                </MenuItem> */}
-
-
             </Menu>
           </Box>
         </Toolbar>
