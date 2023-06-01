@@ -60,3 +60,10 @@ nav {
   z-index: 1;
 }
 
+.update-task form > * {
+  margin: 10px;
+}
+
+.add-task form > * {
+  margin: 10px;
+}

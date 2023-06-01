@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { updateTask } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { TextField, Button, Input} from "@mui/material";
 
 const UpdateTask = ()=> {
   const { tasks } = useSelector(state => state);
@@ -39,27 +40,12 @@ const UpdateTask = ()=> {
     <div className = 'update-task'>
       <h2>Update a Task</h2>
       <form onSubmit={ update }>
-        <label>
-          Title:
-          <input value={ title } onChange={ ev=> setTitle(ev.target.value)} placeholder='Title' />
-        </label>
-        <label>
-          Description:
-          <input value={ description } onChange={ ev=> setDescription(ev.target.value)} placeholder='Description' />
-        </label>
-        <label>
-          City:
-          <input value={ city } onChange={ ev=> setCity(ev.target.value)} placeholder='City' />
-        </label>
-        <label>
-          State:
-          <input value={ state } onChange={ ev=> setState(ev.target.value)} placeholder='State' />
-        </label>
-        <label>
-          Price:
-          <input value={ price } onChange={ ev=> setPrice(ev.target.value)} placeholder='Price' />
-        </label>
-        <button>Update</button>
+          <TextField required label="Title" variant="outlined" value={ title } onChange={ ev=> setTitle(ev.target.value)} placeholder='Title' />
+          <TextField required label="Description" variant="outlined" value={ description } onChange={ ev=> setDescription(ev.target.value)} placeholder='Description' />
+          <TextField required label="City" variant="outlined" value={ city } onChange={ ev=> setCity(ev.target.value)} placeholder='City' />
+          <TextField required label="State" variant="outlined" value={ state } onChange={ ev=> setState(ev.target.value)} placeholder='State' />
+          <TextField required label="Price" variant="outlined" value={ price } onChange={ ev=> setPrice(ev.target.value)} placeholder='Price' />
+        <Button type="submit" variant="outlined" disabled={!title || !description || !city || !state || !price}>Update</Button>
       </form>
     </div>
   )
