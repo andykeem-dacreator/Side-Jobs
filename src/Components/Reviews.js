@@ -7,9 +7,15 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import Tooltip from '@mui/material/Tooltip';
 import EditIcon from '@mui/icons-material/Edit';
- import {
+import {
    Avatar,
-   Modal
+   Modal,
+   Dialog,
+   DialogActions,
+   DialogContent,
+   DialogContentText,
+   DialogTitle,
+   Button
 //   IconButton,
 //   DeleteIcon,
 //   Tooltip,
@@ -22,17 +28,13 @@ const Reviews = () => {
   const filteredReviews = reviews.filter(review => review.userId === auth.id);
   const [showUpdateFormMap, setShowUpdateFormMap] = useState({});
   const [open, setOpen] = useState(false);
-  const [selectedReview, setSelectedReview] = useState(null);
-  //const handleOpen = () => setOpen(true);
-  //const handleClose = () => setOpen(false)
-  const handleOpen = (review) => {
-    setSelectedReview(review);
-    setOpen(true);
+
+  const handleOpen = (reviewId) => {
+    setShowUpdateFormMap(prevState => ({ ...prevState, [reviewId]: true }));
   };
   
-  const handleClose = () => {
-    setOpen(false);
-    setSelectedReview(null);
+  const handleClose = (reviewId) => {
+    setShowUpdateFormMap(prevState => ({ ...prevState, [reviewId]: false }));
   };
   
   const destroy = (review) => {
@@ -40,59 +42,51 @@ const Reviews = () => {
   };
   
   const handleUpdateClick = (reviewId) => {
-    setShowUpdateFormMap(prevState => ({...prevState, [reviewId]: !prevState[reviewId]}));
+    handleOpen(reviewId);
   };
+
   
   // const update = (review) => {
   //   dispatch(updateReview())
   // };
   return (
     <div>
-      <h2>My Reviews</h2>
       <ul>
         {
           filteredReviews.map(review =>{
             const showUpdateForm = showUpdateFormMap[review.id] || false;
+            console.log('showUpdateForm:', showUpdateForm)
             return (
             
                 <li key={ review.id }>
                   <Link to={`/users/${review.taskDoerId}`}>{ review.title } </Link>
-                  <IconButton onClick={ ()=> handleUpdateClick(review.id) }>{showUpdateForm ? 'Cancel Update': <Tooltip title="Edit"><EditIcon /></Tooltip>}</IconButton>
-                  {/*<IconButton onClick={ ()=> handleUpdateClick(review.id) }>{showUpdateForm ? 'Cancel Update': <Tooltip title="Edit"><EditIcon /></Tooltip>}</IconButton>*/}
-                  <Tooltip title="Delete">
+                  {/*<IconButton onClick={ ()=> handleUpdateClick(review.id) }>{showUpdateForm ? <Tooltip title="Edit"><EditIcon /></Tooltip>:  <Tooltip title="Edit"><EditIcon /></Tooltip>}</IconButton>*/}
+                  <IconButton onClick={ ()=> handleUpdateClick(review.id) }>
+                    {showUpdateForm}
+                    <Tooltip title="Edit Review">
+                      <EditIcon />
+                    </Tooltip>
+                  </IconButton>
+                  
+                  <Tooltip title="Delete Review">
                     <IconButton onClick={ () => destroy(review) }><DeleteIcon /></IconButton>
                   </Tooltip>
-                  {
-                    showUpdateForm && (
-                    <UpdateReview review={review}/>
-                    )
-                  }
-                  {/*{
-                    showUpdateForm && (
-                    <IconButton onClick={ () => handleOpen(review) }>
-                      <Tooltip title='Edit'>
-                        <EditIcon />
-                      </Tooltip>
-                    </IconButton>
-                    )
-                  }*/}
-             
+                  {  (
+                  <Dialog 
+                    maxWidth='sm'
+                    fullWidth={true}
+                    open={showUpdateForm} onClose={() => handleClose(review.id)}>
+                    <DialogTitle>Edit Review</DialogTitle>
+                      <DialogContent>
+                        <UpdateReview review={review} onClose={() => handleClose(review.id)}/>
+                      </DialogContent>
+                    <DialogActions>
+                      <Button onClick={ () => handleClose(review.id)}>Cancel</Button>
+                    </DialogActions>
+                  </Dialog>)}
                 </li>
-             
             )})}
       </ul>
-      {/*
-      <Modal
-        open={ open }
-        onClose={ handleClose }
-        aria-labelledby="update-review-modal"
-        aria-describedby="update-review-form"
-        >
-        <div>
-          {selectedReview && <UpdateReview review={selectedReview} />}
-        </div>
-      </Modal>
-      */}
     </div> 
   );
 };
