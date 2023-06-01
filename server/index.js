@@ -1,6 +1,8 @@
+require('dotenv').config();
 const app = require('./app');
 const { syncAndSeed } = require('./db');
 
+// console.log(process.env.REACT_APP_API_KEY);
 const init = async()=> {
   try {
     await syncAndSeed();
