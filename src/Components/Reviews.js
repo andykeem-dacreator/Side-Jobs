@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { destroyReview,} from '../store';
 import { Link } from 'react-router-dom';
 import UpdateReview from './UpdateReview';
-import IconButton from "@mui/material/IconButton";
+//import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-import Tooltip from '@mui/material/Tooltip';
+//import Tooltip from '@mui/material/Tooltip';
 import EditIcon from '@mui/icons-material/Edit';
 import {
    Avatar,
@@ -15,11 +15,13 @@ import {
    DialogContent,
    DialogContentText,
    DialogTitle,
-   Button
-//   IconButton,
-//   DeleteIcon,
-//   Tooltip,
-//   EditIcon
+   Button,
+   Typography,
+   IconButton,
+   //DeleteIcon,
+   Tooltip,
+   //EditIcon,
+  
  } from '@mui/material'
 
 const Reviews = () => {
@@ -28,7 +30,11 @@ const Reviews = () => {
   const filteredReviews = reviews.filter(review => review.userId === auth.id);
   const [showUpdateFormMap, setShowUpdateFormMap] = useState({});
   const [open, setOpen] = useState(false);
-
+  
+  
+  // if(!task){
+  //   return null;
+  // }
   const handleOpen = (reviewId) => {
     setShowUpdateFormMap(prevState => ({ ...prevState, [reviewId]: true }));
   };
@@ -51,15 +57,22 @@ const Reviews = () => {
   // };
   return (
     <div>
+      <Typography variant='h4'>My Reviews of Jobs I Posted</Typography>
       <ul>
         {
           filteredReviews.map(review =>{
             const showUpdateForm = showUpdateFormMap[review.id] || false;
             console.log('showUpdateForm:', showUpdateForm)
+            const task = tasks.find(task => task.id === review.taskId);
+            if(!task){
+              return null;
+            }
             return (
             
                 <li key={ review.id }>
-                  <Link to={`/users/${review.taskDoerId}`}>{ review.title } </Link>
+                  Job: { task.title }
+                  <br/>
+                  Review Title: <Link to={`/users/${review.taskDoerId}`}>{ review.title } </Link>
                   {/*<IconButton onClick={ ()=> handleUpdateClick(review.id) }>{showUpdateForm ? <Tooltip title="Edit"><EditIcon /></Tooltip>:  <Tooltip title="Edit"><EditIcon /></Tooltip>}</IconButton>*/}
                   <IconButton onClick={ ()=> handleUpdateClick(review.id) }>
                     {showUpdateForm}

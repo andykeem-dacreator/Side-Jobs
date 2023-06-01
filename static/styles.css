@@ -49,3 +49,7 @@ nav {
   display: block;
 }
 
+a {
+  text-decoration: none;
+}
+

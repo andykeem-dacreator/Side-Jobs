@@ -121,7 +121,7 @@ const PublicProfile = () => {
         
           <MenuItem value={''}>All Categories</MenuItem>
           {
-            categories.map((category) => {
+            categories.sort().map((category) => {
               return (
               <MenuItem key={ category } value={ category }>
                 { category }
@@ -135,11 +135,12 @@ const PublicProfile = () => {
       
       <List>{
         sortedReviews.map(review =>{
+          const createdAt = new Date(review.createdAt);
           const taskCreator = users.find(user => user.id === review.userId);
           const task = tasks.find(task => task.id === review.taskId);
           
           return (
-          <>
+          <React.Fragment key={review.id}>
             <ListItem key={ review.id }
               >
               {/*<ListItemAvatar>*/}
@@ -166,13 +167,17 @@ const PublicProfile = () => {
               {/*<Typography variant='subtitle1'>{ task.category }</Typography>*/}
               <Chip label={ task.category } variant='outlined' size='small' sx={{ width: 1/2}}/>
              
-              <Typography variant='body2'>{ review.createdAt.slice(0,10) }</Typography>
+              <Typography variant='body2'>{ createdAt.toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric'
+          }) }</Typography>
               <Typography variant='body1'>{ review.comment }</Typography>
               {/*</Card>*/}
               </Stack>
             </ListItem>
             <Divider />
-            </>
+            </React.Fragment>
           );
         })
       }

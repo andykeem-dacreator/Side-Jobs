@@ -46,8 +46,8 @@ const AddReview = () => {
       <h3>Job: { task.title }</h3>
       <form onSubmit={ create }>
         <Rating value={ rating } onChange={ ev => setRating(Number(ev.target.value)) } placeholder='rating' />
-        <TextField  id="outlined-basic" label="Title" variant="outlined" value={ title } onChange={ ev => setTitle(ev.target.value) } />
-        <TextField  id="outlined-basic" label="Comment" variant="outlined" value={ comment } onChange={ ev => setComment(ev.target.value) } />
+        <TextField  margin="dense" id="outlined-basic" label="Title" variant="outlined" value={ title } onChange={ ev => setTitle(ev.target.value) } />
+        <TextField  margin="dense" id="outlined-basic" label="Comment" variant="outlined" value={ comment } onChange={ ev => setComment(ev.target.value) } />
         <Button variant="outlined" type="submit">Add Review</Button>
       </form>
     </div>
