@@ -8,13 +8,14 @@ import { useParams } from 'react-router-dom';
    Rating,
    TextField,
    Button,
-   Typography
+   Typography,
+   TextareaAutosize
 //   IconButton,
 //   DeleteIcon,
 //   Tooltip,
 //   EditIcon
  } from '@mui/material'
-const UpdateReview = ({review}) => {
+const UpdateReview = ({review, onClose }) => {
   const { auth, reviews, tasks } = useSelector(state => state);
   const dispatch = useDispatch();
   
@@ -37,6 +38,7 @@ const UpdateReview = ({review}) => {
     try{
       console.log('review is:', review)
       await dispatch(updateReview({ id: review.id, rating, title, comment, userId: auth.id, taskId: task.id, taskDoerId: task.taskDoerId }));
+      onClose();
     }
     catch(ex){
       console.log(ex);
@@ -45,15 +47,31 @@ const UpdateReview = ({review}) => {
   
   return(
     <>
-      <h3>Edit Review</h3>
+      
       <form onSubmit={ update }>
-        <Typography component="legend">Rating</Typography>
-        <Rating value={ rating } onChange={ ev => setRating(Number(ev.target.value)) } placeholder='rating' />
+        {/*<Typography component="legend">Rating</Typography>*/}
+        <Rating sx={{ margin: 'auto'}} value={ rating } onChange={ ev => setRating(Number(ev.target.value)) } placeholder='rating' />
         <FormControl>
-        <TextField margin='normal' id="outlined-basic" label="Title" variant="outlined" value={ title } onChange={ ev => setTitle(ev.target.value) } />
+        <TextField 
+          margin='dense' 
+          id="outlined-basic" 
+          label="Title" 
+          variant="outlined" 
+          value={ title }
+          fullWidth
+          onChange={ ev => setTitle(ev.target.value) } />
         </FormControl>
-        <TextField margin='normal' id="outlined-basic" label="Comment" variant="outlined" value={ comment } onChange={ ev => setComment(ev.target.value) } />
-        <Button margin='normal' variant="outlined" type="submit">Update</Button>
+        <TextField
+          margin='normal' 
+          id="outlined-basic" 
+          label="Comment" 
+          variant="outlined"
+          multiline={true}
+          rows={3}
+          value={ comment } onChange={ ev => setComment(ev.target.value) } />
+        
+        {/*<Button margin='normal' variant="outlined" type="submit">Update</Button>*/}
+        <Button variant="outlined" type='submit'>Update</Button>
       </form>
     </>
     );
