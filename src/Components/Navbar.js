@@ -14,16 +14,23 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useTheme } from '@mui/material'
 import { Link } from 'react-router-dom';
+import { logout } from '../store';
+import { useDispatch } from 'react-redux';
 
-
-const pages = ['Home', 'Jobs', 'About'];
-const settings = ['Profile', 'Dashboard', 'Logout'];
+// const pages = ['Home', 'Jobs', 'About'];
+// const settings = ['Profile', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorElJob, setAnchorElJob] = React.useState(null);
   const theme = useTheme();
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
 
   const handleOpenNavMenu = (event) => {
@@ -129,7 +136,7 @@ function ResponsiveAppBar() {
                     vertical: 'top',
                     horizontal: 'left',
                   }}
-                  getContentAnchorEl={null}
+                  // getContentAnchorEl={null}
                 >
                   <MenuItem onClick={handleJobClose}>
                     <Link to={"/tasks"}>Available Jobs</Link>
@@ -169,52 +176,27 @@ function ResponsiveAppBar() {
           >
             Side Jobs
           </Typography>
+          
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <MenuItem>
-                <Link to={"/"} style={{color: 'white'}}>Home</Link>
-              </MenuItem>
-              <MenuItem
-                onMouseOver={handleJobOpen}
-                onMouseLeave={handleJobClose}
-              >
-                <Link to={"/tasks"} style={{color: 'white'}}>Jobs</Link>
-                <Menu
-                  anchorEl={anchorElJob}
-                  open={Boolean(anchorElJob)}
-                  onClose={handleJobClose}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                  }}
-                  // transformOrigin={{
-                  //   vertical: 'top',
-                  //   horizontal: 'left',
-                  // }}
-                  // getContentAnchorEl={null}
-                >
-                  <MenuItem onClick={handleJobClose}>
-                    <Link to={"/tasks"} >Available Jobs</Link>
-                  </MenuItem>
-                  <MenuItem onClick={handleJobClose}>
-                    <Link to={"/addTask"} style={{color: 'black'}}>Post a Job</Link>
-                  </MenuItem>
-                  <MenuItem onClick={handleJobClose}>
-                    <Link to={"/toDoList"} style={{color: 'black'}}>Jobs I Accepted</Link>
-                  </MenuItem>
-                  <MenuItem onClick={handleJobClose}>
-                    <Link to={"/myTasks"} style={{color: 'black'}}>Jobs I posted</Link>
-                  </MenuItem>
-                </Menu>
-              </MenuItem>
-              <MenuItem>
-                <Link to={"/about"} style={{color: 'white'}}>About</Link>
-              </MenuItem>
+              <Link to={"/"} style={{color: 'white'}}>Home</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to={"/tasks"} style={{color: 'white'}}>Available Jobs</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to={"/addTask"} style={{color: 'white'}}>Post A Job</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to={"/about"} style={{color: 'white'}}>About</Link>
+            </MenuItem>
+
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
               </Button>
-
+              
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -239,11 +221,25 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem>
+                <Link to={"/profile"} style={{color: 'black'}}>Profile</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to={"/toDoList"} style={{color: 'black'}}>Jobs I Accepted</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to={"/myTasks"} style={{color: 'black'}}>Jobs I posted</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to={"/reviews"} style={{color: 'black'}}>My Reviews</Link>
+              </MenuItem>
+              <MenuItem>
+                <button onClick={handleLogout} style={{color: 'black'}}>Logout</button>
+              </MenuItem>
+                {/* <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">test</Typography>
+                </MenuItem> */}
+
 
             </Menu>
           </Box>
