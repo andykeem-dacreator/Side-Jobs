@@ -40,7 +40,7 @@ const TaskDetail = () => {
             { task.taskDoerId === auth.id ? '': <button onClick={() => destroy(task)}>Delete</button>}
           </div>
           <div>
-            { task.taskDoerId === auth.id ? '': <UpdateTask />}
+            { task.taskDoerId === auth.id || (task.userId === auth.id && task.isComplete) ? '': <UpdateTask />}
             <pre>
               { JSON.stringify(task, null, 2) }
             </pre>

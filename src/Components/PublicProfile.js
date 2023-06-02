@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
-import Rating from '@mui/material/Rating';
+//import Rating from '@mui/material/Rating';
 import {
    Avatar,
    List,
@@ -17,7 +17,8 @@ import {
    InputLabel,
    Select,
    MenuItem,
-   Chip
+   Chip,
+   Rating,
  } from '@mui/material';
  
 const PublicProfile = () => {
@@ -41,9 +42,13 @@ const PublicProfile = () => {
     'beauty',
     'cleaning',
     ];
- 
- // const task = tasks.find(task => task.category === filterCategory);
-  //let filteredByCategory;
+  
+  let sumRating = sortedReviews.reduce((acc, review)=>{
+    return acc + review.rating
+  }, 0);
+  console.log('sumrating:', sumRating)
+  console.log('sortedreviews len:', sortedReviews.length)
+  let averageRating = sumRating / sortedReviews.length;
   
    useEffect(() => {
     const filteredByCategory = filteredReviews.filter((review) => {
@@ -57,7 +62,6 @@ const PublicProfile = () => {
     setSortedReviews(
       filteredByCategory.slice()
         .sort((a, b) => {
-        //console.log('sort option', sortOption);
           if (sortOption === 1) {
             return b.rating - a.rating;
           }
@@ -73,9 +77,7 @@ const PublicProfile = () => {
   if (!user) {
     return null;
   }
-  // if(!task){
-  //   return null;
-  // }
+  
   return (
     <div>
     <Typography variant='h4'>{user.firstName} {user.lastName[0]}. Profile</Typography>
@@ -98,7 +100,7 @@ const PublicProfile = () => {
         <Divider />
       </List>
    
-      <Typography variant='h5'>Reviews ({sortedReviews.length})</Typography>
+      <Typography variant='h5'>Reviews ({sortedReviews.length}), {averageRating}</Typography>
       <Stack
         direction='row'
       >

@@ -46,24 +46,24 @@ const UpdateReview = ({review, onClose }) => {
   };
   
   return(
-    <>
+    <div className='update-review'>
       
       <form onSubmit={ update }>
         {/*<Typography component="legend">Rating</Typography>*/}
-        <Rating sx={{ margin: 'auto'}} value={ rating } onChange={ ev => setRating(Number(ev.target.value)) } placeholder='rating' />
-        <FormControl>
-        <TextField 
-          margin='dense' 
-          id="outlined-basic" 
+        <Rating className='rating' sx={{ margin: 'auto', my: '10px' }} value={ rating } onChange={ ev => setRating(Number(ev.target.value)) } placeholder='rating' />
+        {/*<FormControl>*/} 
+        <TextField
+         className='update-review-textfield'
+  
           label="Title" 
           variant="outlined" 
           value={ title }
-          fullWidth
+         
           onChange={ ev => setTitle(ev.target.value) } />
-        </FormControl>
+        {/*</FormControl>*/}
         <TextField
-          margin='normal' 
-          id="outlined-basic" 
+          className='update-review-textfield'
+         
           label="Comment" 
           variant="outlined"
           multiline={true}
@@ -73,7 +73,7 @@ const UpdateReview = ({review, onClose }) => {
         {/*<Button margin='normal' variant="outlined" type="submit">Update</Button>*/}
         <Button variant="outlined" type='submit'>Update</Button>
       </form>
-    </>
+    </div>
     );
 };
 

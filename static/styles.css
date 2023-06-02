@@ -67,3 +67,11 @@ nav {
 .add-task form > * {
   margin: 10px;
 }
+
+.update-review form > *:not(:first-child) {
+  margin: 10px;
+}
+
+a {
+  text-decoration: none;
+}

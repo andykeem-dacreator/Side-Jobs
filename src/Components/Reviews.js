@@ -21,6 +21,7 @@ import {
    //DeleteIcon,
    Tooltip,
    //EditIcon,
+   Rating,
   
  } from '@mui/material'
 
@@ -56,8 +57,8 @@ const Reviews = () => {
   //   dispatch(updateReview())
   // };
   return (
-    <div>
-      <Typography variant='h4'>My Reviews of Jobs I Posted</Typography>
+    <div className='reviews-i-gave'>
+      <Typography variant='h4'>Reviews I Gave</Typography>
       <ol>
         {
           filteredReviews.map(review =>{
@@ -70,11 +71,20 @@ const Reviews = () => {
             return (
             
                 <li key={ review.id }>
+                  To: {task.taskDoer.firstName} {task.taskDoer.lastName[0]}.
+                  <br/>
                   Job: { task.title }
+                  <br/>
+                  
+                  <Rating
+                    name="read-only"
+                    value={ review.rating }
+                    readOnly
+                  />
                   <br/>
                   Review Title: <Link to={`/users/${review.taskDoerId}`}>{ review.title } </Link>
                   <IconButton onClick={ ()=> handleUpdateClick(review.id) }>
-                    {showUpdateForm}
+                
                     <Tooltip title="Edit Review">
                       <EditIcon />
                     </Tooltip>
