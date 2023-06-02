@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { createTask } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { TextField, Button, Input, Select, MenuItem, InputLabel} from "@mui/material";
 
 const AddTask = ()=> {
   const { auth } = useSelector(state => state);
@@ -31,39 +32,24 @@ const AddTask = ()=> {
     <div className = 'add-task'>
       <h2>Post a Job</h2>
       <form onSubmit={ create }>
-        <label>
-          Title:
-          <input value={ title } onChange={ ev=> setTitle(ev.target.value)} placeholder='Title' />
-        </label>
-        <label>
-          Description:
-          <input value={ description } onChange={ ev=> setDescription(ev.target.value)} placeholder='Description' />
-        </label>
-        <label>
-          City:
-          <input value={ city } onChange={ ev=> setCity(ev.target.value)} placeholder='City' />
-        </label>
-        <label>
-          State:
-          <input value={ state } onChange={ ev=> setState(ev.target.value)} placeholder='State' />
-        </label>
-        <label>
-          Price:
-          <input value={ price } onChange={ ev=> setPrice(ev.target.value)} placeholder='Price' />
-        </label>
-        <select name="categories" id="task-category" onChange = { ev => setCategory(ev.target.value)}>
-          <option value=''>Select a Category</option>
+        <TextField required label="Title" variant="outlined" value={ title } onChange={ ev=> setTitle(ev.target.value)} placeholder='Title' />
+        <TextField required label="Description" variant="outlined" value={ description } onChange={ ev=> setDescription(ev.target.value)} placeholder='Description' />
+        <TextField required label="City" variant="outlined" value={ city } onChange={ ev=> setCity(ev.target.value)} placeholder='City' />
+        <TextField required label="State" variant="outlined" value={ state } onChange={ ev=> setState(ev.target.value)} placeholder='State' />
+        <TextField required label="Price" variant="outlined" value={ price } onChange={ ev=> setPrice(ev.target.value)} placeholder='Price' />
+        <Select name="categories" id="task-category" onChange = { ev => setCategory(ev.target.value)}>
+          <MenuItem value=''>Select a Category</MenuItem>
           {
-            
+
             categories.map(category => {
               return (
-                  
-                  <option key={category} value={`${category}`}>{`${category}`}</option>
+
+                  <MenuItem key={category} value={`${category}`}>{`${category}`}</MenuItem>
               )
             })
           }
-        </select>
-        <button>Add</button>
+        </Select>
+        <Button type="submit" variant="outlined" disabled={!title || !description || !city || !state || !price}>Add</Button>
       </form>
     </div>
   )
