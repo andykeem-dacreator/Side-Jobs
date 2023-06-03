@@ -75,3 +75,7 @@ nav {
 a {
   text-decoration: none;
 }
+
+.public-profile {
+  padding: 10px;
+}

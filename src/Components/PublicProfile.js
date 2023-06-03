@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
-//import Rating from '@mui/material/Rating';
+import StarIcon from '@mui/icons-material/Star';
+
+//import { useContext } from 'react';
+//import { ThemeContext } from '@mui/system';
 import {
    Avatar,
    List,
@@ -19,6 +22,7 @@ import {
    MenuItem,
    Chip,
    Rating,
+   useTheme
  } from '@mui/material';
  
 const PublicProfile = () => {
@@ -42,14 +46,44 @@ const PublicProfile = () => {
     'beauty',
     'cleaning',
     ];
+  //const theme = useContext(ThemeContext);
+  //const theme = useTheme();
   
-  let sumRating = sortedReviews.reduce((acc, review)=>{
-    return acc + review.rating
-  }, 0);
-  console.log('sumrating:', sumRating)
-  console.log('sortedreviews len:', sortedReviews.length)
-  let averageRating = sumRating / sortedReviews.length;
+  // let sumRating = sortedReviews.reduce((acc, review)=>{
+  //   return acc + review.rating;
+  // }, 0);
+  // let sumRatingOverall = filteredReviews.reduce((acc, review)=>{
+  //   return acc + review.rating;
+  // }, 0);
   
+  // console.log('sumrating:', sumRating)
+  // console.log('sortedreviews len:', sortedReviews.length)
+  // console.log('filteredreviews len:', filteredReviews.length)
+  
+  // let averageRating;
+  // let averageRatingOverall;
+  
+  // if (sortedReviews.length === 0){
+  //   averageRating = 0;
+  // } else{
+  //   averageRating = sumRating / sortedReviews.length;
+  // }
+  
+  const getAverageRating = (reviews) => {
+    let sumRating = reviews.reduce((acc, review)=>{
+      return acc + review.rating;
+    }, 0);
+    let averageRating;
+    if(reviews.length === 0){
+      averageRating = 0;
+    } else{
+      averageRating = sumRating / reviews.length;
+    }
+    return averageRating;
+  };
+  
+  const averageRatingByCategory = getAverageRating(sortedReviews);
+  const averageRatingOverall = getAverageRating(filteredReviews);
    useEffect(() => {
     const filteredByCategory = filteredReviews.filter((review) => {
       if (filterCategory === '') {
@@ -79,7 +113,7 @@ const PublicProfile = () => {
   }
   
   return (
-    <div>
+    <div className='public-profile'>
     <Typography variant='h4'>{user.firstName} {user.lastName[0]}. Profile</Typography>
       <List>
         <ListItem>
@@ -92,6 +126,9 @@ const PublicProfile = () => {
             </Avatar>
           </ListItemAvatar>
           <Stack direction='column' spacing={1} sx={{ marginLeft: 1 }}>
+            <Stack direction='row' alignItems='center' >
+            <StarIcon/> {averageRatingOverall.toFixed(1)} ({filteredReviews.length} {filteredReviews.length === 1 ? 'rating' : 'ratings'})
+            </Stack>
             <Typography variant='h5'>Skills & experience</Typography>
             <Typography variant='body1'>{ user.aboutMe }</Typography>
           </Stack>  
@@ -100,11 +137,20 @@ const PublicProfile = () => {
         <Divider />
       </List>
    
-      <Typography variant='h5'>Reviews ({sortedReviews.length}), {averageRating}</Typography>
+      <Typography variant='h5'>Reviews</Typography>
+      <Stack 
+        direction='row'
+        alignItems='center' 
+        spacing={2}
+        margin={1}
+      >
+       <StarIcon/> {averageRatingByCategory.toFixed(1)} ({sortedReviews.length} {sortedReviews.length === 1 ? 'rating' : 'ratings'})
+      </Stack>
       <Stack
         direction='row'
+        margin={1}
       >
-      <FormControl sx={{ minWidth: 200 }} >
+      <FormControl sx={{ minWidth: 200 }} size='small'>
         <InputLabel>Sort by</InputLabel>
         <Select
           value={ sortOption }
@@ -116,7 +162,7 @@ const PublicProfile = () => {
         </Select>
       </FormControl>
       
-      <FormControl sx={{ minWidth: 200, marginLeft: 1}} spacing={1}> 
+      <FormControl sx={{ minWidth: 200, marginLeft: 1}} spacing={1} size='small'> 
         <InputLabel>Filter by</InputLabel>
         <Select
           value={ filterCategory }
@@ -156,28 +202,39 @@ const PublicProfile = () => {
                   direction='row'
                   alignItems='center'
                 >
-                <Avatar
-                  src={taskCreator.avatar}
-                >
-                </Avatar>
-              {/*</ListItemAvatar>*/}
-                <Typography variant='h6' sx={{ marginLeft: 1 }}>{ taskCreator.firstName } { taskCreator.lastName[0] }.</Typography> 
+                  <Avatar
+                    src={taskCreator.avatar}
+                  >
+                  </Avatar>
+                {/*</ListItemAvatar>*/}
+                  <Typography variant='h6' sx={{ marginLeft: 1 }}>{ taskCreator.firstName } { taskCreator.lastName[0] }.
+                  </Typography> 
               </Stack>
               <Stack
                   direction='row'
                   alignItems='center'
-                >
+              >
                 <Rating name="read-only" value={review.rating} readOnly />
                 <Typography variant='h6' sx={{ marginLeft: 1 }} >{ review.title }</Typography>
               </Stack>
-              {/*<Typography variant='subtitle1'>{ task.category }</Typography>*/}
-              <Chip label={ task.category } variant='outlined' size='small' sx={{ width: 1/2}}/>
+        
+              <Stack
+                direction='row'
+                alignItems='center'
+              >
+                <Chip label={ task.category } variant='outlined'
+                
+                  //style={{ backgroundColor: theme.palette.virtual.main}}
+                  color='primary'
+                />
              
-              <Typography variant='body2'>{ createdAt.toLocaleDateString('en-US', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric'
-          }) }</Typography>
+                <Typography variant='body2' sx={{ marginLeft: 1 }}> { createdAt.toLocaleDateString('en-US', {
+                  month: 'long',
+                  day: 'numeric',
+                  year: 'numeric'
+                  }) }
+                </Typography>
+              </Stack>
               <Typography variant='body1'>{ review.comment }</Typography>
               {/*</Card>*/}
               </Stack>

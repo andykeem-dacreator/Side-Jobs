@@ -22,7 +22,12 @@ import {
    Tooltip,
    //EditIcon,
    Rating,
-  
+   Card,
+   CardActions,
+   CardContent,
+   Box,
+   List,
+   ListItem,
  } from '@mui/material'
 
 const Reviews = () => {
@@ -59,7 +64,7 @@ const Reviews = () => {
   return (
     <div className='reviews-i-gave'>
       <Typography variant='h4'>Reviews I Gave</Typography>
-      <ol>
+      <List>
         {
           filteredReviews.map(review =>{
             const showUpdateForm = showUpdateFormMap[review.id] || false;
@@ -69,9 +74,17 @@ const Reviews = () => {
               return null;
             }
             return (
-            
-                <li key={ review.id }>
-                  To: {task.taskDoer.firstName} {task.taskDoer.lastName[0]}.
+            <Box sx={{ minWidth: 275, maxWidth: 350 }}>
+              <Card variant="outlined">
+              <CardContent>
+                <ListItem key={ review.id }
+                  //sx={{ flexDirection: 'column'}}
+                >
+                  <Avatar
+                    src={ task.taskDoer.avatar }
+                  >
+                  </Avatar>
+                  <Typography variant='h6'>{task.taskDoer.firstName} {task.taskDoer.lastName[0]}.</Typography>
                   <br/>
                   Job: { task.title }
                   <br/>
@@ -81,8 +94,8 @@ const Reviews = () => {
                     value={ review.rating }
                     readOnly
                   />
-                  <br/>
-                  Review Title: <Link to={`/users/${review.taskDoerId}`}>{ review.title } </Link>
+                  
+                  <Link to={`/users/${review.taskDoerId}`}>{ review.title } </Link>
                   <IconButton onClick={ ()=> handleUpdateClick(review.id) }>
                 
                     <Tooltip title="Edit Review">
@@ -106,9 +119,12 @@ const Reviews = () => {
                       <Button onClick={ () => handleClose(review.id)}>Cancel</Button>
                     </DialogActions>
                   </Dialog>)}
-                </li>
+                </ListItem>
+              </CardContent>  
+              </Card>  
+            </Box>  
             )})}
-      </ol>
+      </List>
     </div> 
   );
 };

@@ -17,6 +17,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchTasks, fetchUsers, fetchReviews } from '../store';
 import { Link, Routes, Route } from 'react-router-dom';
 import MyTasks from "./MyTasks";
+const { faker } = require("@faker-js/faker");
 import {
   IconButton,
   Box,
@@ -175,6 +176,9 @@ export default function ToggleColorMode() {
       createTheme({
         palette: {
           mode,
+          // virtual: {
+          //   main: faker.color.rgb({ prefix: '#', casing: 'lower' })
+          // }
         },
       }),
     [mode],

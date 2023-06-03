@@ -56,6 +56,7 @@ const syncAndSeed = async () => {
       avatar: `https://avatars.githubusercontent.com/u/${Math.floor(
         Math.random() * 1000
       )}`,
+      aboutMe: faker.lorem.paragraph(3),
     }),
     User.create({
       username: "ethyl",
@@ -131,6 +132,7 @@ const syncAndSeed = async () => {
       taskDoerId: ethyl.id,
       lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
       lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+      isComplete: true,
     }),
     Task.create({
       title: "4th player needed for FortNite",
@@ -144,6 +146,7 @@ const syncAndSeed = async () => {
       taskDoerId: ethyl.id,
       lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
       lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+      isComplete: true,
     }),
     Task.create({
       title: "NEED HAIR PERSON",
@@ -272,7 +275,25 @@ const syncAndSeed = async () => {
       lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
   ]);
-
+  
+  const [review4, review5] = await Promise.all([
+    Review.create({
+      rating: 4,
+      title: faker.lorem.paragraph({ min: 1, max: 1}),
+      comment: faker.lorem.paragraph(3),
+      userId: larry.id,
+      taskId: task4.id,
+      taskDoerId: ethyl.id
+    }),
+    Review.create({
+      rating: 4,
+      title: faker.lorem.paragraph({ min: 1, max: 1}),
+      comment: faker.lorem.paragraph(3),
+      userId: larry.id,
+      taskId: task5.id,
+      taskDoerId: ethyl.id
+    })
+    ]);
   return {
     users: {
       moe,
@@ -296,6 +317,8 @@ const syncAndSeed = async () => {
     },
     reviews: {
       review1,
+      review4,
+      review5,
     },
   };
 };
