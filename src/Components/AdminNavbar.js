@@ -17,10 +17,11 @@ import { Link } from 'react-router-dom';
 import { logout } from '../store';
 import { useDispatch } from 'react-redux';
 
-function ResponsiveAppBar() {
+function AdminAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const theme = useTheme();
+  console.log(theme)
 
   const dispatch = useDispatch();
 
@@ -189,6 +190,9 @@ function ResponsiveAppBar() {
                 <Link to={"/reviews"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>My Reviews</Link>
               </MenuItem>
               <MenuItem>
+                <Link to={"/controlPanel"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Control Panel</Link>
+              </MenuItem>
+              <MenuItem>
                 <button onClick={handleLogout} style={{color: 'black'}}>Logout</button>
               </MenuItem>
             </Menu>
@@ -199,4 +203,4 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+export default AdminAppBar;

@@ -5,7 +5,6 @@ import { updateTask } from "../store";
 
 const Tasks = ()=> {
   const { auth, tasks } = useSelector(state => state);
-  console.log(tasks);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const unassignedTasks = tasks.filter(task => task.taskDoerId === null && task.userId !== auth.id);
