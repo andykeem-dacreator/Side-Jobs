@@ -51,6 +51,7 @@ const Reviews = () => {
   // };
   return (
     <div>
+      <h2>Reviews I Gave</h2>
       <ul>
         {
           filteredReviews.map(review =>{
