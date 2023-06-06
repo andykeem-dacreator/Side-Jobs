@@ -12,6 +12,7 @@ import ControlPanel from './ControlPanel';
 import PublicProfile from './PublicProfile';
 import ToDoList from './ToDoList';
 import Navbar from './Navbar';
+import AdminNavbar from './AdminNavbar';
 import About from './About';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchTasks, fetchUsers, fetchReviews } from '../store';
@@ -83,7 +84,7 @@ const App = () => {
       {!!auth.id && !auth.isAdmin && (
         <div className='navbar'>
           <nav id="menu">
-            <Navbar style={{color: theme === 'dark' ? 'white' : 'black'}}/>
+            <Navbar/>
             {/* <Link to="/" style={{color: theme === 'dark' ? 'white' : 'black'}}>Home</Link>
             <Link to="/profile" style={{color: theme === 'dark' ? 'white' : 'black'}}>Profile</Link>
             <div className={`dropdown ${dropdownOpen ? 'open' : ''}`}>
@@ -127,14 +128,15 @@ const App = () => {
       {!!auth.id && auth.isAdmin && (
         <div>
           <nav className='navbar'>
-            <Link to="/" style={{color: theme === 'dark' ? 'white' : 'black'}}>Home</Link>
+            <AdminNavbar/>
+            {/* <Link to="/" style={{color: theme === 'dark' ? 'white' : 'black'}}>Home</Link>
             <Link to ="/controlPanel" >Control Panel</Link>
             <Link to="/profile">Profile</Link>
             <Link to="/tasks">Available Jobs</Link>
             <Link to="/addTask">Add Task</Link>
             <Link to="/reviews">My Reviews</Link>
             <Link to="/toDoList">To Do List</Link>
-            <Link to="/myTasks">Created Tasks</Link>
+            <Link to="/myTasks">Created Tasks</Link> */}
           </nav>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -148,6 +150,7 @@ const App = () => {
             <Route path="/tasks/:id/review/new" element={<AddReview />} />
             <Route path="/reviews" element={<Reviews />}/>
             <Route path="/toDoList" element={<ToDoList />}/>
+            <Route path="/about" element={<About />} />
             <Route path="/myTasks" element={<MyTasks />}/>
           </Routes>
         </div>

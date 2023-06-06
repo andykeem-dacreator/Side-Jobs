@@ -271,6 +271,16 @@ const syncAndSeed = async () => {
       lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
       lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
+    Review.create({
+      rating: 1,
+      title: "ROBBER",
+      comment: "he stole stuff from my house!!!",
+      userId: andy.id,
+      taskId: task1.id,
+      taskDoerId: ethyl.id,
+      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+    })
   ]);
 
   return {
