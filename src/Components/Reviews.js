@@ -3,10 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { destroyReview,} from '../store';
 import { Link } from 'react-router-dom';
 import UpdateReview from './UpdateReview';
-//import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-//import Tooltip from '@mui/material/Tooltip';
 import EditIcon from '@mui/icons-material/Edit';
+import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import {
    Avatar,
    Modal,
@@ -28,6 +27,9 @@ import {
    Box,
    List,
    ListItem,
+   Stack,
+   Collapse
+   //ExpandMore as ExpandMoreIcon
  } from '@mui/material'
 
 const Reviews = () => {
@@ -36,11 +38,9 @@ const Reviews = () => {
   const filteredReviews = reviews.filter(review => review.userId === auth.id);
   const [showUpdateFormMap, setShowUpdateFormMap] = useState({});
   const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [expandedReviews, setExpandedReviews] = useState({});
   
-  
-  // if(!task){
-  //   return null;
-  // }
   const handleOpen = (reviewId) => {
     setShowUpdateFormMap(prevState => ({ ...prevState, [reviewId]: true }));
   };
@@ -57,16 +57,18 @@ const Reviews = () => {
     handleOpen(reviewId);
   };
 
-  
-  // const update = (review) => {
-  //   dispatch(updateReview())
-  // };
+  const handleExpandClick = (reviewId) => {
+    //setExpanded(!expanded);
+    setExpandedReviews((prevState)=>({ ...prevState, [reviewId]: !prevState[reviewId]}));
+  };
+
   return (
     <div className='reviews-i-gave'>
       <Typography variant='h4'>Reviews I Gave</Typography>
-      <List>
+      {/*<List >*/}
         {
           filteredReviews.map(review =>{
+            const createdAt = new Date(review.createdAt);
             const showUpdateForm = showUpdateFormMap[review.id] || false;
             console.log('showUpdateForm:', showUpdateForm)
             const task = tasks.find(task => task.id === review.taskId);
@@ -74,38 +76,62 @@ const Reviews = () => {
               return null;
             }
             return (
-            <Box sx={{ minWidth: 275, maxWidth: 350 }}>
+            <Box sx={{ minWidth: 275}}>
               <Card variant="outlined">
               <CardContent>
-                <ListItem key={ review.id }
-                  //sx={{ flexDirection: 'column'}}
-                >
-                  <Avatar
-                    src={ task.taskDoer.avatar }
-                  >
-                  </Avatar>
-                  <Typography variant='h6'>{task.taskDoer.firstName} {task.taskDoer.lastName[0]}.</Typography>
-                  <br/>
-                  Job: { task.title }
-                  <br/>
+                {/*<ListItem key={ review.id }
+                >*/}
                   
+                  <Stack direction='column'>
+                    <Stack direction='row'>
+                      <Avatar
+                        src={ task.taskDoer.avatar }
+                        
+                      >
+                      </Avatar>
+                      <Typography variant='h6' sx={{ marginLeft: 1 }}>To: {task.taskDoer.firstName} {task.taskDoer.lastName[0]}.</Typography>
+                    
+                    <div style={{ flexGrow: 1}}>
+                      <IconButton onClick={ ()=> handleUpdateClick(review.id) }>
+                        <Tooltip title="Edit Review" >
+                          <EditIcon />
+                        </Tooltip>
+                    </IconButton>
+                  
+                    <Tooltip title="Delete Review">
+                      <IconButton onClick={ () => destroy(review) } ><DeleteIcon /></IconButton>
+                    </Tooltip>
+                    </div> 
+                    </Stack>
+                  
+                
+                  {/*<Stack direction='column'>*/}
+                  <Stack direction='row' alignItems='center'>
                   <Rating
                     name="read-only"
                     value={ review.rating }
                     readOnly
                   />
+                  <Typography 
+                    variant='h6' 
+                    component='div'
+                    sx={{ marginLeft: 1 }} 
+                  >
+                    <Link to={`/users/${review.taskDoerId}`}>
+                      { review.title } 
+                    </Link>
+                  </Typography>
+                  </Stack>
+                  <Typography variant='body2' sx={{ marginLeft: 1 }}> { createdAt.toLocaleDateString('en-US', {
+                  month: 'long',
+                  day: 'numeric',
+                  year: 'numeric'
+                  }) }
+                  </Typography>
                   
-                  <Link to={`/users/${review.taskDoerId}`}>{ review.title } </Link>
-                  <IconButton onClick={ ()=> handleUpdateClick(review.id) }>
-                
-                    <Tooltip title="Edit Review">
-                      <EditIcon />
-                    </Tooltip>
-                  </IconButton>
+                  <Typography variant='body1'>{ review.comment }</Typography>
+                  </Stack>
                   
-                  <Tooltip title="Delete Review">
-                    <IconButton onClick={ () => destroy(review) }><DeleteIcon /></IconButton>
-                  </Tooltip>
                   {  (
                   <Dialog 
                     maxWidth='sm'
@@ -119,12 +145,32 @@ const Reviews = () => {
                       <Button onClick={ () => handleClose(review.id)}>Cancel</Button>
                     </DialogActions>
                   </Dialog>)}
-                </ListItem>
+                {/*</ListItem>*/}
               </CardContent>  
+              
+              <CardActions disableSpacing>
+                <IconButton
+                  onClick={ () => handleExpandClick(review.id)}
+                  aria-expanded={expandedReviews[review.id] || false}
+                  aria-label='show more'
+                >
+          
+                  <ExpandMoreOutlinedIcon />
+                </IconButton>
+              </CardActions>
+              <Collapse in={expandedReviews[review.id] || false} timeout='auto' unmountOnExit>
+                <CardContent>
+                  <Typography variant="body2">
+                    
+                    <Typography variant='subtitle1'>Job: { task.title }</Typography>
+                    <Typography variant='body1'>{ task.description }</Typography>
+                  </Typography>
+                </CardContent>
+              </Collapse>
               </Card>  
             </Box>  
             )})}
-      </List>
+      {/*</List>*/}
     </div> 
   );
 };

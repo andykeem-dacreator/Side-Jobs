@@ -121,7 +121,7 @@ const PublicProfile = () => {
           {/*<Stack direction='row'>*/}
             <Avatar
               src={ user.avatar }
-              sx={{ width: 56, height: 56 }}
+              sx={{ width: 60, height: 60 }}
               >
             </Avatar>
           </ListItemAvatar>

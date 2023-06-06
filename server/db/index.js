@@ -276,13 +276,13 @@ const syncAndSeed = async () => {
     }),
   ]);
   
-  const [review4, review5] = await Promise.all([
+  const [review3, review4] = await Promise.all([
     Review.create({
       rating: 4,
       title: faker.lorem.paragraph({ min: 1, max: 1}),
       comment: faker.lorem.paragraph(3),
       userId: larry.id,
-      taskId: task4.id,
+      taskId: task3.id,
       taskDoerId: ethyl.id
     }),
     Review.create({
@@ -290,7 +290,7 @@ const syncAndSeed = async () => {
       title: faker.lorem.paragraph({ min: 1, max: 1}),
       comment: faker.lorem.paragraph(3),
       userId: larry.id,
-      taskId: task5.id,
+      taskId: task4.id,
       taskDoerId: ethyl.id
     })
     ]);
@@ -317,8 +317,8 @@ const syncAndSeed = async () => {
     },
     reviews: {
       review1,
+      review3,
       review4,
-      review5,
     },
   };
 };
