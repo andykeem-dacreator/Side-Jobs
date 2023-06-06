@@ -63,15 +63,9 @@ const Reviews = () => {
   };
 
   return (
-<<<<<<< HEAD
     <div className='reviews-i-gave'>
       <Typography variant='h4'>Reviews I Gave</Typography>
       {/*<List >*/}
-=======
-    <div>
-      <h2>Reviews I Gave</h2>
-      <ul>
->>>>>>> main
         {
           filteredReviews.map(review =>{
             const createdAt = new Date(review.createdAt);
