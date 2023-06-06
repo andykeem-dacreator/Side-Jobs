@@ -6,7 +6,11 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
+import {
+  Avatar,
+  Stack,
+ } from '@mui/material'
+ 
 const AddReview = () => {
   const { auth, tasks, users } = useSelector(state => state);
   const { id } = useParams();
@@ -41,14 +45,59 @@ const AddReview = () => {
   };
 
   return (
-    <div>
-      <h2>Create a Review for: { user.username }</h2>
-      <h3>Job: { task.title }</h3>
+    <div className='add-review'>
+      <Typography variant='h4'>Write a Review</Typography>
+      <Stack direction='column' sx={{ spacing: 2, padding: 1 }}>
+        <Stack direction='row'>
+          <Avatar
+            src={ task.taskDoer.avatar }
+          >
+          </Avatar>
+          <Typography 
+            variant='h6'
+            sx={{ marginLeft: 2 }}
+          > 
+            For: { user.firstName } { user.lastName[0] }.
+          </Typography>
+        </Stack>
+        <Typography 
+          variant='body1'
+          sx={{ marginTop: 1}}
+        >
+          Completed Job: { task.title }</Typography>
+        <Typography variant='body1'>Job Description: { task.description }</Typography>
+      </Stack>  
+      
       <form onSubmit={ create }>
-        <Rating value={ rating } onChange={ ev => setRating(Number(ev.target.value)) } placeholder='rating' />
-        <TextField  id="outlined-basic" label="Title" variant="outlined" value={ title } onChange={ ev => setTitle(ev.target.value) } />
-        <TextField  id="outlined-basic" label="Comment" variant="outlined" value={ comment } onChange={ ev => setComment(ev.target.value) } />
-        <Button variant="outlined" type="submit">Add Review</Button>
+        <Rating 
+          value={ rating } 
+          onChange={ ev => setRating(Number(ev.target.value)) } 
+          sx={{ margin: 'auto', my: '10px' }}
+          size="large"
+          />
+        <TextField  
+        
+          label="Title" 
+          variant="outlined" 
+          value={ title } 
+          onChange={ ev => setTitle(ev.target.value) } 
+        />
+        <TextField  
+       
+          label="Comment" 
+          variant="outlined" 
+          value={ comment } 
+          onChange={ ev => setComment(ev.target.value) } 
+          multiline={true}
+          rows={3}
+        />
+        <Button 
+          variant="outlined" 
+          type="submit"
+          disabled={ !title || !comment || !rating }
+        >
+          Add Review
+        </Button>
       </form>
     </div>
     );

@@ -6,7 +6,21 @@ module.exports = app;
 
 app.get('/', async(req, res, next)=> {
   try{
-    res.send(await Review.findAll());
+    const reviews = await Review.findAll({
+      order: [
+        ['createdAt', 'DESC'],
+        ]
+    });
+    res.send(reviews);
+    //const sortedReviews = reviews.sort((a, b) => b.createdAt - a.createdAt);
+    //res.send(sortedReviews);
+    //res.send(await Review.findAll());
+    //await Review.findAll()
+    // {
+    //   order: [
+    //     ['createdAt', 'DESC'],
+    //     ]
+    // }
   }
   catch(ex){
     next(ex);

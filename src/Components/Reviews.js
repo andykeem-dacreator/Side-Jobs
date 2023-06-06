@@ -1,25 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { destroyReview,} from '../store';
 import { Link } from 'react-router-dom';
 import UpdateReview from './UpdateReview';
-import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-import Tooltip from '@mui/material/Tooltip';
 import EditIcon from '@mui/icons-material/Edit';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import {
    Avatar,
-   Modal,
    Dialog,
    DialogActions,
    DialogContent,
-   DialogContentText,
    DialogTitle,
-   Button
-//   IconButton,
-//   DeleteIcon,
-//   Tooltip,
-//   EditIcon
+   Button,
+   Typography,
+   IconButton,
+   Tooltip,
+   Rating,
+   Card,
+   CardActions,
+   CardContent,
+   Box,
+   Stack,
+   Collapse,
  } from '@mui/material'
 
 const Reviews = () => {
@@ -27,8 +31,8 @@ const Reviews = () => {
   const dispatch = useDispatch();
   const filteredReviews = reviews.filter(review => review.userId === auth.id);
   const [showUpdateFormMap, setShowUpdateFormMap] = useState({});
-  const [open, setOpen] = useState(false);
-
+  const [expandedReviews, setExpandedReviews] = useState({});
+  
   const handleOpen = (reviewId) => {
     setShowUpdateFormMap(prevState => ({ ...prevState, [reviewId]: true }));
   };
@@ -45,38 +49,83 @@ const Reviews = () => {
     handleOpen(reviewId);
   };
 
-  
-  // const update = (review) => {
-  //   dispatch(updateReview())
-  // };
+  const handleExpandClick = (reviewId) => {
+    setExpandedReviews((prevState)=>({ ...prevState, [reviewId]: !prevState[reviewId]}));
+  };
+
   return (
-    <div>
-      <h2>Reviews I Gave</h2>
-      <ul>
+    <div className='reviews-i-gave'>
+      <Typography variant='h4'>Reviews I Gave</Typography>
+      {/*<List >*/}
         {
           filteredReviews.map(review =>{
+            const createdAt = new Date(review.createdAt);
             const showUpdateForm = showUpdateFormMap[review.id] || false;
-            console.log('showUpdateForm:', showUpdateForm)
+            const task = tasks.find(task => task.id === review.taskId);
+            if(!task){
+              return null;
+            }
             return (
-            
-                <li key={ review.id }>
-                  <Link to={`/users/${review.taskDoerId}`}>{ review.title } </Link>
-                  {/*<IconButton onClick={ ()=> handleUpdateClick(review.id) }>{showUpdateForm ? <Tooltip title="Edit"><EditIcon /></Tooltip>:  <Tooltip title="Edit"><EditIcon /></Tooltip>}</IconButton>*/}
-                  <IconButton onClick={ ()=> handleUpdateClick(review.id) }>
-                    {showUpdateForm}
-                    <Tooltip title="Edit Review">
-                      <EditIcon />
-                    </Tooltip>
-                  </IconButton>
+            <Box key={ review.id }sx={{ minWidth: 275}}>
+              <Card variant="outlined">
+                <CardContent>
+                {/*<ListItem key={ review.id }
+                >*/}
+                  <Stack direction='column'>
+                    <Stack direction='row'>
+                      <Avatar
+                        src={ task.taskDoer.avatar }
+                      >
+                      </Avatar>
+                      
+                      <Typography variant='h6' component='div' sx={{ marginLeft: 2 }}>To: {task.taskDoer.firstName} {task.taskDoer.lastName[0]}.</Typography>
+                      
+                      <div style={{ flexGrow: 1 }}></div>
+                      <div>
+                        <IconButton onClick={ ()=> handleUpdateClick(review.id) }>
+                          <Tooltip title="Edit Review" >
+                            <EditIcon />
+                          </Tooltip>
+                        </IconButton>
                   
-                  <Tooltip title="Delete Review">
-                    <IconButton onClick={ () => destroy(review) }><DeleteIcon /></IconButton>
-                  </Tooltip>
-                  {  (
+                        <Tooltip title="Delete Review">
+                          <IconButton onClick={ () => destroy(review) } ><DeleteIcon /></IconButton>
+                        </Tooltip>
+                      </div> 
+                    </Stack>
+                    
+                    <Stack direction='row' alignItems='center' spacing={1} sx={{ marginTop: 1}}>
+                      <Rating
+                        name="read-only"
+                        value={ review.rating }
+                        readOnly
+                      />
+                      <Typography 
+                        variant='h6' 
+                        component='div'
+                        sx={{ marginLeft: 1 }} 
+                      >
+                        <Link to={`/users/${review.taskDoerId}`}>
+                          { review.title } 
+                        </Link>
+                      </Typography>
+                    </Stack>
+                    <Typography variant='body2'>
+                      { createdAt.toLocaleDateString('en-US', {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric'
+                      })}
+                    </Typography>
+                    <Typography variant='body1'>{ review.comment }</Typography>
+                  </Stack>
+                  { (
                   <Dialog 
                     maxWidth='sm'
                     fullWidth={true}
-                    open={showUpdateForm} onClose={() => handleClose(review.id)}>
+                    open={showUpdateForm} 
+                    onClose={() => handleClose(review.id)}
+                  >
                     <DialogTitle>Edit Review</DialogTitle>
                       <DialogContent>
                         <UpdateReview review={review} onClose={() => handleClose(review.id)}/>
@@ -85,9 +134,28 @@ const Reviews = () => {
                       <Button onClick={ () => handleClose(review.id)}>Cancel</Button>
                     </DialogActions>
                   </Dialog>)}
-                </li>
+                {/*</ListItem>*/}
+              </CardContent>  
+              
+              <CardActions disableSpacing>
+                <IconButton
+                  onClick={ () => handleExpandClick(review.id)}
+                  aria-expanded={expandedReviews[review.id] || false}
+                  aria-label='show more'
+                >
+                  { expandedReviews[review.id] ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                </IconButton>
+              </CardActions>
+              <Collapse in={expandedReviews[review.id] || false} timeout='auto' unmountOnExit>
+                <CardContent>
+                    <Typography>Completed Job: { task.title }</Typography>
+                    <Typography variant='body1'>Description: { task.description }</Typography>
+                </CardContent>
+              </Collapse>
+              </Card>  
+            </Box>  
             )})}
-      </ul>
+      {/*</List>*/}
     </div> 
   );
 };

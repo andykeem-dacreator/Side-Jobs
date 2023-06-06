@@ -1,34 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
-import Rating from '@mui/material/Rating';
+import StarIcon from '@mui/icons-material/Star';
+
 import {
    Avatar,
    List,
    ListItem,
    ListItemAvatar,
-   ListItemText,
    Divider,
    Stack,
-   Card,
-   Badge,
    FormControl,
    InputLabel,
    Select,
    MenuItem,
-   Chip
+   Chip,
+   Rating,
  } from '@mui/material';
  
 const PublicProfile = () => {
   const { users, auth, tasks, reviews} = useSelector((state) => state);
   const { id } = useParams();
   const user = users.find((user) => user.id === id);
-  const dispatch = useDispatch();
+
   const filteredReviews = reviews.filter(review => review.taskDoerId === id);
-  //find first task where the taskDoerId === id. then i can get the taskDoer's name
-  //const task = tasks.find(task => task.taskDoerId === id);
-  //createReview component should show if the task that taskcreator made doesn't have review yet
+ 
   const [sortedReviews, setSortedReviews] = useState([]);
   const [sortOption, setSortOption] = useState('');
   const [filterCategory, setFilterCategory] = useState('');
@@ -43,8 +40,24 @@ const PublicProfile = () => {
     'beauty',
     'cleaning',
     ];
-    
- // const task = tasks.find(task => task.category === filterCategory);
+  //const theme = useContext(ThemeContext);
+  //const theme = useTheme();
+
+  const getAverageRating = (reviews) => {
+    let sumRating = reviews.reduce((acc, review)=>{
+      return acc + review.rating;
+    }, 0);
+    let averageRating;
+    if(reviews.length === 0){
+      averageRating = 0;
+    } else{
+      averageRating = sumRating / reviews.length;
+    }
+    return averageRating;
+  };
+  
+  const averageRatingByCategory = getAverageRating(sortedReviews);
+  const averageRatingOverall = getAverageRating(filteredReviews);
   
    useEffect(() => {
     const filteredByCategory = filteredReviews.filter((review) => {
@@ -58,11 +71,13 @@ const PublicProfile = () => {
     setSortedReviews(
       filteredByCategory.slice()
         .sort((a, b) => {
-        //console.log('sort option', sortOption);
           if (sortOption === 1) {
             return b.rating - a.rating;
           }
-          return a.rating - b.rating;
+          else if(sortOption === 2 ){
+            return a.rating - b.rating;
+          }
+          return 0;
         })
         
     );
@@ -71,11 +86,9 @@ const PublicProfile = () => {
   if (!user) {
     return null;
   }
-  // if(!task){
-  //   return null;
-  // }
+  
   return (
-    <div>
+    <div className='public-profile'>
     <Typography variant='h4'>{user.firstName} {user.lastName[0]}. Profile</Typography>
       <List>
         <ListItem>
@@ -83,11 +96,14 @@ const PublicProfile = () => {
           {/*<Stack direction='row'>*/}
             <Avatar
               src={ user.avatar }
-              sx={{ width: 56, height: 56 }}
+              sx={{ width: 60, height: 60 }}
               >
             </Avatar>
           </ListItemAvatar>
-          <Stack direction='column' spacing={1} sx={{ marginLeft: 1 }}>
+          <Stack direction='column' spacing={1} sx={{ marginLeft: 2 }}>
+            <Stack direction='row' alignItems='center' >
+              <StarIcon/> {averageRatingOverall.toFixed(1)} overall ({filteredReviews.length} {filteredReviews.length === 1 ? 'rating' : 'ratings'})
+            </Stack>
             <Typography variant='h5'>Skills & experience</Typography>
             <Typography variant='body1'>{ user.aboutMe }</Typography>
           </Stack>  
@@ -96,11 +112,20 @@ const PublicProfile = () => {
         <Divider />
       </List>
    
-      <Typography variant='h5'>Reviews ({reviews.length})</Typography>
+      <Typography variant='h5'>Reviews</Typography>
+      <Stack 
+        direction='row'
+        alignItems='center' 
+        spacing={2}
+        margin={1}
+      >
+       <StarIcon/> {averageRatingByCategory.toFixed(1)} ({sortedReviews.length} {sortedReviews.length === 1 ? 'rating' : 'ratings'})
+      </Stack>
       <Stack
         direction='row'
+        margin={1}
       >
-      <FormControl sx={{ minWidth: 200 }} >
+      <FormControl sx={{ minWidth: 200 }} size='small'>
         <InputLabel>Sort by</InputLabel>
         <Select
           value={ sortOption }
@@ -112,7 +137,7 @@ const PublicProfile = () => {
         </Select>
       </FormControl>
       
-      <FormControl sx={{ minWidth: 200, marginLeft: 1}} spacing={1}> 
+      <FormControl sx={{ minWidth: 200, marginLeft: 1}} spacing={1} size='small'> 
         <InputLabel>Filter by</InputLabel>
         <Select
           value={ filterCategory }
@@ -121,7 +146,7 @@ const PublicProfile = () => {
         
           <MenuItem value={''}>All Categories</MenuItem>
           {
-            categories.map((category) => {
+            categories.sort().map((category) => {
               return (
               <MenuItem key={ category } value={ category }>
                 { category }
@@ -135,11 +160,14 @@ const PublicProfile = () => {
       
       <List>{
         sortedReviews.map(review =>{
+          const createdAt = new Date(review.createdAt);
           const taskCreator = users.find(user => user.id === review.userId);
           const task = tasks.find(task => task.id === review.taskId);
-          
+          if(!task){
+            return null;
+          }
           return (
-          <>
+          <React.Fragment key={review.id}>
             <ListItem key={ review.id }
               >
               {/*<ListItemAvatar>*/}
@@ -149,30 +177,45 @@ const PublicProfile = () => {
                   direction='row'
                   alignItems='center'
                 >
-                <Avatar
-                  src={taskCreator.avatar}
-                >
-                </Avatar>
-              {/*</ListItemAvatar>*/}
-                <Typography variant='h6' sx={{ marginLeft: 1 }}>{ taskCreator.firstName } { taskCreator.lastName[0] }.</Typography> 
+                  <Avatar
+                    src={taskCreator.avatar}
+                  >
+                  </Avatar>
+                {/*</ListItemAvatar>*/}
+                  <Typography variant='h6' sx={{ marginLeft: 1 }}>{ taskCreator.firstName } { taskCreator.lastName[0] }.
+                  </Typography> 
               </Stack>
               <Stack
                   direction='row'
                   alignItems='center'
-                >
+              >
                 <Rating name="read-only" value={review.rating} readOnly />
                 <Typography variant='h6' sx={{ marginLeft: 1 }} >{ review.title }</Typography>
               </Stack>
-              {/*<Typography variant='subtitle1'>{ task.category }</Typography>*/}
-              <Chip label={ task.category } variant='outlined' size='small' sx={{ width: 1/2}}/>
+        
+              <Stack
+                direction='row'
+                alignItems='center'
+              >
+                <Chip label={ task.category } variant='outlined'
+                
+                  //style={{ backgroundColor: theme.palette.virtual.main}}
+                  color='primary'
+                />
              
-              <Typography variant='body2'>{ review.createdAt.slice(0,10) }</Typography>
+                <Typography variant='body2' sx={{ marginLeft: 1 }}> { createdAt.toLocaleDateString('en-US', {
+                  month: 'long',
+                  day: 'numeric',
+                  year: 'numeric'
+                  }) }
+                </Typography>
+              </Stack>
               <Typography variant='body1'>{ review.comment }</Typography>
               {/*</Card>*/}
               </Stack>
             </ListItem>
             <Divider />
-            </>
+            </React.Fragment>
           );
         })
       }
