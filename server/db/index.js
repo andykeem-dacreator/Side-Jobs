@@ -262,8 +262,9 @@ const syncAndSeed = async () => {
       lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
   ]);
-
-  const [review1] = await Promise.all([
+  
+  //reviews for Ethyl
+  const [review1, review3, review4, review8, review9] = await Promise.all([
     Review.create({
       rating: 5,
       title: "great job",
@@ -274,19 +275,6 @@ const syncAndSeed = async () => {
       lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
       lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
-    Review.create({
-      rating: 1,
-      title: "ROBBER",
-      comment: "he stole stuff from my house!!!",
-      userId: andy.id,
-      taskId: task1.id,
-      taskDoerId: ethyl.id,
-      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
-      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
-    })
-  ]);
-  
-  const [review3, review4] = await Promise.all([
     Review.create({
       rating: 4,
       title: faker.lorem.paragraph({ min: 1, max: 1}),
@@ -302,8 +290,19 @@ const syncAndSeed = async () => {
       userId: larry.id,
       taskId: task4.id,
       taskDoerId: ethyl.id
-    })
-    ]);
+    }),
+    Review.create({
+      rating: 1,
+      title: "ROBBER",
+      comment: `${ethyl.firstName} stole stuff from my house!!!`,
+      userId: larry.id,
+      taskId: task8.id,
+      taskDoerId: ethyl.id,
+      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+    }),
+  ]);
+  
   return {
     users: {
       moe,
@@ -329,6 +328,7 @@ const syncAndSeed = async () => {
       review1,
       review3,
       review4,
+      review8
     },
   };
 };

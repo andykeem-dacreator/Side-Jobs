@@ -9,6 +9,7 @@ const Review = conn.define('review', {
   },
   rating: {
     type: INTEGER,
+    allowNull: false,
   },
   title: {
     type: STRING,
@@ -18,6 +19,11 @@ const Review = conn.define('review', {
   },
   taskDoerId: {
     type: UUID
+  },
+  taskId: {
+    type: UUID,
+    allowNull: false,
+    unique: true
   }
 }
 // , {

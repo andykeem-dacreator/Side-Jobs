@@ -1,35 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import StarIcon from '@mui/icons-material/Star';
 
-//import { useContext } from 'react';
-//import { ThemeContext } from '@mui/system';
 import {
    Avatar,
    List,
    ListItem,
    ListItemAvatar,
-   ListItemText,
    Divider,
    Stack,
-   Card,
-   Badge,
    FormControl,
    InputLabel,
    Select,
    MenuItem,
    Chip,
    Rating,
-   useTheme
  } from '@mui/material';
  
 const PublicProfile = () => {
   const { users, auth, tasks, reviews} = useSelector((state) => state);
   const { id } = useParams();
   const user = users.find((user) => user.id === id);
-  const dispatch = useDispatch();
+
   const filteredReviews = reviews.filter(review => review.taskDoerId === id);
  
   const [sortedReviews, setSortedReviews] = useState([]);
@@ -48,27 +42,7 @@ const PublicProfile = () => {
     ];
   //const theme = useContext(ThemeContext);
   //const theme = useTheme();
-  
-  // let sumRating = sortedReviews.reduce((acc, review)=>{
-  //   return acc + review.rating;
-  // }, 0);
-  // let sumRatingOverall = filteredReviews.reduce((acc, review)=>{
-  //   return acc + review.rating;
-  // }, 0);
-  
-  // console.log('sumrating:', sumRating)
-  // console.log('sortedreviews len:', sortedReviews.length)
-  // console.log('filteredreviews len:', filteredReviews.length)
-  
-  // let averageRating;
-  // let averageRatingOverall;
-  
-  // if (sortedReviews.length === 0){
-  //   averageRating = 0;
-  // } else{
-  //   averageRating = sumRating / sortedReviews.length;
-  // }
-  
+
   const getAverageRating = (reviews) => {
     let sumRating = reviews.reduce((acc, review)=>{
       return acc + review.rating;
@@ -84,6 +58,7 @@ const PublicProfile = () => {
   
   const averageRatingByCategory = getAverageRating(sortedReviews);
   const averageRatingOverall = getAverageRating(filteredReviews);
+  
    useEffect(() => {
     const filteredByCategory = filteredReviews.filter((review) => {
       if (filterCategory === '') {
@@ -125,9 +100,9 @@ const PublicProfile = () => {
               >
             </Avatar>
           </ListItemAvatar>
-          <Stack direction='column' spacing={1} sx={{ marginLeft: 1 }}>
+          <Stack direction='column' spacing={1} sx={{ marginLeft: 2 }}>
             <Stack direction='row' alignItems='center' >
-            <StarIcon/> {averageRatingOverall.toFixed(1)} ({filteredReviews.length} {filteredReviews.length === 1 ? 'rating' : 'ratings'})
+              <StarIcon/> {averageRatingOverall.toFixed(1)} overall ({filteredReviews.length} {filteredReviews.length === 1 ? 'rating' : 'ratings'})
             </Stack>
             <Typography variant='h5'>Skills & experience</Typography>
             <Typography variant='body1'>{ user.aboutMe }</Typography>

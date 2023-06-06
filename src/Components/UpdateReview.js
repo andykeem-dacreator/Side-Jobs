@@ -49,7 +49,6 @@ const UpdateReview = ({review, onClose }) => {
     <div className='update-review'>
       
       <form onSubmit={ update }>
-        {/*<Typography component="legend">Rating</Typography>*/}
         <Rating className='rating' sx={{ margin: 'auto', my: '10px' }} value={ rating } onChange={ ev => setRating(Number(ev.target.value)) } placeholder='rating' />
         {/*<FormControl>*/} 
         <TextField
