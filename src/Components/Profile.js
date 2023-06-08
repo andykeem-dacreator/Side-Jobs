@@ -15,7 +15,7 @@ const Profile = () => {
   const [avatar, setAvatar] = useState('');
   const [updateMessage, setUpdateMessage] = useState('');
   const user = users.find((user) => user.id === id);
-  console.log(auth);
+  // console.log(auth);
   const dispatch = useDispatch();
   const ref = useRef();
 
@@ -104,7 +104,7 @@ const Profile = () => {
           <input type="file" ref={ref} />
         </label>
         <label>
-          Wallet Balance: { auth.wallet }
+          Wallet Balance: ${ auth.wallet }
         </label>
         <label>
           Add Funds? 
