@@ -10,9 +10,9 @@ const MyTasks = () => {
     let filteredTasks = tasks.filter((task) => task.userId === auth.id)
 
     const update = async(task) => {
-        console.log('task', task);
+        // console.log('task', task);
         const taskDoer = users.find((user) => user.id === task.taskDoerId);
-        console.log('taskdoer', taskDoer);
+        // console.log('taskdoer', taskDoer);
         await dispatch(updateTask({id:task.id, isComplete: true}));
         await dispatch(updateUser({id:taskDoer.id, wallet: taskDoer.wallet + task.price}));
         await dispatch(updateUser({id:auth.id, wallet: auth.wallet - task.price}));

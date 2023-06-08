@@ -15,7 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { useTheme } from '@mui/material'
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -44,7 +44,7 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-
+  const { auth } = useSelector(state => state);
 
   return (
     <AppBar position="static">
@@ -134,16 +134,16 @@ function ResponsiveAppBar() {
           
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <MenuItem>
-              <Link to={"/"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Home</Link>
+              <Link to={"/"} style={{color: 'white' }}>Home</Link>
             </MenuItem>
             <MenuItem>
-              <Link to={"/tasks"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Available Jobs</Link>
+              <Link to={"/tasks"} style={{color: 'white' }}>Available Jobs</Link>
             </MenuItem>
             <MenuItem>
-              <Link to={"/addTask"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Post A Job</Link>
+              <Link to={"/addTask"} style={{color: 'white' }}>Post A Job</Link>
             </MenuItem>
             <MenuItem>
-              <Link to={"/about"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>About</Link>
+              <Link to={"/about"} style={{color: 'white' }}>About</Link>
             </MenuItem>
 
               <Button
@@ -157,7 +157,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar src={auth.avatar} />
               </IconButton>
             </Tooltip>
             <Menu
