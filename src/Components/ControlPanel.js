@@ -1,11 +1,16 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteUser, fetchUsers, deleteTask } from '../store';
+import { deleteUser, fetchUsers, deleteTask, fetchTasks } from '../store';
 
 const ControlPanel = () => {
   const { auth, users, tasks } = useSelector((state) => state);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+    dispatch(fetchTasks());
+  }, [dispatch]);
 
   const handleDeleteUser = (user) => {
     dispatch(deleteUser(user))
