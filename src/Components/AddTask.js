@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useRef, useEffect} from 'react';
 import { createTask } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -54,7 +54,7 @@ const AddTask = ()=> {
     'photography'];
   const create = async(ev)=> {
     ev.preventDefault();
-    await dispatch(createTask({ title, description, city, state, price, category, userId: auth.id }));
+    await dispatch(createTask({ title, description, street, city, state, zipCode, country, lat, lng, price, category, userId: auth.id}));
     navigate('/myTasks')
   };
 
