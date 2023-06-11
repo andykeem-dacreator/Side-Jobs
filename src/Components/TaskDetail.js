@@ -76,7 +76,7 @@ const TaskDetail = () => {
           ) : (
             <UpdateTask />
           )}
-          <pre>{JSON.stringify(task, null, 2)}</pre>
+          {console.log(JSON.stringify(task, null, 2))}
           {auth.id === task.userId &&
           task.isComplete &&
           task.taskDoerId &&
