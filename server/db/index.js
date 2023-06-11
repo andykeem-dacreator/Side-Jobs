@@ -105,8 +105,8 @@ const syncAndSeed = async () => {
       category: "shopping",
       userId: larry.id,
       taskDoerId: ethyl.id,
-      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
-      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+      lat: faker.location.latitude({ max: 40.9153, min: 40.4961, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.7004, min: -74.2557, precision: 5 }),
     }),
     Task.create({
       title: "Organize my calendar",
@@ -117,8 +117,8 @@ const syncAndSeed = async () => {
       category: "virtual",
       userId: ethyl.id,
       taskDoerId: larry.id,
-      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
-      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+      lat: faker.location.latitude({ max: 40.9153, min: 40.4961, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.7004, min: -74.2557, precision: 5 }),
     }),
     Task.create({
       title: "Walk the dog",
@@ -129,9 +129,8 @@ const syncAndSeed = async () => {
       category: "moving",
       userId: larry.id,
       taskDoerId: ethyl.id,
-      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
-      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
-      isComplete: true,
+      lat: faker.location.latitude({ max: 40.9153, min: 40.4961, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.7004, min: -74.2557, precision: 5 }),
     }),
     Task.create({
       title: "4th player needed for FortNite",
@@ -143,9 +142,8 @@ const syncAndSeed = async () => {
       category: "gaming",
       userId: larry.id,
       taskDoerId: ethyl.id,
-      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
-      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
-      isComplete: true,
+      lat: faker.location.latitude({ max: 40.9153, min: 40.4961, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.7004, min: -74.2557, precision: 5 }),
     }),
     Task.create({
       title: "NEED HAIR PERSON",
@@ -157,8 +155,8 @@ const syncAndSeed = async () => {
       category: "beauty",
       userId: lucy.id,
       taskDoerId: ethyl.id,
-      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
-      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+      lat: faker.location.latitude({ max: 38.9589, min: 38.7551, precision: 5 }),
+      lng: faker.location.longitude({ max: -104.5945, min: -104.8922, precision: 5 }),
     }),
     Task.create({
       title: "Party Entertainment",
@@ -169,8 +167,8 @@ const syncAndSeed = async () => {
       category: "misc",
       userId: moe.id,
       taskDoerId: lucy.id,
-      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
-      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+      lat: faker.location.latitude({ max: 40.9153, min: 40.4961, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.7004, min: -74.2557, precision: 5 }),
     }),
     Task.create({
       title: "Last minute SAT tutor",
@@ -181,8 +179,8 @@ const syncAndSeed = async () => {
       category: "virtual",
       userId: ethyl.id,
       taskDoerId: moe.id,
-      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
-      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+      lat: faker.location.latitude({ max: 40.9153, min: 40.4961, precision: 5 }),
+      lng: faker.location.longitude({ max: -73.7004, min: -74.2557, precision: 5 }),
     }),
     Task.create({
       title: "Looking for housekeeping",
@@ -194,8 +192,8 @@ const syncAndSeed = async () => {
       category: "cleaning",
       userId: larry.id,
       taskDoerId: ethyl.id,
-      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
-      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+      lat: faker.location.latitude({ max: 33.8481, min: 33.2903, precision: 5 }),
+      lng: faker.location.longitude({ max: -111.7897, min: -112.3241, precision: 5 }),
     }),
     Task.create({
       title: "Professional Blackjack Player assistance",
@@ -207,8 +205,8 @@ const syncAndSeed = async () => {
       category: "misc",
       userId: moe.id,
       taskDoerId: lucy.id,
-      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
-      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+      lat: faker.location.latitude({ max: 36.3308, min: 36.0840, precision: 5 }),
+      lng: faker.location.longitude({ max: -115.1124, min: -115.3238, precision: 5 }),
     }),
     Task.create({
       title: "Expand lemonade business",
@@ -220,8 +218,8 @@ const syncAndSeed = async () => {
       category: "moving",
       userId: andy.id,
       taskDoerId: lucy.id,
-      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
-      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+      lat: faker.location.latitude({ max: 25.9950, min: 25.7617, precision: 5 }),
+      lng: faker.location.longitude({ max: -80.1247, min: -80.3200, precision: 5 }),
     }),
     Task.create({
       title: "Plus one for wedding",
@@ -233,8 +231,8 @@ const syncAndSeed = async () => {
       category: "misc",
       userId: larry.id,
       taskDoerId: lucy.id,
-      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
-      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+      lat: faker.location.latitude({ max: 40.1376, min: 39.8670, precision: 5 }),
+      lng: faker.location.longitude({ max: -74.9558, min: -75.2800, precision: 5 }),
     }),
     Task.create({
       title: "FISH!!!",
@@ -245,8 +243,8 @@ const syncAndSeed = async () => {
       state: "NY",
       category: "misc",
       userId: lucy.id,
-      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
-      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+      lat: faker.location.latitude({ max: 41.1644, min: 40.5600, precision: 5 }),
+      lng: faker.location.longitude({ max: -71.8562, min: -73.6664, precision: 5 }),
     }),
     Task.create({
       title: "Need a wedding watch",
@@ -257,11 +255,11 @@ const syncAndSeed = async () => {
       state: "CA",
       category: "shopping",
       userId: lucy.id,
-      lat: faker.location.latitude({ max: 40.915, min: 40.498, precision: 5 }),
-      lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
+      lat: faker.location.latitude({ max: 37.9298, min: 37.6396, precision: 5 }),
+      lng: faker.location.longitude({ max: -122.2818, min: -123.1738, precision: 5 }),
     }),
   ]);
-  
+
   //reviews for Ethyl
   const [review1, review3, review4, review8, review9] = await Promise.all([
     Review.create({
@@ -301,7 +299,7 @@ const syncAndSeed = async () => {
       lng: faker.location.longitude({ max: -73.699, min: -74.255, precision: 5 }),
     }),
   ]);
-  
+
   return {
     users: {
       moe,
