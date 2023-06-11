@@ -12,11 +12,10 @@ Task.belongsTo(User, { as: "taskCreator", foreignKey: "userId" });
 Task.belongsTo(User, { as: "taskDoer", foreignKey: "taskDoerId" });
 //Review.belongsTo(User);
 Review.belongsTo(User, { as: "taskCreator", foreignKey: "userId" });
+Task.hasOne(Review, { onDelete: 'CASCADE' });
 Review.belongsTo(Task);
-
 //User.hasMany(Review);
 User.hasMany(Review);
-Task.hasOne(Review);
 
 const syncAndSeed = async () => {
   if (process.env.NO_SEED) {
