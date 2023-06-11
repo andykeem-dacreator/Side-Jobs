@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { deleteUser, fetchUsers, deleteTask, fetchTasks } from '../store';
 
 const ControlPanel = () => {
-  const { auth, users, tasks } = useSelector((state) => state);
+  const { auth, users, tasks, onlineUsers } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,6 +36,7 @@ const ControlPanel = () => {
     <div>
       <h1>Control Panel</h1>
       <h2>Welcome Admin {auth.firstName}</h2>
+      <h3>Online Users ({onlineUsers.length})</h3>
       <div>
         <h3>User Management</h3>
         {users.map((user) => (
