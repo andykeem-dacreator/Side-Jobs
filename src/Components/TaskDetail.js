@@ -63,7 +63,7 @@ const TaskDetail = () => {
               taskDoer.firstName
             )}
           </div>
-          {task.userId === auth.id ? (
+          {task.userId === auth.id && !task.taskDoerId ? (
             <button onClick={() => destroy(task)}>Delete</button>
           ) : (
             ""
