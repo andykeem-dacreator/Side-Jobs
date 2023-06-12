@@ -3,7 +3,31 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateAuth } from '../store';
 import { useParams } from 'react-router-dom';
 import Wallet from './Wallet';
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import UploadIcon from '@mui/icons-material/Upload';
+import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+//import { Upload, Delete } from '@mui/icons-material';
+import {
+  Avatar,
+  TextField,
+  Typography,
+  FormControl,
+  InputLabel,
+  InputAdornment,
+  OutlinedInput,
+  IconButton,
+  Button,
+  Card,
+  CardHeader,
+  Stack,
+  Tooltip,
+  Grid,
+  Snackbar,
+  Alert,
+ } from '@mui/material';
+ 
 const Profile = () => {
   const { users, auth } = useSelector((state) => state);
   const { id } = useParams();
@@ -13,12 +37,22 @@ const Profile = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [avatar, setAvatar] = useState('');
-  const [updateMessage, setUpdateMessage] = useState('');
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState(null);
   const user = users.find((user) => user.id === id);
-  // console.log(auth);
   const dispatch = useDispatch();
   const ref = useRef();
 
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (ev) => {
+    ev.preventDefault();
+  };
+  
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+  
   useEffect(() => {
     if (auth.id) {
       setUsername(auth.username);
@@ -28,7 +62,7 @@ const Profile = () => {
       setLastName(auth.lastName);
       setAvatar(auth.avatar);
     }
-  }, [auth]);
+  }, [auth, auth.wallet]);
 
   useEffect(() => {
     ref.current.addEventListener('change', (ev) => {
@@ -43,6 +77,7 @@ const Profile = () => {
 
   const updateProfile = (ev) => {
     ev.preventDefault();
+    
     if (password.length === 0) {
       dispatch(updateAuth({ username, email, firstName, lastName, avatar }));
     } else {
@@ -51,74 +86,189 @@ const Profile = () => {
       );
     }
     setPassword('');
-    setUpdateMessage('Profile updated successfully!');
+    setOpen(true);
   };
+  
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
 
+    setOpen(false);
+  };
   return (
-    <div>
-      <h2>Profile</h2>
-      {!!avatar && <img src={avatar} width="100" alt="Avatar" />}
+    <div className='profile'>
+      <Typography variant='h4'>Profile</Typography>
       <form onSubmit={updateProfile}>
-        <label>
-          Username:
-          <input
+        <Card sx={{ minWidth: 200, display: 'flex', flexDirection: 'column', alignItems: 'center', p: 2, margin: 'auto' }}>
+          <Typography variant='h6'>Profile Picture</Typography>
+          <Avatar 
+            src={avatar} 
+            sx={{ width: 100, height: 100 }}
+            alt="Avatar"
+          />
+          
+            <Stack
+              direction='row'
+              spacing={2}
+              justifyContent="center"
+            >
+            <Tooltip title='Upload profile picture'>
+              <IconButton variant='contained' component='label'>
+                <UploadIcon />
+                <input
+                  hidden
+                  id='avatar'
+                  name='avatar'
+                  type="file" 
+                  ref={ref} 
+                />
+              </IconButton>  
+            </Tooltip>
+            <Tooltip title='Delete profile picture'>
+              <IconButton onClick={ () => setAvatar('https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png') }>
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
+            
+         </Stack>
+        </Card>
+        {/*<label>
+          Username:*/}
+          <TextField
+            label="Username"
             value={username}
             placeholder="New username"
             onChange={(ev) => setUsername(ev.target.value)}
           />
-        </label>
-        <label>
-          Password:
-          <input
+          <FormControl variant='outlined'>
+            <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
+       {/*</label>*/}
+        {/*<label>
+          Password:*/}
+          <OutlinedInput
             value={password}
-            placeholder="New password"
+            //placeholder="New password"
             onChange={(ev) => setPassword(ev.target.value)}
+            type={showPassword ? 'text' : 'password'}
+            endAdornment={
+              <InputAdornment position='end'>
+                <IconButton
+                  aria-label='toggle password visibility'
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge='end'
+                >
+                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label='new password'
           />
-        </label>
-        <label>
-          Email:
-          <input
+        </FormControl>
+        {/*</label>*/}
+        {/*<FormControl>*/}
+        {/*  <InputLabel htmlFor="my-input">New Email Address</InputLabel>*/}
+        {/*<label>
+          Email:*/}
+          {/*<OutlinedInput*/}
+          <TextField
+            label='Email'
             value={email}
             placeholder="New email Address"
-            onChange={(ev) => setEmail(ev.target.value)}
-          />
-        </label>
-        <label>
-          First Name:
-          <input
+            onChange={(ev) => {
+              if (!isValidEmail(ev.target.value)) {
+                setError('Email is invalid');
+              } else {
+                setError(null);
+              }
+                setEmail(ev.target.value)}
+              }
+            error={error && !isValidEmail(email)}
+            helperText={error && !isValidEmail(email) ? 'Email is invalid' : ''}
+          />  
+          {/*/>*/}
+        {/*</label>*/}
+        {/*</FormControl>*/}
+       
+        <FormControl>
+          <InputLabel htmlFor="my-input">First Name</InputLabel>
+        {/*<label>
+          First Name:*/}
+          <OutlinedInput
             value={firstName}
             placeholder="New First Name"
             onChange={(ev) => setFirstName(ev.target.value)}
           />
-        </label>
-        <label>
-          Last Name:
-          <input
+        {/*</label>*/}
+        </FormControl>
+        <FormControl>
+          <InputLabel htmlFor="my-input">Last Name</InputLabel>
+        {/*<label>
+          Last Name:*/}
+          <OutlinedInput
             value={lastName}
             placeholder="New Last Name"
             onChange={(ev) => setLastName(ev.target.value)}
           />
-        </label>
-        <label>
-          Avatar:
-          <input type="file" ref={ref} />
-        </label>
-        <label>
-          Wallet Balance: ${ auth.wallet }
-        </label>
-        <label>
-          Add Funds? 
-          <a href="https://venmo.com" style={{ marginLeft: '10px', marginRight: '5px' }}>
-            <img src='https://images.ctfassets.net/gkyt4bl1j2fs/ym6BkLqyGjMBmiCwtM7AW/829bf561ea771c00839b484cb8edeebb/App_Icon.png?w=276&h=276&q=50&fm=png&bg=transparent' style={{ width: '20px', height: '20px' }} alt="Venmo" />
-          </a>
-          <a href="https://paypal.com" style={{ marginLeft: '5px', marginRight: '10px' }}>
-            <img src='https://assets.stickpng.com/images/62977ac0e01809629f11355f.png' style={{ width: '20px', height: '20px' }} alt="Paypal" />
-          </a>
-
-        </label>
-        <button type="submit">Update Profile</button>
+        {/*</label>*/}
+        </FormControl>
+        
+        {/*<label>
+          Avatar:*/}
+       {/*   <FormControl>*/}
+          {/*<input 
+            type="file" 
+            ref={ref} 
+            //accept="image/*"
+            //className={classes.input}
+            //style={{ display: 'none' }}
+            //id="icon-button-file"
+            //multiple
+   
+          />*/}
+        {/*  <InputLabel htmlFor="icon-button-file">Avatar</InputLabel>*/}
+        {/*</label>*/}
+         {/*   <Button variant='outlined' component='span'>
+              <AddPhotoAlternateIcon />
+            </Button>*/}
+     {/*     </FormControl>*/}
+        
+        <Button 
+          variant='outlined' 
+          type="submit"
+          disabled={!isValidEmail(email) || !username || !firstName || !lastName}
+        >
+          Update Profile
+        </Button>
+        <Snackbar 
+          open={open} 
+          autoHideDuration={5000} 
+          onClose={handleClose} 
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        >
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            Profile updated successfully!
+          </Alert>
+        </Snackbar>
+        {/*<label>*/}
+      {/*  </label>*/}
+        {/*<label>*/}
+        <Stack direction='row' justifyContent='space-around'>
+          <Typography>  Wallet Balance: <strong>${ auth.wallet.toLocaleString() }</strong></Typography>
+          
+          <Stack direction='row' align-items='center'>
+          <Typography >Add Funds?</Typography>
+            <a href="https://venmo.com" style={{ marginLeft: '10px', marginRight: '5px' }}>
+              <img src='https://images.ctfassets.net/gkyt4bl1j2fs/ym6BkLqyGjMBmiCwtM7AW/829bf561ea771c00839b484cb8edeebb/App_Icon.png?w=276&h=276&q=50&fm=png&bg=transparent' style={{ width: '20px', height: '20px' }} alt="Venmo" />
+            </a>
+            <a href="https://paypal.com" style={{ marginLeft: '5px', marginRight: '10px' }}>
+              <img src='../static/paypal.png' style={{ width: '20px', height: '20px' }} alt="Paypal" />
+            </a>
+          </Stack>
+        {/*</label>*/}
+        </Stack>
       </form>
-      {updateMessage && <p>{updateMessage}</p>}
     </div>
   );
 };
