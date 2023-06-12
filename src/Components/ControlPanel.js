@@ -33,44 +33,42 @@ const ControlPanel = () => {
   };
 
   return (
-    <div>
-      <h1>Control Panel</h1>
-      <h2>Welcome Admin {auth.firstName}</h2>
-      <h3>Online Users ({onlineUsers.length})</h3>
-      <ul>
-        {onlineUsers.map((user) => (
-          <li key={user.id}>{user.username}</li>
-        ))}
-      </ul>
-      <div>
-        <h3>User Management</h3>
-        {users.map((user) => (
-          <div key={user.id}>
-            <div>
-              <Link to={`/users/${user.id}`}>
-                {user.firstName} {user.lastName}
-              </Link>
-            </div>
-            {!user.isAdmin && (
-              <div>
-                <button onClick={() => handleDeleteUser(user)}>Delete</button>
-              </div>
-            )}
+<div class="control-panel">
+  <h1>Control Panel</h1>
+  <h2>Welcome Admin {auth.firstName}</h2>
+  <h3>Online Users ({onlineUsers.length})</h3>
+  <ul>
+    {onlineUsers.map((user) => (
+      <li key={user.id}>{user.username}</li>
+    ))}
+  </ul>
+  <div>
+    <h3>User Management</h3>
+    {users.map((user) => (
+      <div key={user.id}>
+        <div>
+          <Link to={`/users/${user.id}`}>
+            {user.firstName} {user.lastName}
+          </Link>
+        </div>
+        {!user.isAdmin && (
+          <div>
+            <button onClick={() => handleDeleteUser(user)}>Delete</button>
           </div>
-        ))}
+        )}
       </div>
-      <div>
-        <h3>Task Management</h3>
-        {tasks.map((task) => (
-          <div key={task.id}>
-              {task.id}
-              {"   "}
-              {task.title}
-              <button onClick={() => handleDeleteTask(task)}>Delete</button>
-          </div>
-        ))}
+    ))}
+  </div>
+  <div>
+    <h3>Task Management</h3>
+    {tasks.map((task) => (
+      <div key={task.id}>
+        {task.id} {"   "} {task.title}
+        <button onClick={() => handleDeleteTask(task)}>Delete</button>
       </div>
-    </div>
+    ))}
+  </div>
+</div>
   );
 };
 

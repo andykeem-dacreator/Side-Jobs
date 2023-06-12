@@ -42,7 +42,7 @@ const Chats = ({ taskId, task }) => {
     <div id='chats'>
       {chats.map((chat, idx) => {
         return (
-          <div key={idx}>
+          <div key={idx} className="chat-container">
             <h3>Chat with {chat.withUser.username}</h3>
             <ul>
               {chat.messages.map(message => {
@@ -64,7 +64,7 @@ const Chats = ({ taskId, task }) => {
 
       {chats.length === 0 && (
         <div className="no-chats">
-        <h3>Start a Conversation</h3>
+          <h3>Start a Conversation</h3>
           <form onSubmit={sendMessage.bind(null, null)}>
             <input
               placeholder="Start a conversation"
