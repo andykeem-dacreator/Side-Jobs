@@ -42,7 +42,7 @@ const Profile = () => {
   const user = users.find((user) => user.id === id);
   const dispatch = useDispatch();
   const ref = useRef();
-  
+
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (ev) => {
@@ -62,7 +62,7 @@ const Profile = () => {
       setLastName(auth.lastName);
       setAvatar(auth.avatar);
     }
-  }, [auth]);
+  }, [auth, auth.wallet]);
 
   useEffect(() => {
     ref.current.addEventListener('change', (ev) => {
@@ -255,7 +255,7 @@ const Profile = () => {
       {/*  </label>*/}
         {/*<label>*/}
         <Stack direction='row' justifyContent='space-around'>
-          <Typography>  Wallet Balance: <strong>${ auth.wallet }</strong></Typography>
+          <Typography>  Wallet Balance: <strong>${ auth.wallet.toLocaleString() }</strong></Typography>
           
           <Stack direction='row' align-items='center'>
           <Typography >Add Funds?</Typography>
