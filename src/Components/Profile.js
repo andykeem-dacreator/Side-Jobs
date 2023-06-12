@@ -8,7 +8,6 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import UploadIcon from '@mui/icons-material/Upload';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-//import { Upload, Delete } from '@mui/icons-material';
 import {
   Avatar,
   TextField,
