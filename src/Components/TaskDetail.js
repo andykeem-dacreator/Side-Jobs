@@ -63,19 +63,14 @@ const TaskDetail = () => {
               taskDoer.firstName
             )}
           </div>
-          {task.taskDoerId === auth.id || task.taskDoerId ? (
-            ""
-          ) : (
+          {task.userId === auth.id ? (
             <button onClick={() => destroy(task)}>Delete</button>
+          ) : (
+            ""
           )}
         </div>
         <div>
-          {task.taskDoerId === auth.id ||
-          (task.userId === auth.id && task.isComplete) ? (
-            ""
-          ) : (
-            <UpdateTask />
-          )}
+          {task.userId === auth.id && !task.isComplete ? <UpdateTask /> : ""}
           {console.log(JSON.stringify(task, null, 2))}
           {auth.id === task.userId &&
           task.isComplete &&
