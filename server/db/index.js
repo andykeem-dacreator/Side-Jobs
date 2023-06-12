@@ -1,6 +1,7 @@
 const conn = require("./conn");
 const User = require("./User");
 const Task = require("./Task");
+const Message = require("./Message");
 const { faker } = require("@faker-js/faker");
 const Review = require("./Review");
 
@@ -16,6 +17,9 @@ Task.hasOne(Review, { onDelete: 'CASCADE' });
 Review.belongsTo(Task);
 //User.hasMany(Review);
 User.hasMany(Review);
+
+Message.belongsTo(User, { as: 'from' });
+Message.belongsTo(User, { as: 'to' });
 
 const syncAndSeed = async () => {
   if (process.env.NO_SEED) {
@@ -296,6 +300,12 @@ const syncAndSeed = async () => {
     }),
   ]);
 
+  await Promise.all([
+    Message.create({ txt: 'Hi Lucy', fromId: moe.id, toId: lucy.id, taskId: task6.id }),
+    Message.create({ txt: 'Hi Ethyl', fromId: moe.id, toId: ethyl.id, taskId: task7.id }),
+  ]);
+  await Message.create({ txt: 'Hi Moe', fromId: lucy.id, toId: moe.id, taskId: task6.id });
+  
   return {
     users: {
       moe,

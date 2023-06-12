@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Home from './Home';
 import Login from './Login';
 import Profile from './Profile';
@@ -15,7 +15,7 @@ import Navbar from './Navbar';
 import AdminNavbar from './AdminNavbar';
 import About from './About';
 import { useSelector, useDispatch } from 'react-redux';
-import { loginWithToken, fetchTasks, fetchUsers, fetchReviews } from '../store';
+import { loginWithToken, fetchTasks, fetchUsers, fetchReviews, fetchOnlineUsers } from '../store';
 import { Link, Routes, Route } from 'react-router-dom';
 import MyTasks from "./MyTasks";
 const { faker } = require("@faker-js/faker");
@@ -39,6 +39,7 @@ import {
  } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { CollectionsOutlined } from '@mui/icons-material';
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 // const pages = ['Home', 'Profile', 'Available Jobs', 'Post a Job', 'Jobs I Accepted', 'Created Tasks', 'My Reviews', 'About'];
@@ -46,6 +47,7 @@ const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 const App = () => {
   const { auth, reviews } = useSelector((state) => state);
+  const prevAuth = useRef(auth);
   const dispatch = useDispatch();
  // const [theme, setTheme] = useState('light');
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -71,6 +73,28 @@ const App = () => {
     dispatch(fetchUsers());
     dispatch(fetchReviews());
   }, []);
+
+
+  useEffect(()=> {
+    if(!prevAuth.current.id && auth.id){
+      console.log('you just logged in.');
+      window.socket = new WebSocket(window.location.origin.replace('http', 'ws'));
+      window.socket.addEventListener('open', () => {
+        window.socket.send(JSON.stringify({ token: window.localStorage.getItem('token')}));
+      });
+      window.socket.addEventListener('message', (ev) => {
+        const message = JSON.parse(ev.data);
+        if (message.type) {
+          dispatch(message);
+        }
+      });
+      dispatch(fetchOnlineUsers());
+
+    }
+    if(prevAuth.current.id && !auth.id){
+      window.socket.close();
+    }
+  }, [auth]);
 
   // useEffect(() => {
   //     document.body.className = theme;

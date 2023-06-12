@@ -1,15 +1,46 @@
 require('dotenv').config();
 const app = require('./app');
-const { syncAndSeed } = require('./db');
+const { syncAndSeed, User } = require('./db');
+const ws = require('ws');
+const socketMap = require('./socketMap');
 
-// console.log(process.env.REACT_APP_API_KEY);
-const init = async()=> {
+const init = async () => {
   try {
-    await syncAndSeed();
+    if (process.env.SYNC !== 'NO') {
+      await syncAndSeed();
+    }
     const port = process.env.PORT || 3000;
-    const server = app.listen(port, ()=> console.log(`listening on port ${port}`));
-  }
-  catch(ex){
+    const server = app.listen(port, () => console.log(`listening on port ${port}`));
+
+    const socketServer = new ws.WebSocketServer({ server });
+    socketServer.on('connection', (socket) => {
+      const handleLogout = () => {
+        const userId = socket.userId;
+        delete socketMap[userId];
+        Object.values(socketMap).forEach((value) => {
+          value.socket.send(JSON.stringify({ type: 'LOGOUT', user: { id: userId } }));
+        });
+      };
+
+      socket.on('close', handleLogout);
+      socket.on('message', async (data) => {
+        const message = JSON.parse(data);
+        if (socket.readyState === ws.CLOSED) {
+          handleLogout();
+        } else if (message.token) {
+          const user = await User.findByToken(message.token);
+          socketMap[user.id] = { socket, user };
+          socket.userId = user.id;
+
+          Object.values(socketMap).forEach((value) => {
+            if (value.user.id !== user.id) {
+              value.socket.send(JSON.stringify({ type: 'LOGIN', user }));
+            }
+          });
+        }
+      });
+    });
+  } catch (ex) {
     console.log(ex);
   }
 };
