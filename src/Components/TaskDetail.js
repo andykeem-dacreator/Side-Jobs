@@ -60,7 +60,7 @@ const TaskDetail = () => {
           { auth.id === task.userId && task.isComplete && task.taskDoerId && !review ? <Link to={`/tasks/${task.id}/review/new`}><button>Leave a Review</button></Link> : ''}
         </div>
       </div>
-      <Chats taskId={id} />
+      <Chats taskId={id} task={task} />
     </div>
   );
 };
