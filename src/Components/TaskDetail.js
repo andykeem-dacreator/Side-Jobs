@@ -13,7 +13,7 @@ const TaskDetail = () => {
   let task = tasks.find((t) => t.id === id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const review = reviews.find(review => review.taskId === id);
+  const review = reviews.find((review) => review.taskId === id);
   const theme = useTheme();
 
   useEffect(() => {
@@ -26,7 +26,8 @@ const TaskDetail = () => {
   let taskDoer = users.find((u) => u.id === task.taskDoerId);
 
   if (!taskDoer) {
-    return null;
+    taskDoer = {};
+    taskDoer.firstName = "no one";
   }
 
   const destroy = async (task) => {

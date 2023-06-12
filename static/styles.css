@@ -76,7 +76,7 @@ a {
   text-decoration: none;
 }
 
-.public-profile, .reviews-i-gave, .add-review {
+.public-profile, .reviews-i-gave, .add-review, .profile {
   padding: 10px;
 }
 
@@ -84,3 +84,9 @@ a {
   margin: 10px;
 }
 
+.profile form > * {
+  margin: 10px;
+}
+.reviews-i-gave {
+  padding: 10px;
+}
