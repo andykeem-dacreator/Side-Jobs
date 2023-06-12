@@ -8,7 +8,6 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import UploadIcon from '@mui/icons-material/Upload';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-//import { Upload, Delete } from '@mui/icons-material';
 import {
   Avatar,
   TextField,
@@ -89,13 +88,22 @@ const Profile = () => {
     setOpen(true);
   };
   
-  const handleClose = (event, reason) => {
+  const handleClose = (ev, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
   };
+  
+  const handleEmailChange = (ev) => {
+    if (!isValidEmail(ev.target.value)) {
+      setError('Email is invalid');
+    } else {
+      setError(null);
+    }
+    setEmail(ev.target.value);
+  }
+  
   return (
     <div className='profile'>
       <Typography variant='h4'>Profile</Typography>
@@ -108,11 +116,11 @@ const Profile = () => {
             alt="Avatar"
           />
           
-            <Stack
-              direction='row'
-              spacing={2}
-              justifyContent="center"
-            >
+          <Stack
+            direction='row'
+            spacing={2}
+            justifyContent="center"
+          >
             <Tooltip title='Upload profile picture'>
               <IconButton variant='contained' component='label'>
                 <UploadIcon />
@@ -130,109 +138,68 @@ const Profile = () => {
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
-            
-         </Stack>
+          </Stack>
         </Card>
-        {/*<label>
-          Username:*/}
-          <TextField
-            label="Username"
-            value={username}
-            placeholder="New username"
-            onChange={(ev) => setUsername(ev.target.value)}
-          />
-          <FormControl variant='outlined'>
-            <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
-       {/*</label>*/}
-        {/*<label>
-          Password:*/}
-          <OutlinedInput
-            value={password}
-            //placeholder="New password"
-            onChange={(ev) => setPassword(ev.target.value)}
-            type={showPassword ? 'text' : 'password'}
-            endAdornment={
-              <InputAdornment position='end'>
-                <IconButton
-                  aria-label='toggle password visibility'
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge='end'
-                >
-                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                </IconButton>
-              </InputAdornment>
-            }
-            label='new password'
-          />
-        </FormControl>
-        {/*</label>*/}
-        {/*<FormControl>*/}
-        {/*  <InputLabel htmlFor="my-input">New Email Address</InputLabel>*/}
-        {/*<label>
-          Email:*/}
-          {/*<OutlinedInput*/}
+    
+        <TextField
+          label="Username"
+          value={username}
+          placeholder="New username"
+          onChange={(ev) => setUsername(ev.target.value)}
+        />
+          
+        <FormControl>
+          <InputLabel htmlFor="my-input">First Name</InputLabel>
+            <OutlinedInput
+              value={firstName}
+              placeholder="New First Name"
+              onChange={(ev) => setFirstName(ev.target.value)}
+            />
+     
+          </FormControl>
+          <FormControl>
+            <InputLabel htmlFor="my-input">Last Name</InputLabel>
+   
+            <OutlinedInput
+              value={lastName}
+              placeholder="New Last Name"
+              onChange={(ev) => setLastName(ev.target.value)}
+            />
+     
+          </FormControl>
+     
           <TextField
             label='Email'
             value={email}
             placeholder="New email Address"
-            onChange={(ev) => {
-              if (!isValidEmail(ev.target.value)) {
-                setError('Email is invalid');
-              } else {
-                setError(null);
-              }
-                setEmail(ev.target.value)}
-              }
+            onChange={handleEmailChange}
             error={error && !isValidEmail(email)}
             helperText={error && !isValidEmail(email) ? 'Email is invalid' : ''}
           />  
-          {/*/>*/}
-        {/*</label>*/}
-        {/*</FormControl>*/}
-       
-        <FormControl>
-          <InputLabel htmlFor="my-input">First Name</InputLabel>
-        {/*<label>
-          First Name:*/}
-          <OutlinedInput
-            value={firstName}
-            placeholder="New First Name"
-            onChange={(ev) => setFirstName(ev.target.value)}
-          />
-        {/*</label>*/}
-        </FormControl>
-        <FormControl>
-          <InputLabel htmlFor="my-input">Last Name</InputLabel>
-        {/*<label>
-          Last Name:*/}
-          <OutlinedInput
-            value={lastName}
-            placeholder="New Last Name"
-            onChange={(ev) => setLastName(ev.target.value)}
-          />
-        {/*</label>*/}
-        </FormControl>
-        
-        {/*<label>
-          Avatar:*/}
-       {/*   <FormControl>*/}
-          {/*<input 
-            type="file" 
-            ref={ref} 
-            //accept="image/*"
-            //className={classes.input}
-            //style={{ display: 'none' }}
-            //id="icon-button-file"
-            //multiple
-   
-          />*/}
-        {/*  <InputLabel htmlFor="icon-button-file">Avatar</InputLabel>*/}
-        {/*</label>*/}
-         {/*   <Button variant='outlined' component='span'>
-              <AddPhotoAlternateIcon />
-            </Button>*/}
-     {/*     </FormControl>*/}
+
+          <FormControl variant='outlined'>
+            <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
+    
+            <OutlinedInput
+              value={password}
+              //placeholder="New password"
+              onChange={(ev) => setPassword(ev.target.value)}
+              type={showPassword ? 'text' : 'password'}
+              endAdornment={
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label='toggle password visibility'
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge='end'
+                  >
+                    {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label='new password'
+            />
+          </FormControl>
         
         <Button 
           variant='outlined' 
@@ -251,9 +218,7 @@ const Profile = () => {
             Profile updated successfully!
           </Alert>
         </Snackbar>
-        {/*<label>*/}
-      {/*  </label>*/}
-        {/*<label>*/}
+    
         <Stack direction='row' justifyContent='space-around'>
           <Typography>  Wallet Balance: <strong>${ auth.wallet.toLocaleString() }</strong></Typography>
           
@@ -266,7 +231,7 @@ const Profile = () => {
               <img src='../static/paypal.png' style={{ width: '20px', height: '20px' }} alt="Paypal" />
             </a>
           </Stack>
-        {/*</label>*/}
+
         </Stack>
       </form>
     </div>
