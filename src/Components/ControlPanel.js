@@ -37,6 +37,11 @@ const ControlPanel = () => {
       <h1>Control Panel</h1>
       <h2>Welcome Admin {auth.firstName}</h2>
       <h3>Online Users ({onlineUsers.length})</h3>
+      <ul>
+        {onlineUsers.map((user) => (
+          <li key={user.id}>{user.username}</li>
+        ))}
+      </ul>
       <div>
         <h3>User Management</h3>
         {users.map((user) => (
