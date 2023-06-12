@@ -28,11 +28,8 @@ const AddTask = ()=> {
       });
       autocomplete.addListener('place_changed', ()=> {
         const place = autocomplete.getPlace();
-        console.log(place);
         if(place.address_components){
           let Address = place.formatted_address.split(",");
-          console.log(Address);
-          console.log(Address[2].split(" "));
           setStreet(Address[0]);
           setCity(Address[1]);
           setState(Address[2].split(" ")[1]);
@@ -82,7 +79,7 @@ const AddTask = ()=> {
             ))}
           </Select>
         </FormControl>
-        <Button type="submit" variant="outlined" disabled={!title || !description || !city || !state || !price}>Add</Button>
+        <Button type="submit" variant="outlined" disabled={!title || !description || !price || !category || !street }>Add</Button>
       </form>
     </div>
   )
