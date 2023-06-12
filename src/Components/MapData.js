@@ -7,9 +7,9 @@ const MapData = () => {
     const { id } = useParams();
     // const [activeMarker, setActiveMarker] = useState(null);
     const task = tasks.find(task => task.id === id);
-    const { isLoaded } = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_API_KEY,
-    });
+    // const { isLoaded } = useLoadScript({
+    //     googleMapsApiKey: process.env.REACT_APP_API_KEY,
+    // });
     // const handleMarkerClick = (marker) => {
     //     setActiveMarker(marker);
     // };
@@ -21,9 +21,9 @@ const MapData = () => {
     if (!task) {
         return null;
     }
-    if (!isLoaded) {
-        return <div>Loading...</div>;
-    }
+    // if (!isLoaded) {
+    //     return <div>Loading...</div>;
+    // }
     return (
         <GoogleMap zoom={12} center={center} mapContainerClassName="map-container">
             <Marker position = {center} />
