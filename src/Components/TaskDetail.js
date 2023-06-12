@@ -5,7 +5,7 @@ import { deleteTask, fetchMessages } from "../store";
 import UpdateTask from "./UpdateTask";
 import MapData from "./MapData";
 import { useTheme } from '@mui/material';
-import Chats from "./Chats"; // Import the Chats component
+import Chats from "./Chats";
 
 const TaskDetail = () => {
   const { id } = useParams();
@@ -60,7 +60,7 @@ const TaskDetail = () => {
           { auth.id === task.userId && task.isComplete && task.taskDoerId && !review ? <Link to={`/tasks/${task.id}/review/new`}><button>Leave a Review</button></Link> : ''}
         </div>
       </div>
-      <Chats taskId={id} /> {/* Pass the taskId as a prop */}
+      <Chats taskId={id} />
     </div>
   );
 };
