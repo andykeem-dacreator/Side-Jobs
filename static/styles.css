@@ -266,3 +266,29 @@ footer {
   padding: 8px;
 }
 
+/*Control Panel*/
+.user-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.user-text {
+  margin-right: 8px;
+}
+
+.user-button {
+  margin-left: 8px;
+}
+
+.task-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.task-text {
+  margin-right: 8px;
+}
+
+.task-button {
+  margin-left: 8px;
+}
