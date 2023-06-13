@@ -32,10 +32,10 @@ const MyTasks = () => {
                             <li key={task.id}>
                                 <Link to={`/tasks/${task.id}`}>
                                     <div className = 'task-title'>Title: {task.title}</div>
-                                    <div className = 'task-price'>Price: {task.price}</div>
+                                    <div className = 'task-price'>Price: ${task.price}</div>
                                     <div className = 'task-location'>Location: {task.city}, {task.state}</div>
                                 </Link>
-                                { task.taskDoerId && <button onClick={() => update(task)}>Task Complete</button>}
+                                { task.taskDoerId ? <button onClick={() => update(task)}>Task Complete</button> : ""}
                             </li>
                         )
                     })

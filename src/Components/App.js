@@ -204,12 +204,12 @@ const App = () => {
             </IconButton>
           </p>
         </div>
-        <div className="copyright">
-          <img
-            src="https://logos-world.net/wp-content/uploads/2021/08/Copyright-Logo.png"
-            style={{ height: "30px", width: "auto" }}
-          />
-        </div>
+        {/*<div className="copyright">*/}
+        {/*  <img*/}
+        {/*    src="https://logos-world.net/wp-content/uploads/2021/08/Copyright-Logo.png"*/}
+        {/*    style={{ height: "30px", width: "auto" }}*/}
+        {/*  />*/}
+        {/*</div>*/}
       </footer>
     </div>
   );
