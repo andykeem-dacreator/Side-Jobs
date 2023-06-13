@@ -41,7 +41,6 @@ const Profile = () => {
   const user = users.find((user) => user.id === id);
   const dispatch = useDispatch();
   const ref = useRef();
-
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (ev) => {

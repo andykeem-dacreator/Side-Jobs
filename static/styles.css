@@ -1,5 +1,6 @@
 body {
   font-family: verdana;
+  margin: 0px;
 }
 
 form {
@@ -14,6 +15,7 @@ form > * {
 nav {
   display: flex;
   justify-content: space-around;
+  padding: 8px;
 }
 
 .dark {
@@ -249,3 +251,18 @@ button:hover {
 .no-chats form input {
   margin-top: 10px;
 }
+.tasks-info {
+  color: white;
+}
+
+.featured {
+  /* transform: scale(20%); */
+  display: flex;
+  justify-content: space-around;
+  height: 80px;
+}
+
+footer {
+  padding: 8px;
+}
+

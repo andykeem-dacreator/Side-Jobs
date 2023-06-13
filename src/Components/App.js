@@ -49,12 +49,12 @@ const App = () => {
   const { auth, reviews } = useSelector((state) => state);
   const prevAuth = useRef(auth);
   const dispatch = useDispatch();
- // const [theme, setTheme] = useState('light');
+  // const [theme, setTheme] = useState('light');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
 
-  
+
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
@@ -100,16 +100,16 @@ const App = () => {
   //     document.body.className = theme;
   //   }, [theme]);
   useEffect(() => {
-      document.body.className = theme.palette.mode;
-    }, [theme.palette.mode]);
+    document.body.className = theme.palette.mode;
+  }, [theme.palette.mode]);
   return (
-    <div> 
+    <div>
       {/* <h1>Side Quests</h1> */}
-      {auth.id ? '' : <Login />}
+      {auth.id ? "" : <Login />}
       {!!auth.id && !auth.isAdmin && (
-        <div className='navbar'>
+        <div className="navbar">
           <nav id="menu">
-            <Navbar/>
+            <Navbar />
             {/* <Link to="/" style={{color: theme === 'dark' ? 'white' : 'black'}}>Home</Link>
             <Link to="/profile" style={{color: theme === 'dark' ? 'white' : 'black'}}>Profile</Link>
             <div className={`dropdown ${dropdownOpen ? 'open' : ''}`}>
@@ -146,14 +146,14 @@ const App = () => {
             <Route path="/toDoList" element={<ToDoList />} />
             <Route path="/myTasks" element={<MyTasks />} />
             <Route path="/about" element={<About />} />
-            <Route path='/navtest' element={<Navbar />} />
+            <Route path="/navtest" element={<Navbar />} />
           </Routes>
         </div>
       )}
       {!!auth.id && auth.isAdmin && (
         <div>
-          <nav className='navbar'>
-            <AdminNavbar/>
+          <nav className="navbar">
+            <AdminNavbar />
             {/* <Link to="/" style={{color: theme === 'dark' ? 'white' : 'black'}}>Home</Link>
             <Link to ="/controlPanel" >Control Panel</Link>
             <Link to="/profile">Profile</Link>
@@ -173,29 +173,56 @@ const App = () => {
             <Route path="/addTask" element={<AddTask />} />
             <Route path="/updateTask" element={<UpdateTask />} />
             <Route path="/tasks/:id/review/new" element={<AddReview />} />
-            <Route path="/reviews" element={<Reviews />}/>
-            <Route path="/toDoList" element={<ToDoList />}/>
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/toDoList" element={<ToDoList />} />
             <Route path="/about" element={<About />} />
-            <Route path="/myTasks" element={<MyTasks />}/>
+            <Route path="/myTasks" element={<MyTasks />} />
           </Routes>
         </div>
       )}
-          {theme.palette.mode} mode
-      <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
-        {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-      </IconButton>
+      <footer
+        style={{
+          position: "fixed",
+          bottom: 0,
+          width: "100%",
+          backgroundColor: "lightgray",
+        }}
+      >
+        <div className="screenMode">
+          <p>
+            {theme.palette.mode} mode
+            <IconButton
+              sx={{ ml: 1 }}
+              onClick={colorMode.toggleColorMode}
+              color="inherit"
+            >
+              {theme.palette.mode === "dark" ? (
+                <Brightness7Icon />
+              ) : (
+                <Brightness4Icon />
+              )}
+            </IconButton>
+          </p>
+        </div>
+        <div className="copyright">
+          <img
+            src="https://logos-world.net/wp-content/uploads/2021/08/Copyright-Logo.png"
+            style={{ height: "30px", width: "auto" }}
+          />
+        </div>
+      </footer>
     </div>
   );
 };
 export default function ToggleColorMode() {
-  const [mode, setMode] = React.useState('light');
+  const [mode, setMode] = React.useState("light");
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
       },
     }),
-    [],
+    []
   );
 
   const theme = React.useMemo(
@@ -208,7 +235,7 @@ export default function ToggleColorMode() {
           // }
         },
       }),
-    [mode],
+    [mode]
   );
 
   return (
