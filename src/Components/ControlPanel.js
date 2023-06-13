@@ -33,7 +33,7 @@ const ControlPanel = () => {
   };
 
   return (
-<div class="control-panel">
+<div className="control-panel">
   <h1>Control Panel</h1>
   <h2>Welcome Admin {auth.firstName}</h2>
   <h3>Online Users ({onlineUsers.length})</h3>
