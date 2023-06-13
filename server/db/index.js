@@ -16,10 +16,10 @@ Review.belongsTo(User, { as: "taskCreator", foreignKey: "userId" });
 Task.hasOne(Review, { onDelete: 'CASCADE' });
 Review.belongsTo(Task);
 //User.hasMany(Review);
-User.hasMany(Review);
+User.hasMany(Review, { onDelete: 'CASCADE' });
 
-Message.belongsTo(User, { as: 'from' });
-Message.belongsTo(User, { as: 'to' });
+Message.belongsTo(User, { as: 'from', onDelete: 'CASCADE' });
+Message.belongsTo(User, { as: 'to', onDelete: 'CASCADE' });
 
 const syncAndSeed = async () => {
   if (process.env.NO_SEED) {
@@ -70,8 +70,7 @@ const syncAndSeed = async () => {
       avatar: `https://avatars.githubusercontent.com/u/${Math.floor(
         Math.random() * 1000
       )}`,
-      aboutMe:
-        "I am a jack of all trades, so I can handle pretty much whatever you throw at me, but I love cleaning and organizing the most!",
+      aboutMe: "I am a jack of all trades, so I can handle pretty much whatever you throw at me, but I love cleaning and organizing the most!",
     }),
     User.create({
       username: "andy",
@@ -305,7 +304,7 @@ const syncAndSeed = async () => {
     Message.create({ txt: 'Hi Ethyl', fromId: moe.id, toId: ethyl.id, taskId: task7.id }),
   ]);
   await Message.create({ txt: 'Hi Moe', fromId: lucy.id, toId: moe.id, taskId: task6.id });
-  
+
   return {
     users: {
       moe,
