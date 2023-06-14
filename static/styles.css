@@ -332,3 +332,20 @@ footer {
   height:100vh;
 }
 
+/*accepted jobs and posted jobs*/
+
+.myTasks-page-layout {
+  font-family: verdana;
+  color: #333;
+}
+
+
+.myTasks-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+

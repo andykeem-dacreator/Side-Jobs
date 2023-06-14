@@ -21,7 +21,6 @@ function AdminAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const theme = useTheme();
-  // console.log(theme)
 
   const dispatch = useDispatch();
 
@@ -132,7 +131,7 @@ function AdminAppBar() {
           >
             Side Jobs
           </Typography>
-          
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <MenuItem>
               <Link to={"/"} style={{color: 'white' }}>Home</Link>
@@ -152,7 +151,7 @@ function AdminAppBar() {
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
               </Button>
-              
+
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -199,7 +198,7 @@ function AdminAppBar() {
           </Box>
         </Toolbar>
       </Container>
-      
+
     </AppBar>
   );
 }
