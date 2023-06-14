@@ -35,10 +35,16 @@ const TaskDetail = () => {
     navigate("/tasks");
   };
 
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const handleToggleChat = () => {
+    setIsChatOpen((prevIsChatOpen) => !prevIsChatOpen);
+  };
+
   return (
     <div id="page-layout">
       <MapData />
-      <div>
+      <div id="task-detail-container">
         <div className="task-detail">
           <h2>Task Detail</h2>
           <div className="task-title">Title: {task.title}</div>
@@ -52,17 +58,16 @@ const TaskDetail = () => {
           <div className="taskDoerName">
             Accepted by:
             {taskDoer.firstName !== "no one" ? (
-                <Link
-                    to={`/users/${task.taskDoerId}`}
-                    style={{
-                      color: theme.palette.mode === "dark" ? "white" : "black",
-                    }}
-                >
-                  {console.log(task)}
-                  {taskDoer.firstName}
-                </Link>
+              <Link
+                to={`/users/${task.taskDoerId}`}
+                style={{
+                  color: theme.palette.mode === "dark" ? "white" : "black",
+                }}
+              >
+                {taskDoer.firstName}
+              </Link>
             ) : (
-                taskDoer.firstName
+              taskDoer.firstName
             )}
           </div>
           {task.userId === auth.id && !task.taskDoerId ? (
@@ -72,8 +77,11 @@ const TaskDetail = () => {
           )}
         </div>
         <div>
-          {task.userId === auth.id && !task.isComplete && !task.taskDoerId ? <UpdateTask /> : ""}
-          {console.log(JSON.stringify(task, null, 2))}
+          {task.userId === auth.id && !task.isComplete && !task.taskDoerId ? (
+            <UpdateTask />
+          ) : (
+            ""
+          )}
           {auth.id === task.userId &&
           task.isComplete &&
           task.taskDoerId &&
@@ -87,8 +95,19 @@ const TaskDetail = () => {
         </div>
       </div>
       <div id="chats-container">
-    {task.taskDoerId && <Chats taskId={id} task={task} />}
-  </div>
+        {task.taskDoerId && (
+          <div>
+          <button id="chats-button" onClick={handleToggleChat}>
+              {isChatOpen ? "Hide Chat" : "Open Chat"}
+            </button>
+            {isChatOpen && (
+              <div className="chats-popup">
+                <Chats taskId={id} task={task} />
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
