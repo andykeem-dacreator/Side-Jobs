@@ -37,10 +37,16 @@ const TaskDetail = () => {
     navigate("/tasks");
   };
 
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const handleToggleChat = () => {
+    setIsChatOpen((prevIsChatOpen) => !prevIsChatOpen);
+  };
+
   return (
     <div id="page-layout">
       <MapData />
-      <div className="task-info">
+      <div className="task-info" id="task-detail-container">
         <div className="task-detail">
           <div className="task-detail-header">
             <Typography variant='h4'>Job Details</Typography>
@@ -64,22 +70,26 @@ const TaskDetail = () => {
           <div className="taskDoerName">
             Accepted by:
             {taskDoer.firstName !== "no one" ? (
-                <Link
-                    to={`/users/${task.taskDoerId}`}
-                    style={{
-                      color: theme.palette.mode === "dark" ? "white" : "black",
-                    }}
-                >
-                  {taskDoer.firstName}
-                </Link>
+              <Link
+                to={`/users/${task.taskDoerId}`}
+                style={{
+                  color: theme.palette.mode === "dark" ? "white" : "black",
+                }}
+              >
+                {taskDoer.firstName}
+              </Link>
             ) : (
-                taskDoer.firstName
+              taskDoer.firstName
             )}
           </div>
 
         </div>
         <div>
-          {task.userId === auth.id && !task.isComplete && !task.taskDoerId ? <UpdateTask /> : ""}
+          {task.userId === auth.id && !task.isComplete && !task.taskDoerId ? (
+            <UpdateTask />
+          ) : (
+            ""
+          )}
           {auth.id === task.userId &&
           task.isComplete &&
           task.taskDoerId &&
@@ -92,7 +102,20 @@ const TaskDetail = () => {
           )}
         </div>
       </div>
-      <Chats taskId={id} task={task} />
+      <div id="chats-container">
+        {task.taskDoerId && (
+          <div>
+          <button id="chats-button" onClick={handleToggleChat}>
+              {isChatOpen ? "Hide Chat" : "Open Chat"}
+            </button>
+            {isChatOpen && (
+              <div className="chats-popup">
+                <Chats taskId={id} task={task} />
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
