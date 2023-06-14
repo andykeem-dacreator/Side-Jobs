@@ -12,9 +12,9 @@ User.hasMany(Task, { as: "performedTasks", foreignKey: "taskDoerId" });
 Task.belongsTo(User, { as: "taskCreator", foreignKey: "userId" });
 Task.belongsTo(User, { as: "taskDoer", foreignKey: "taskDoerId" });
 //Review.belongsTo(User);
-Review.belongsTo(User, { as: "taskCreator", foreignKey: "userId" });
+Review.belongsTo(User, { as: "taskCreator", foreignKey: "userId", onDelete: 'CASCADE' });
 Task.hasOne(Review, { onDelete: 'CASCADE' });
-Review.belongsTo(Task);
+Review.belongsTo(Task, { onDelete: 'CASCADE' } );
 //User.hasMany(Review);
 User.hasMany(Review, { onDelete: 'CASCADE' });
 
