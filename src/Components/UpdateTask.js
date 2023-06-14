@@ -3,6 +3,7 @@ import { updateTask } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { TextField, Button, Input } from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 const UpdateTask = () => {
   const { tasks } = useSelector((state) => state);
@@ -83,7 +84,7 @@ const UpdateTask = () => {
 
   return (
     <div className="update-task">
-      <h2>Update a Task</h2>
+      <Typography variant="h4">Update Job</Typography>
       <form onSubmit={update}>
         <TextField
           required
@@ -100,8 +101,9 @@ const UpdateTask = () => {
           value={description}
           onChange={(ev) => setDescription(ev.target.value)}
           placeholder="Description"
+          multiline
+          rows={4}
         />
-        <input className="addressInput" ref={input} />
         <TextField
           required
           label="Price"
@@ -110,6 +112,7 @@ const UpdateTask = () => {
           onChange={(ev) => setPrice(ev.target.value)}
           placeholder="Price"
         />
+        <input className="addressInput" ref={input} />
         <Button
           type="submit"
           variant="outlined"
