@@ -1,8 +1,15 @@
 import React from "react";
+import Hero from './Hero';
+import AboutStatSection from './AboutStatSection';
+import AboutUs from './AboutUs';
 
 const About = () => {
   return (
     <div>
+      <Hero />
+      <AboutStatSection />
+      <AboutUs />
+    {/*
       <h2>About</h2>
       <p>
         Introducing Side Jobs, your ultimate side job finder application
@@ -20,6 +27,7 @@ const About = () => {
         possibilities. Join Side Jobs today and embark on a journey towards a
         more fulfilling and prosperous work-life balance.
       </p>
+      */}
     </div>
   );
 };
