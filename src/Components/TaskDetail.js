@@ -86,7 +86,9 @@ const TaskDetail = () => {
           )}
         </div>
       </div>
-      {task.taskDoerId && <Chats taskId={id} task={task} />}
+      <div id="chats-container">
+    {task.taskDoerId && <Chats taskId={id} task={task} />}
+  </div>
     </div>
   );
 };
