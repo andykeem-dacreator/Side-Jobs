@@ -4,8 +4,10 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { deleteTask, fetchMessages } from "../store";
 import UpdateTask from "./UpdateTask";
 import MapData from "./MapData";
-import { useTheme } from "@mui/material";
+import {IconButton, Tooltip, useTheme} from "@mui/material";
 import Chats from "./Chats";
+import Typography from "@mui/material/Typography";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 
 const TaskDetail = () => {
   const { id } = useParams();
@@ -38,9 +40,19 @@ const TaskDetail = () => {
   return (
     <div id="page-layout">
       <MapData />
-      <div>
+      <div className="task-info">
         <div className="task-detail">
-          <h2>Task Detail</h2>
+          <div className="task-detail-header">
+            <Typography variant='h4'>Job Details</Typography>
+
+            {task.userId === auth.id && !task.taskDoerId ? (
+                    <Tooltip title="Delete Task">
+                      <IconButton onClick={() => destroy(task)} ><DeleteIcon /></IconButton>
+                    </Tooltip>
+            ) : (
+                ""
+            )}
+          </div>
           <div className="task-title">Title: {task.title}</div>
           <div className="task-description">
             Description: {task.description}
@@ -58,22 +70,16 @@ const TaskDetail = () => {
                       color: theme.palette.mode === "dark" ? "white" : "black",
                     }}
                 >
-                  {console.log(task)}
                   {taskDoer.firstName}
                 </Link>
             ) : (
                 taskDoer.firstName
             )}
           </div>
-          {task.userId === auth.id && !task.taskDoerId ? (
-            <button onClick={() => destroy(task)}>Delete</button>
-          ) : (
-            ""
-          )}
+
         </div>
         <div>
           {task.userId === auth.id && !task.isComplete && !task.taskDoerId ? <UpdateTask /> : ""}
-          {console.log(JSON.stringify(task, null, 2))}
           {auth.id === task.userId &&
           task.isComplete &&
           task.taskDoerId &&
