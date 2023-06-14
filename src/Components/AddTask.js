@@ -3,6 +3,7 @@ import { createTask } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Select, MenuItem, InputLabel, FormControl} from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 const AddTask = ()=> {
   const { auth } = useSelector(state => state);
@@ -57,12 +58,13 @@ const AddTask = ()=> {
 
   return (
     <div className = 'add-task'>
-      <h2>Post a Job</h2>
+      <div>
+        <Typography variant='h4'>Post Job</Typography>
+      </div>
       <form onSubmit={ create }>
         <TextField required label="Title" variant="outlined" value={ title } onChange={ ev=> setTitle(ev.target.value)} placeholder='Title' />
-        <TextField required label="Description" variant="outlined" value={ description } onChange={ ev=> setDescription(ev.target.value)} placeholder='Description' />
+        <TextField required label="Description" variant="outlined" value={ description } onChange={ ev=> setDescription(ev.target.value)} placeholder='Description' multiline  rows={4}/>
         <TextField required label="Price" variant="outlined" value={ price } onChange={ ev=> setPrice(ev.target.value)} placeholder='Price' />
-        <input className='addressInput' ref={ input }/>
         <FormControl>
           <InputLabel>Select A Category</InputLabel>
           <Select
@@ -79,6 +81,7 @@ const AddTask = ()=> {
             ))}
           </Select>
         </FormControl>
+        <input className='addressInput' ref={ input }/>
         <Button type="submit" variant="outlined" disabled={!title || !description || !price || !category || !street }>Add</Button>
       </form>
     </div>
