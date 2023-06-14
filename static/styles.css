@@ -67,9 +67,6 @@ nav {
   margin: 10px;
 }
 
-.add-task form > * {
-  margin: 10px;
-}
 
 .update-review form > *:not(:first-child) {
   margin: 10px;
@@ -353,6 +350,106 @@ li.yours .message-avatar {
 
 footer {
   padding: 8px;
+}
+
+/*post a job  and update a job*/
+.add-task > * {
+  text-align: center;
+  max-width: 33%;
+  margin: 0 auto;
+  font-weight: lighter;
+}
+
+.update-task > * {
+  text-align: center;
+  /*max-width: 33%;*/
+  margin: 0 auto;
+  font-weight: lighter;
+}
+
+.add-task input {
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-weight: lighter;
+}
+
+.update-task input {
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-weight: lighter;
+}
+.update-task form > * {
+  margin: 10px;
+}
+
+.add-task form > * {
+  margin: 10px;
+}
+
+.addressInput {
+  border: 1px solid #cccccc;
+  outline: none;
+}
+.addressInput:focus {
+  border: 2px solid #1976d2;
+}
+
+/*task-details*/
+
+.task-detail-header {
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.task-detail > * {
+  font-family: Arial, sans-serif;
+  font-size: large;
+  font-weight: bold;
+}
+
+
+/*map*/
+
+
+#page-layout {
+  display:flex;
+  justify-content: space-around;
+  flex-direction: row-reverse;
+  z-index: 1;
+}
+
+#page-layout > * {
+  max-width: 50%;
+  margin: 20px;
+}
+
+.map-container {
+  width: 100%;
+  height:100vh;
+}
+
+/*accepted jobs and posted jobs*/
+
+.myTasks-page-layout {
+  font-family: verdana;
+  color: #333;
+}
+
+
+.myTasks-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 /*Control Panel*/

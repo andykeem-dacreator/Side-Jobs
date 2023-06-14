@@ -6,7 +6,6 @@ const Wallet = () => {
   const { users, auth } = useSelector((state) => state);
   const { id } = useParams();
   const user = user.find((user) => user.id === id);
-  // console.log(user);
 
   return (
     <div>

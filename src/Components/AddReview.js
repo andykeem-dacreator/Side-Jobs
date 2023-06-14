@@ -10,14 +10,12 @@ import {
   Avatar,
   Stack,
  } from '@mui/material'
- 
+
 const AddReview = () => {
   const { auth, tasks, users } = useSelector(state => state);
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log('tasks:', tasks)
-  console.log('id:', id)
   const [rating, setRating] = useState(0);
   const [title, setTitle] = useState('');
   const [comment, setComment] = useState('');
@@ -53,46 +51,46 @@ const AddReview = () => {
             src={ task.taskDoer.avatar }
           >
           </Avatar>
-          <Typography 
+          <Typography
             variant='h6'
             sx={{ marginLeft: 2 }}
-          > 
+          >
             For: { user.firstName } { user.lastName[0] }.
           </Typography>
         </Stack>
-        <Typography 
+        <Typography
           variant='body1'
           sx={{ marginTop: 1}}
         >
           Completed Job: { task.title }</Typography>
         <Typography variant='body1'>Job Description: { task.description }</Typography>
-      </Stack>  
-      
+      </Stack>
+
       <form onSubmit={ create }>
-        <Rating 
-          value={ rating } 
-          onChange={ ev => setRating(Number(ev.target.value)) } 
+        <Rating
+          value={ rating }
+          onChange={ ev => setRating(Number(ev.target.value)) }
           sx={{ margin: 'auto', my: '10px' }}
           size="large"
           />
-        <TextField  
-        
-          label="Title" 
-          variant="outlined" 
-          value={ title } 
-          onChange={ ev => setTitle(ev.target.value) } 
+        <TextField
+
+          label="Title"
+          variant="outlined"
+          value={ title }
+          onChange={ ev => setTitle(ev.target.value) }
         />
-        <TextField  
-       
-          label="Comment" 
-          variant="outlined" 
-          value={ comment } 
-          onChange={ ev => setComment(ev.target.value) } 
+        <TextField
+
+          label="Comment"
+          variant="outlined"
+          value={ comment }
+          onChange={ ev => setComment(ev.target.value) }
           multiline={true}
           rows={3}
         />
-        <Button 
-          variant="outlined" 
+        <Button
+          variant="outlined"
           type="submit"
           disabled={ !title || !comment || !rating }
         >
