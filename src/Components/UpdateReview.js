@@ -22,7 +22,7 @@ const UpdateReview = ({ review, onClose }) => {
   const [rating, setRating] = useState(0);
   const [title, setTitle] = useState('');
   const [comment, setComment] = useState('');
-  const task = tasks.find((task) => task.taskDoerId === review.taskDoerId);
+  // const task = tasks.find(task => task.taskDoerId === review.taskDoerId);
 
   useEffect(() => {
     if (review) {
