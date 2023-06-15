@@ -22,7 +22,6 @@ const Review = conn.define('review', {
   },
   taskId: {
     type: UUID,
-    allowNull: false,
     unique: true
   }
 }

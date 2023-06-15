@@ -18,6 +18,8 @@ const TaskDetail = () => {
   const review = reviews.find((review) => review.taskId === id);
   const theme = useTheme();
 
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
   useEffect(() => {
     dispatch(fetchMessages(id));
   }, [dispatch, id]);
@@ -36,8 +38,6 @@ const TaskDetail = () => {
     await dispatch(deleteTask(task));
     navigate("/tasks");
   };
-
-  const [isChatOpen, setIsChatOpen] = useState(false);
 
   const handleToggleChat = () => {
     setIsChatOpen((prevIsChatOpen) => !prevIsChatOpen);
