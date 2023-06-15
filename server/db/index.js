@@ -113,6 +113,7 @@ const syncAndSeed = async () => {
       category: 'shopping',
       userId: larry.id,
       taskDoerId: ethyl.id,
+      isComplete: true,
       lat: faker.location.latitude({
         max: 39.9143,
         min: 39.7392,
@@ -153,6 +154,7 @@ const syncAndSeed = async () => {
       category: 'moving',
       userId: larry.id,
       taskDoerId: ethyl.id,
+      isComplete: true,
       lat: faker.location.latitude({
         max: 39.3539,
         min: 39.0997,
@@ -235,6 +237,7 @@ const syncAndSeed = async () => {
       category: 'virtual',
       userId: ethyl.id,
       taskDoerId: moe.id,
+      isComplete: true,
       lat: faker.location.latitude({
         max: 40.9153,
         min: 40.4961,
@@ -361,7 +364,7 @@ const syncAndSeed = async () => {
   ]);
 
   //reviews for Ethyl
-  const [review1, review3, review4, review8, review9] = await Promise.all([
+  const [review1, review3, review7, review8, review9] = await Promise.all([
     Review.create({
       rating: 5,
       title: 'great job',
@@ -383,7 +386,7 @@ const syncAndSeed = async () => {
       title: faker.lorem.paragraph({ min: 1, max: 1 }),
       comment: faker.lorem.paragraph(3),
       userId: larry.id,
-      taskId: task4.id,
+      taskId: task7.id,
       taskDoerId: ethyl.id,
     }),
     Review.create({
@@ -441,7 +444,7 @@ const syncAndSeed = async () => {
     reviews: {
       review1,
       review3,
-      review4,
+      review7,
       review8,
     },
   };
