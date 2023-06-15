@@ -79,7 +79,8 @@ a {
 .public-profile,
 .reviews-i-gave,
 .add-review,
-.profile {
+.profile,
+.tasks-page-layout {
   padding: 10px;
 }
 
@@ -103,12 +104,28 @@ a {
 
 .tasks-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex: 0 0 33%;
+  width: calc(33.33% - 20px);
+  /* align-items: flex-start; */
   justify-content: space-between;
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
 }
+
+
+
+.acceptButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .tasks-pages-layout .tasks-container {
+
+} */
 
 .task-info {
   flex: 1;
@@ -270,8 +287,6 @@ button:hover {
   background-color:#e9e9e9;
 }
 
-
-
 .chat-container form input {
   margin-top: 10px;
 }
@@ -348,8 +363,47 @@ li.yours .message-avatar {
   height: 80px;
 }
 
-footer {
+.footer {
+  /* height: 10px; */
+  /* position: fixed;
   padding: 8px;
+  display: flex;
+  justify-content: space-between; */
+  /* align-items: end; */
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  font-size: 16px;
+  padding: 10px 32px;
+  display: flex;
+  box-shadow: 0 4px 40px -8px rgb(0, 51, 98);
+  overflow: hidden;
+	font-family:'Oswald',serif;
+	z-index: 500;
+	word-break: normal
+}
+
+.screenMode {
+  font-weight: bold;
+  padding-right: 20px;
+  margin-right: 20px;
+  border-right: 1px solid #fff;
+}
+
+.footer .copyright {
+  position: absolute;
+  padding-left: 150px;
+  display: flex;
+  padding-top: 10px;
+}
+
+
+
+.footer img {
+  width: 30px;
+  height: auto;
+  position:center
 }
 
 /*post a job  and update a job*/
@@ -528,4 +582,8 @@ footer {
   bottom: 100px;
   left: 10px;
   z-index: 999;
+}
+
+.introStatement {
+  margin-left: 10px;
 }

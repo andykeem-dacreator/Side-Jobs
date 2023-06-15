@@ -14,7 +14,7 @@ const ToDoList = () => {
                             <div className='myTasks-container' key={task.id}>
                                 <Link to={`/tasks/${task.id}`}>
                                     <div className = 'task-title'>Title: {task.title}</div>
-                                    <div className = 'task-price'>Price: {task.price}</div>
+                                    <div className = 'task-price'>Price: ${task.price}</div>
                                     <div className = 'task-location'>Location: {task.city}, {task.state}</div>
                                 </Link>
                             </div>

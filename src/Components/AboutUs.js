@@ -15,11 +15,12 @@ const AboutUs = () => {
           Make money. Save time
         </Typography>
         <Typography sx={styles.aboutUsSubtitle}>
-          With us, you can easily explore various
+          {/* With us, you can easily explore various
           categories such as freelance work, tutoring, pet sitting, event
           staffing, and much more. Our extensive network of trusted employers
           ensures that you'll find legitimate and rewarding opportunities that fit
-          your skills and schedule. 
+          your skills and schedule.  */}
+          Introducing a versatile platform that caters to both job posters and job seekers, this company provides a convenient space for users to post and accept random side jobs. It serves as a go-to resource for individuals seeking additional income opportunities, facilitating the seamless connection between those in need of assistance and those eager to take on extra hustle.
         </Typography>
         <Button 
           variant='contained'

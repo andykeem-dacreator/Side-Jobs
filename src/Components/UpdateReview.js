@@ -36,7 +36,7 @@ const UpdateReview = ({review, onClose }) => {
   const update = async(ev) => {
     ev.preventDefault();
     try{
-      await dispatch(updateReview({ id: review.id, rating, title, comment, userId: auth.id, taskId: task.id, taskDoerId: task.taskDoerId }));
+      await dispatch(updateReview({ id: review.id, rating, title, comment, userId: auth.id, taskId: review.taskId, taskDoerId: review.taskDoerId }));
       onClose();
     }
     catch(ex){

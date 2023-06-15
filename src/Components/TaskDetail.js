@@ -66,7 +66,7 @@ const TaskDetail = () => {
           <div className="task-location">
             Location: {task.city}, {task.state}
           </div>
-          <div className="task-price">Price: {task.price}</div>
+          <div className="task-price">Price: ${task.price}</div>
           <div className="taskDoerName">
             Accepted by:
             {taskDoer.firstName !== "no one" ? (

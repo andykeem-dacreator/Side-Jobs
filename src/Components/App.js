@@ -164,7 +164,7 @@ const App = () => {
             <Link to="/myTasks">Created Tasks</Link> */}
           </nav>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<About />} />
             <Route path="/ControlPanel" element={<ControlPanel />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/users/:id" element={<PublicProfile />} />
@@ -175,12 +175,13 @@ const App = () => {
             <Route path="/tasks/:id/review/new" element={<AddReview />} />
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/toDoList" element={<ToDoList />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/about" element={<Home />} />
             <Route path="/myTasks" element={<MyTasks />} />
           </Routes>
         </div>
       )}
       <footer
+        className='footer'
         style={{
           position: "fixed",
           bottom: 0,
@@ -189,7 +190,6 @@ const App = () => {
         }}
       >
         <div className="screenMode">
-          <p>
             {theme.palette.mode} mode
             <IconButton
               sx={{ ml: 1 }}
@@ -202,14 +202,15 @@ const App = () => {
                 <Brightness4Icon />
               )}
             </IconButton>
-          </p>
         </div>
-        {/*<div className="copyright">*/}
-        {/*  <img*/}
-        {/*    src="https://logos-world.net/wp-content/uploads/2021/08/Copyright-Logo.png"*/}
-        {/*    style={{ height: "30px", width: "auto" }}*/}
-        {/*  />*/}
-        {/*</div>*/}
+        <div className="copyright">
+          <img
+            src="https://logos-world.net/wp-content/uploads/2021/08/Copyright-Logo.png"
+          />
+          <div>
+            Copyright
+          </div>
+        </div>
       </footer>
     </div>
   );
