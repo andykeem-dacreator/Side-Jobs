@@ -10,7 +10,9 @@ const init = async () => {
       await syncAndSeed();
     }
     const port = process.env.PORT || 3000;
-    const server = app.listen(port, () => console.log(`listening on port ${port}`));
+    const server = app.listen(port, () =>
+      console.log(`listening on port ${port}`)
+    );
 
     const socketServer = new ws.WebSocketServer({ server });
     socketServer.on('connection', (socket) => {
@@ -18,7 +20,9 @@ const init = async () => {
         const userId = socket.userId;
         delete socketMap[userId];
         Object.values(socketMap).forEach((value) => {
-          value.socket.send(JSON.stringify({ type: 'LOGOUT', user: { id: userId } }));
+          value.socket.send(
+            JSON.stringify({ type: 'LOGOUT', user: { id: userId } })
+          );
         });
       };
 
@@ -46,6 +50,3 @@ const init = async () => {
 };
 
 init();
-
-
-

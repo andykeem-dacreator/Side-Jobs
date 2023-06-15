@@ -8,25 +8,21 @@ const onlineUsers = (state = [], action) => {
     return [...state, action.user];
   }
   if (action.type === 'LOGOUT') {
-    return state.filter(user => user.id !== action.user.id);
+    return state.filter((user) => user.id !== action.user.id);
   }
   return state;
 };
-
-
 
 export const fetchOnlineUsers = () => {
   return async (dispatch) => {
     const token = window.localStorage.getItem('token');
     const response = await axios.get('/api/onlineUsers', {
       headers: {
-        authorization: token
-      }
+        authorization: token,
+      },
     });
     dispatch({ type: 'SET_ONLINE_USERS', onlineUsers: response.data });
   };
 };
-
-
 
 export default onlineUsers;

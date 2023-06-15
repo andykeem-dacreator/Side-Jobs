@@ -54,8 +54,8 @@ export const styles = {
     width: '200px',
     borderRadius: '10px',
     margin: '10px !important',
-  }
-}
+  },
+};
 export const Img = styled('img')(({ theme }) => ({
   ...styles.largeImage,
 }));

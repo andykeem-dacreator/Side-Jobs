@@ -7,11 +7,7 @@ const Wallet = () => {
   const { id } = useParams();
   const user = user.find((user) => user.id === id);
 
-  return (
-    <div>
-      Wallet Balance = {user.wallet};
-    </div>
-  )
+  return <div>Wallet Balance = {user.wallet};</div>;
 };
 
 export default Wallet;

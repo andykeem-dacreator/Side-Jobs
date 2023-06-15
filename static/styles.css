@@ -67,7 +67,6 @@ nav {
   margin: 10px;
 }
 
-
 .update-review form > *:not(:first-child) {
   margin: 10px;
 }
@@ -114,8 +113,6 @@ a {
   padding: 10px;
   margin-bottom: 10px;
 }
-
-
 
 .acceptButton {
   display: flex;
@@ -228,7 +225,6 @@ button:hover {
 #chats-container {
   margin-left: 20px;
   margin-right: 20px;
-  
 }
 
 .input-container {
@@ -284,7 +280,7 @@ button:hover {
 }
 
 .chat-container li:not(.yours) {
-  background-color:#e9e9e9;
+  background-color: #e9e9e9;
 }
 
 .chat-container form input {
@@ -379,9 +375,9 @@ li.yours .message-avatar {
   display: flex;
   box-shadow: 0 4px 40px -8px rgb(0, 51, 98);
   overflow: hidden;
-	font-family:'Oswald',serif;
-	z-index: 500;
-	word-break: normal
+  font-family: 'Oswald', serif;
+  z-index: 500;
+  word-break: normal;
 }
 
 .screenMode {
@@ -398,12 +394,10 @@ li.yours .message-avatar {
   padding-top: 10px;
 }
 
-
-
 .footer img {
   width: 30px;
   height: auto;
-  position:center
+  position: center;
 }
 
 /*post a job  and update a job*/
@@ -457,7 +451,7 @@ li.yours .message-avatar {
 /*task-details*/
 
 .task-detail-header {
-  display:flex;
+  display: flex;
   justify-content: space-around;
   align-items: center;
 }
@@ -468,12 +462,10 @@ li.yours .message-avatar {
   font-weight: bold;
 }
 
-
 /*map*/
 
-
 #page-layout {
-  display:flex;
+  display: flex;
   justify-content: space-around;
   flex-direction: row-reverse;
   z-index: 1;
@@ -486,7 +478,7 @@ li.yours .message-avatar {
 
 .map-container {
   width: 100%;
-  height:100vh;
+  height: 100vh;
 }
 
 /*accepted jobs and posted jobs*/
@@ -495,7 +487,6 @@ li.yours .message-avatar {
   font-family: verdana;
   color: #333;
 }
-
 
 .myTasks-container {
   display: flex;

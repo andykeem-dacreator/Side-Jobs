@@ -6,19 +6,21 @@ module.exports = app;
 
 app.get('/', async (req, res, next) => {
   try {
-    res.send(await Task.findAll({
-      include: [
-        {
-          model: User, as: 'taskCreator'
-        },
-        {
-          model: User, as: 'taskDoer'
-        }
-
-      ]
-    }));
-  }
-  catch (error) {
+    res.send(
+      await Task.findAll({
+        include: [
+          {
+            model: User,
+            as: 'taskCreator',
+          },
+          {
+            model: User,
+            as: 'taskDoer',
+          },
+        ],
+      })
+    );
+  } catch (error) {
     next(error);
   }
 });
@@ -26,8 +28,7 @@ app.get('/', async (req, res, next) => {
 app.post('/', async (req, res, next) => {
   try {
     res.status(201).send(await Task.create(req.body));
-  }
-  catch (error) {
+  } catch (error) {
     next(error);
   }
 });
@@ -37,17 +38,17 @@ app.put('/:id', async (req, res, next) => {
     const task = await Task.findByPk(req.params.id, {
       include: [
         {
-          model: User, as: 'taskCreator'
+          model: User,
+          as: 'taskCreator',
         },
         {
-          model: User, as: 'taskDoer'
-        }
-
-      ]
+          model: User,
+          as: 'taskDoer',
+        },
+      ],
     });
     res.send(await task.update(req.body));
-  }
-  catch (error) {
+  } catch (error) {
     next(error);
   }
 });
@@ -62,5 +63,3 @@ app.delete('/:id', async (req, res, next) => {
     next(error);
   }
 });
-
-

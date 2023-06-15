@@ -7,7 +7,7 @@ const tasks = (state = [], action) => {
     return [...state, action.task];
   }
   if (action.type === 'UPDATE_TASK') {
-    return state.map(task => {
+    return state.map((task) => {
       if (task.id === action.task.id) {
         return action.task;
       }
@@ -15,7 +15,7 @@ const tasks = (state = [], action) => {
     });
   }
   if (action.type === 'DELETE_TASK') {
-    return state.filter(task => task.id !== action.task.id);
+    return state.filter((task) => task.id !== action.task.id);
   }
   return state;
 };

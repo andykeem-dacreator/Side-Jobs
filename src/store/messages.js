@@ -15,8 +15,8 @@ export const fetchMessages = () => {
     const token = window.localStorage.getItem('token');
     const response = await axios.get('/api/messages', {
       headers: {
-        authorization: token
-      }
+        authorization: token,
+      },
     });
     dispatch({ type: 'SET_MESSAGES', messages: response.data });
   };
@@ -27,13 +27,11 @@ export const createMessage = (message) => {
     const token = window.localStorage.getItem('token');
     const response = await axios.post('/api/messages', message, {
       headers: {
-        authorization: token
-      }
+        authorization: token,
+      },
     });
     dispatch({ type: 'CREATE_MESSAGE', message: response.data });
   };
 };
-
-
 
 export default messages;

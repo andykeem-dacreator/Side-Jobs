@@ -32,8 +32,8 @@ const User = conn.define('user', {
     type: STRING,
     unique: true,
     validate: {
-      isEmail: true
-    }
+      isEmail: true,
+    },
   },
   wallet: {
     type: FLOAT,
@@ -44,29 +44,30 @@ const User = conn.define('user', {
     defaultValue: false,
   },
   aboutMe: {
-    type: TEXT
-  }
+    type: TEXT,
+  },
 });
 
 User.prototype.sendMessage = async function (message) {
   message = await conn.models.message.create({ ...message, fromId: this.id });
-  message = await conn.models.message.findByPk(
-    message.id,
-    {
-      include: [
-        {
-          model: User, as: 'from',
-          attributes: ['username', 'id']
-        },
-        {
-          model: User, as: 'to',
-          attributes: ['username', 'id']
-        }
-      ]
-    }
-  );
+  message = await conn.models.message.findByPk(message.id, {
+    include: [
+      {
+        model: User,
+        as: 'from',
+        attributes: ['username', 'id'],
+      },
+      {
+        model: User,
+        as: 'to',
+        attributes: ['username', 'id'],
+      },
+    ],
+  });
   if (socketMap[message.toId]) {
-    socketMap[message.toId].socket.send(JSON.stringify({ type: 'CREATE_MESSAGE', message }));
+    socketMap[message.toId].socket.send(
+      JSON.stringify({ type: 'CREATE_MESSAGE', message })
+    );
   }
   return message;
 };
@@ -82,18 +83,20 @@ User.prototype.messagesForUser = function () {
         {
           fromId: this.id,
         },
-      ]
+      ],
     },
     include: [
       {
-        model: User, as: 'from',
-        attributes: ['username', 'id']
+        model: User,
+        as: 'from',
+        attributes: ['username', 'id'],
       },
       {
-        model: User, as: 'to',
-        attributes: ['username', 'id']
-      }
-    ]
+        model: User,
+        as: 'to',
+        attributes: ['username', 'id'],
+      },
+    ],
   });
 };
 

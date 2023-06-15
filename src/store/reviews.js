@@ -8,10 +8,12 @@ const reviews = (state = [], action) => {
     return [...state, action.review];
   }
   if (action.type === 'DESTROY_REVIEW') {
-    return state.filter(review => review.id !== action.review.id);
+    return state.filter((review) => review.id !== action.review.id);
   }
   if (action.type === 'UPDATE_REVIEW') {
-    return state.map(review => review.id === action.review.id ? action.review : review);
+    return state.map((review) =>
+      review.id === action.review.id ? action.review : review
+    );
   }
   return state;
 };
@@ -28,8 +30,8 @@ export const createReview = (review) => {
     const token = window.localStorage.getItem('token');
     const response = await axios.post(`/api/reviews`, review, {
       headers: {
-        authorization: token
-      }
+        authorization: token,
+      },
     });
     dispatch({ type: 'CREATE_REVIEW', review: response.data });
   };
@@ -40,8 +42,8 @@ export const destroyReview = (review) => {
     const token = window.localStorage.getItem('token');
     const response = await axios.delete(`/api/reviews/${review.id}`, {
       headers: {
-        authorization: token
-      }
+        authorization: token,
+      },
     });
     dispatch({ type: 'DESTROY_REVIEW', review });
   };
@@ -52,8 +54,8 @@ export const updateReview = (review) => {
     const token = window.localStorage.getItem('token');
     const response = await axios.put(`/api/reviews/${review.id}`, review, {
       headers: {
-        authorization: token
-      }
+        authorization: token,
+      },
     });
     dispatch({ type: 'UPDATE_REVIEW', review: response.data });
   };

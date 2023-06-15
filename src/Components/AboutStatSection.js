@@ -9,24 +9,21 @@ const AboutStatSection = () => {
   const sectionItems = [
     {
       id: 1,
-      icon: <ShoppingCartOutlinedIcon sx={{ fontSize: 100 }} color='primary' />,
+      icon: <ShoppingCartOutlinedIcon sx={{ fontSize: 100 }} color="primary" />,
       stat: '700,000',
-      sentence:
-        'shopping trips made',
+      sentence: 'shopping trips made',
     },
     {
       id: 2,
-      icon: <SanitizerOutlinedIcon sx={{ fontSize: 100 }} color='primary' />,
+      icon: <SanitizerOutlinedIcon sx={{ fontSize: 100 }} color="primary" />,
       stat: '50,000',
-      sentence:
-        'homes scrubbed squeaky clean',
+      sentence: 'homes scrubbed squeaky clean',
     },
     {
       id: 3,
-      icon: <PetsOutlinedIcon sx={{ fontSize: 100 }} color='primary' />,
+      icon: <PetsOutlinedIcon sx={{ fontSize: 100 }} color="primary" />,
       stat: '3,000',
-      sentence:
-        'dogs and a llama walked',
+      sentence: 'dogs and a llama walked',
     },
   ];
 
@@ -43,10 +40,12 @@ const AboutStatSection = () => {
               key={item.id}
               sx={styles.sectionGridItem}
             >
-              <Stack direction='column' sx={{ alignItems: 'center' }}>
+              <Stack direction="column" sx={{ alignItems: 'center' }}>
                 {item.icon}
                 <br />
-                <Typography variant='h5' fontWeight='bold'>{item.stat}</Typography>
+                <Typography variant="h5" fontWeight="bold">
+                  {item.stat}
+                </Typography>
                 <Typography>{item.sentence}</Typography>
               </Stack>
             </Grid>

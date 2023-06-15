@@ -36,7 +36,9 @@ const Login = () => {
     try {
       await dispatch(register(updatedCredentials));
     } catch (ex) {
-      setError('Invalid Input, please try again (a user with that username or email may already exist)');
+      setError(
+        'Invalid Input, please try again (a user with that username or email may already exist)'
+      );
     }
   };
 

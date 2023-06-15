@@ -15,7 +15,10 @@ const Chats = ({ taskId, task }) => {
     .reduce((acc, message) => {
       const withUser = message.fromId === auth.id ? message.to : message.from;
       acc[withUser.id] = acc[withUser.id] || { messages: [], withUser };
-      acc[withUser.id].messages.push({ ...message, mine: auth.id === message.fromId });
+      acc[withUser.id].messages.push({
+        ...message,
+        mine: auth.id === message.fromId,
+      });
       return acc;
     }, {});
   const chats = Object.values(chatMap);
@@ -29,7 +32,8 @@ const Chats = ({ taskId, task }) => {
       if (chat) {
         dispatch(createMessage({ txt, toId: chat.withUser.id, taskId }));
       } else {
-        const toId = task.taskDoerId === auth.id ? task.userId : task.taskDoerId;
+        const toId =
+          task.taskDoerId === auth.id ? task.userId : task.taskDoerId;
         dispatch(createMessage({ txt, toId, taskId }));
       }
     } catch (error) {
@@ -46,7 +50,10 @@ const Chats = ({ taskId, task }) => {
   return (
     <div id="chats">
       {chats.map((chat, idx) => {
-        const avatar = auth.id === task.userId ? getAvatar(task.taskDoerId) : getAvatar(task.userId);
+        const avatar =
+          auth.id === task.userId
+            ? getAvatar(task.taskDoerId)
+            : getAvatar(task.userId);
         return (
           <div key={idx} className="chat-container">
             <h3>Chat with {chat.withUser.username}</h3>
@@ -59,7 +66,14 @@ const Chats = ({ taskId, task }) => {
                   <li key={message.id} className={messageClassName}>
                     <div className="message-wrapper">
                       <div className="message-avatar">
-                        <img src={messageAvatar} alt={isLoginUser ? 'Your Avatar' : `${chat.withUser.username}'s Avatar`} />
+                        <img
+                          src={messageAvatar}
+                          alt={
+                            isLoginUser
+                              ? 'Your Avatar'
+                              : `${chat.withUser.username}'s Avatar`
+                          }
+                        />
                       </div>
                       <div className="message-content">{message.txt}</div>
                     </div>
@@ -69,7 +83,9 @@ const Chats = ({ taskId, task }) => {
             </ul>
             <form onSubmit={sendMessage.bind(null, chat)}>
               <div className="input-container">
-                <input placeholder={`send message to ${chat.withUser.username}`} />
+                <input
+                  placeholder={`send message to ${chat.withUser.username}`}
+                />
                 <button type="submit">Send</button>
               </div>
             </form>

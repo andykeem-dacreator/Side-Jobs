@@ -4,12 +4,12 @@ const users = (state = [], action) => {
     return action.users;
   }
   if (action.type === 'UPDATE_USER') {
-    return state.map(user => {
+    return state.map((user) => {
       if (user.id === action.user.id) {
         return action.user;
       }
       return user;
-    })
+    });
   }
   if (action.type === 'DELETE_USER') {
     return state.filter((user) => user.id !== action.user.id);
@@ -27,7 +27,7 @@ export const fetchUsers = () => {
 export const updateUser = (user) => {
   return async (dispatch) => {
     const response = await axios.put(`/api/users/${user.id}`, user);
-    dispatch({ type: 'UPDATE_USER', user: response.data })
+    dispatch({ type: 'UPDATE_USER', user: response.data });
   };
 };
 

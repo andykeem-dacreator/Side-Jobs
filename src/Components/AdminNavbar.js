@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { useTheme } from '@mui/material'
+import { useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,7 +27,6 @@ function AdminAppBar() {
   const handleLogout = () => {
     dispatch(logout());
   };
-
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -44,7 +43,7 @@ function AdminAppBar() {
     setAnchorElUser(null);
   };
 
-  const { auth } = useSelector(state => state);
+  const { auth } = useSelector((state) => state);
 
   return (
     <AppBar position="static">
@@ -98,18 +97,45 @@ function AdminAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-
               <MenuItem>
-                <Link to={"/"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>Home</Link>
+                <Link
+                  to={'/'}
+                  style={{
+                    color: theme.palette.mode === 'dark' ? 'white' : 'black',
+                  }}
+                >
+                  Home
+                </Link>
               </MenuItem>
               <MenuItem>
-                <Link to={"/tasks"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>Available Jobs</Link>
+                <Link
+                  to={'/tasks'}
+                  style={{
+                    color: theme.palette.mode === 'dark' ? 'white' : 'black',
+                  }}
+                >
+                  Available Jobs
+                </Link>
               </MenuItem>
               <MenuItem>
-                <Link to={"/addTask"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>Post A Job</Link>
+                <Link
+                  to={'/addTask'}
+                  style={{
+                    color: theme.palette.mode === 'dark' ? 'white' : 'black',
+                  }}
+                >
+                  Post A Job
+                </Link>
               </MenuItem>
               <MenuItem>
-                <Link to={"/about"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>About</Link>
+                <Link
+                  to={'/about'}
+                  style={{
+                    color: theme.palette.mode === 'dark' ? 'white' : 'black',
+                  }}
+                >
+                  About
+                </Link>
               </MenuItem>
             </Menu>
           </Box>
@@ -134,24 +160,30 @@ function AdminAppBar() {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <MenuItem>
-              <Link to={"/"} style={{ color: 'white' }}>Home</Link>
+              <Link to={'/'} style={{ color: 'white' }}>
+                Home
+              </Link>
             </MenuItem>
             <MenuItem>
-              <Link to={"/tasks"} style={{ color: 'white' }}>Available Jobs</Link>
+              <Link to={'/tasks'} style={{ color: 'white' }}>
+                Available Jobs
+              </Link>
             </MenuItem>
             <MenuItem>
-              <Link to={"/addTask"} style={{ color: 'white' }}>Post A Job</Link>
+              <Link to={'/addTask'} style={{ color: 'white' }}>
+                Post A Job
+              </Link>
             </MenuItem>
             <MenuItem>
-              <Link to={"/about"} style={{ color: 'white' }}>About</Link>
+              <Link to={'/about'} style={{ color: 'white' }}>
+                About
+              </Link>
             </MenuItem>
 
             <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-            </Button>
-
+            ></Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -177,28 +209,64 @@ function AdminAppBar() {
               onClose={handleCloseUserMenu}
             >
               <MenuItem>
-                <Link to={"/profile"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>Profile</Link>
+                <Link
+                  to={'/profile'}
+                  style={{
+                    color: theme.palette.mode === 'dark' ? 'white' : 'black',
+                  }}
+                >
+                  Profile
+                </Link>
               </MenuItem>
               <MenuItem>
-                <Link to={"/toDoList"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>Jobs I Accepted</Link>
+                <Link
+                  to={'/toDoList'}
+                  style={{
+                    color: theme.palette.mode === 'dark' ? 'white' : 'black',
+                  }}
+                >
+                  Jobs I Accepted
+                </Link>
               </MenuItem>
               <MenuItem>
-                <Link to={"/myTasks"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>Jobs I posted</Link>
+                <Link
+                  to={'/myTasks'}
+                  style={{
+                    color: theme.palette.mode === 'dark' ? 'white' : 'black',
+                  }}
+                >
+                  Jobs I posted
+                </Link>
               </MenuItem>
               <MenuItem>
-                <Link to={"/reviews"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>My Reviews</Link>
+                <Link
+                  to={'/reviews'}
+                  style={{
+                    color: theme.palette.mode === 'dark' ? 'white' : 'black',
+                  }}
+                >
+                  My Reviews
+                </Link>
               </MenuItem>
               <MenuItem>
-                <Link to={"/controlPanel"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>Control Panel</Link>
+                <Link
+                  to={'/controlPanel'}
+                  style={{
+                    color: theme.palette.mode === 'dark' ? 'white' : 'black',
+                  }}
+                >
+                  Control Panel
+                </Link>
               </MenuItem>
               <MenuItem>
-                <button onClick={handleLogout} style={{ color: 'black' }}>Logout</button>
+                <button onClick={handleLogout} style={{ color: 'black' }}>
+                  Logout
+                </button>
               </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
       </Container>
-
     </AppBar>
   );
 }
