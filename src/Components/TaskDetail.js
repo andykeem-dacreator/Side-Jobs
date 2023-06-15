@@ -8,6 +8,8 @@ import { IconButton, Tooltip, useTheme } from '@mui/material';
 import Chats from './Chats';
 import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
 const TaskDetail = () => {
   const { id } = useParams();
@@ -106,9 +108,17 @@ const TaskDetail = () => {
       <div id="chats-container">
         {task.taskDoerId && (
           <div>
-            <button id="chats-button" onClick={handleToggleChat}>
-              {isChatOpen ? 'Hide Chat' : 'Open Chat'}
-            </button>
+            <IconButton
+              id="chats-button"
+              onClick={handleToggleChat}
+              color="primary"
+            >
+              {isChatOpen ? (
+                <ChatBubbleOutlineIcon />
+              ) : (
+                <ChatBubbleIcon />
+              )}
+            </IconButton>
             {isChatOpen && (
               <div className="chats-popup">
                 <Chats taskId={id} task={task} />
