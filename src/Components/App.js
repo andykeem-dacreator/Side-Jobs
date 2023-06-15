@@ -13,6 +13,7 @@ import PublicProfile from './PublicProfile';
 import ToDoList from './ToDoList';
 import Navbar from './Navbar';
 import AdminNavbar from './AdminNavbar';
+import GuestNavBar from './GuestNavbar';
 import About from './About';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchTasks, fetchUsers, fetchReviews, fetchOnlineUsers } from '../store';
@@ -105,7 +106,18 @@ const App = () => {
   return (
     <div>
       {/* <h1>Side Quests</h1> */}
-      {auth.id ? "" : <Login />}
+      {auth.id ? '' : (
+        <div className="navbar">
+          <nav id="menu">
+            <GuestNavBar />
+            </nav>
+          <Routes>
+            <Route path="/" element={<About />} />
+            <Route path="/about" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </div>
+      )}
       {!!auth.id && !auth.isAdmin && (
         <div className="navbar">
           <nav id="menu">
@@ -134,7 +146,7 @@ const App = () => {
             <Link to='/navtest'>test</Link> */}
           </nav>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<About />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/users/:id" element={<PublicProfile />} />
             <Route path="/tasks" element={<Tasks />} />
@@ -145,7 +157,7 @@ const App = () => {
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/toDoList" element={<ToDoList />} />
             <Route path="/myTasks" element={<MyTasks />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/about" element={<Home />} />
             <Route path="/navtest" element={<Navbar />} />
           </Routes>
         </div>

@@ -16,6 +16,7 @@ const ControlPanel = () => {
     dispatch(deleteUser(user))
       .then(() => {
         dispatch(fetchUsers());
+        dispatch(fetchTasks());
       })
       .catch((error) => {
         console.log('Error deleting user:', error);
