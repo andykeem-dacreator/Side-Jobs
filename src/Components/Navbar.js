@@ -145,13 +145,16 @@ function ResponsiveAppBar() {
             <MenuItem>
               <Link to={"/about"} style={{color: 'white' }}>About</Link>
             </MenuItem>
-
-              <Button
+            <div style={{ flexGrow: 1 }}></div>
+            <div style={{ display: 'flex', alignItems: 'center', marginRight: '16px' }}>
+              <Typography variant='body2' sx={{fontWeight: 'bold'}}>Hi, {auth.firstName}!</Typography>
+            </div>
+              {/*<Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
               </Button>
-              
+              */}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
