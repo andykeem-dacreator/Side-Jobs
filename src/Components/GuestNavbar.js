@@ -85,35 +85,22 @@ function GuestNavBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              <MenuItem>
-                <Link
-                  to={'/'}
-                  style={{
-                    color: theme.palette.mode === 'dark' ? 'white' : 'black',
-                  }}
-                >
-                  Home
-                </Link>
+              <MenuItem onClick={handleCloseNavMenu} component={Link} to="/">
+                Home
               </MenuItem>
-              <MenuItem>
-                <Link
-                  to={'/tasks'}
-                  style={{
-                    color: theme.palette.mode === 'dark' ? 'white' : 'black',
-                  }}
-                >
-                  Available Jobs
-                </Link>
+              <MenuItem
+                onClick={handleCloseNavMenu}
+                component={Link}
+                to="/tasks"
+              >
+                Available Jobs
               </MenuItem>
-              <MenuItem>
-                <Link
-                  to={'/about'}
-                  style={{
-                    color: theme.palette.mode === 'dark' ? 'white' : 'black',
-                  }}
-                >
-                  About
-                </Link>
+              <MenuItem
+                onClick={handleCloseNavMenu}
+                component={Link}
+                to="/about"
+              >
+                About
               </MenuItem>
             </Menu>
           </Box>
@@ -121,8 +108,8 @@ function GuestNavBar() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href=""
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -138,20 +125,14 @@ function GuestNavBar() {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <MenuItem>
-              <Link to={'/'} style={{ color: 'white' }}>
-                Home
-              </Link>
+            <MenuItem component={Link} to="/" onClick={handleCloseNavMenu}>
+              Home
             </MenuItem>
-            <MenuItem>
-              <Link to={'/tasks'} style={{ color: 'white' }}>
-                Available Jobs
-              </Link>
+            <MenuItem component={Link} to="/tasks" onClick={handleCloseNavMenu}>
+              Available Jobs
             </MenuItem>
-            <MenuItem>
-              <Link to={'/about'} style={{ color: 'white' }}>
-                About
-              </Link>
+            <MenuItem component={Link} to="/about" onClick={handleCloseNavMenu}>
+              About
             </MenuItem>
           </Box>
 
@@ -177,15 +158,12 @@ function GuestNavBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem>
-                <Link
-                  to={'/login'}
-                  style={{
-                    color: theme.palette.mode === 'dark' ? 'white' : 'black',
-                  }}
-                >
-                  Log In
-                </Link>
+              <MenuItem
+                onClick={handleCloseUserMenu}
+                component={Link}
+                to="/login"
+              >
+                Log In
               </MenuItem>
             </Menu>
           </Box>
