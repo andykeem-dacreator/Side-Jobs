@@ -9,7 +9,7 @@ const About = () => {
       <Hero />
       <AboutStatSection />
       <AboutUs />
-    {/*
+      {/*
       <h2>About</h2>
       <p>
         Introducing Side Jobs, your ultimate side job finder application

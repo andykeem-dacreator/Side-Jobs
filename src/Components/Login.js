@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { attemptLogin, register } from '../store';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [changeForm, setChangeForm] = useState(true);
   const [credentials, setCredentials] = useState({
     username: '',
@@ -22,6 +24,7 @@ const Login = () => {
     ev.preventDefault();
     try {
       await dispatch(attemptLogin(credentials));
+      navigate('/');
     } catch (ex) {
       setError('Invalid combination of username and password');
     }

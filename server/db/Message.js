@@ -5,7 +5,7 @@ const Message = conn.define('message', {
   id: {
     type: UUID,
     primaryKey: true,
-    defaultValue: UUIDV4 
+    defaultValue: UUIDV4
   },
   txt: {
     type: STRING,

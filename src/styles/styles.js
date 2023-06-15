@@ -1,33 +1,33 @@
 import { styled } from '@mui/system';
 
-  export const styles = {
-    link: {
-      color: '#000',
-    },
-    heroBox: {
-      width: '100%',
-      display: 'flex',
-      minHeight: '360px',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    gridContainer: {
-      display: 'flex',
-      alignItems: 'center',
-      maxWidth: '1300px',
-      padding: '50px',
-    },
-    title: {
-      paddingBottom: '15px',
-    },
-    subtitle: {
-      opacity: '0.4',
-      paddingBottom: '30px',
-    },
-    largeImage: {
-      width: '100%',
-    },
-    aboutUsContainer: {
+export const styles = {
+  link: {
+    color: '#000',
+  },
+  heroBox: {
+    width: '100%',
+    display: 'flex',
+    minHeight: '360px',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  gridContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    maxWidth: '1300px',
+    padding: '50px',
+  },
+  title: {
+    paddingBottom: '15px',
+  },
+  subtitle: {
+    opacity: '0.4',
+    paddingBottom: '30px',
+  },
+  largeImage: {
+    width: '100%',
+  },
+  aboutUsContainer: {
     width: '100%',
     display: 'flex',
     minHeight: '400px',

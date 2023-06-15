@@ -14,7 +14,7 @@ const MapData = () => {
     //     setActiveMarker(marker);
     // };
     const center = useMemo(
-        () => ({ lat: parseFloat(task.lat), lng: parseFloat(task.lng)}),
+        () => ({ lat: parseFloat(task.lat), lng: parseFloat(task.lng) }),
         []
     );
 
@@ -26,7 +26,7 @@ const MapData = () => {
     // }
     return (
         <GoogleMap zoom={12} center={center} mapContainerClassName="map-container">
-            <Marker position = {center} />
+            <Marker position={center} />
         </GoogleMap>
     )
 }

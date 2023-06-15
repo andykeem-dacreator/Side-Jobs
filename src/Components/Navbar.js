@@ -99,18 +99,18 @@ function ResponsiveAppBar() {
               }}
             >
 
-            <MenuItem>
-              <Link to={"/"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Home</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to={"/tasks"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Available Jobs</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to={"/addTask"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Post A Job</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to={"/about"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>About</Link>
-            </MenuItem>
+              <MenuItem>
+                <Link to={"/"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>Home</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to={"/tasks"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>Available Jobs</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to={"/addTask"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>Post A Job</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to={"/about"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>About</Link>
+              </MenuItem>
             </Menu>
           </Box>
           <Typography
@@ -131,27 +131,27 @@ function ResponsiveAppBar() {
           >
             Side Jobs
           </Typography>
-          
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <MenuItem>
-              <Link to={"/"} style={{color: 'white' }}>Home</Link>
+              <Link to={"/"} style={{ color: 'white' }}>Home</Link>
             </MenuItem>
             <MenuItem>
-              <Link to={"/tasks"} style={{color: 'white' }}>Available Jobs</Link>
+              <Link to={"/tasks"} style={{ color: 'white' }}>Available Jobs</Link>
             </MenuItem>
             <MenuItem>
-              <Link to={"/addTask"} style={{color: 'white' }}>Post A Job</Link>
+              <Link to={"/addTask"} style={{ color: 'white' }}>Post A Job</Link>
             </MenuItem>
             <MenuItem>
-              <Link to={"/about"} style={{color: 'white' }}>About</Link>
+              <Link to={"/about"} style={{ color: 'white' }}>About</Link>
             </MenuItem>
 
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-              </Button>
-              
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+            </Button>
+
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -177,25 +177,25 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               <MenuItem>
-                <Link to={"/profile"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Profile</Link>
+                <Link to={"/profile"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>Profile</Link>
               </MenuItem>
               <MenuItem>
-                <Link to={"/toDoList"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Jobs I Accepted</Link>
+                <Link to={"/toDoList"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>Jobs I Accepted</Link>
               </MenuItem>
               <MenuItem>
-                <Link to={"/myTasks"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Jobs I posted</Link>
+                <Link to={"/myTasks"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>Jobs I posted</Link>
               </MenuItem>
               <MenuItem>
-                <Link to={"/reviews"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>My Reviews</Link>
+                <Link to={"/reviews"} style={{ color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>My Reviews</Link>
               </MenuItem>
               <MenuItem>
-                <button onClick={handleLogout} style={{color: 'black'}}>Logout</button>
+                <button onClick={handleLogout} style={{ color: 'black' }}>Logout</button>
               </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
       </Container>
-      
+
     </AppBar>
   );
 }

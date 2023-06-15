@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const onlineUsers = (state = [], action)=> {
-  if(action.type === 'SET_ONLINE_USERS'){
+const onlineUsers = (state = [], action) => {
+  if (action.type === 'SET_ONLINE_USERS') {
     return action.onlineUsers;
   }
-  if(action.type === 'LOGIN'){
+  if (action.type === 'LOGIN') {
     return [...state, action.user];
   }
-  if(action.type === 'LOGOUT'){
+  if (action.type === 'LOGOUT') {
     return state.filter(user => user.id !== action.user.id);
   }
   return state;
@@ -15,8 +15,8 @@ const onlineUsers = (state = [], action)=> {
 
 
 
-export const fetchOnlineUsers = ()=> {
-  return async(dispatch)=> {
+export const fetchOnlineUsers = () => {
+  return async (dispatch) => {
     const token = window.localStorage.getItem('token');
     const response = await axios.get('/api/onlineUsers', {
       headers: {

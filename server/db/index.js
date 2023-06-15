@@ -14,7 +14,7 @@ Task.belongsTo(User, { as: "taskDoer", foreignKey: "taskDoerId" });
 //Review.belongsTo(User);
 Review.belongsTo(User, { as: "taskCreator", foreignKey: "userId", onDelete: 'CASCADE' });
 Task.hasOne(Review, { onDelete: 'CASCADE' });
-Review.belongsTo(Task, { onDelete: 'CASCADE' } );
+Review.belongsTo(Task, { onDelete: 'CASCADE' });
 //User.hasMany(Review);
 User.hasMany(Review, { onDelete: 'CASCADE' });
 
@@ -275,7 +275,7 @@ const syncAndSeed = async () => {
     }),
     Review.create({
       rating: 4,
-      title: faker.lorem.paragraph({ min: 1, max: 1}),
+      title: faker.lorem.paragraph({ min: 1, max: 1 }),
       comment: faker.lorem.paragraph(3),
       userId: larry.id,
       taskId: task3.id,
@@ -283,7 +283,7 @@ const syncAndSeed = async () => {
     }),
     Review.create({
       rating: 4,
-      title: faker.lorem.paragraph({ min: 1, max: 1}),
+      title: faker.lorem.paragraph({ min: 1, max: 1 }),
       comment: faker.lorem.paragraph(3),
       userId: larry.id,
       taskId: task4.id,

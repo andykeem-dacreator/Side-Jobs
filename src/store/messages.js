@@ -1,17 +1,17 @@
 import axios from 'axios';
 
-const messages = (state = [], action)=> {
-  if(action.type === 'SET_MESSAGES'){
+const messages = (state = [], action) => {
+  if (action.type === 'SET_MESSAGES') {
     return action.messages;
   }
-  if(action.type === 'CREATE_MESSAGE'){
+  if (action.type === 'CREATE_MESSAGE') {
     return [...state, action.message];
   }
   return state;
 };
 
-export const fetchMessages = ()=> {
-  return async(dispatch)=> {
+export const fetchMessages = () => {
+  return async (dispatch) => {
     const token = window.localStorage.getItem('token');
     const response = await axios.get('/api/messages', {
       headers: {
@@ -22,8 +22,8 @@ export const fetchMessages = ()=> {
   };
 };
 
-export const createMessage = (message)=> {
-  return async(dispatch)=> {
+export const createMessage = (message) => {
+  return async (dispatch) => {
     const token = window.localStorage.getItem('token');
     const response = await axios.post('/api/messages', message, {
       headers: {

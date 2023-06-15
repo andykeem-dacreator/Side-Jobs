@@ -29,32 +29,32 @@ const AboutStatSection = () => {
         'dogs and a llama walked',
     },
   ];
-  
+
   return (
     <Box sx={{ flexGrow: 1, minHeight: '400px' }}>
       <Grid container sx={styles.sectionGridContainer}>
         {sectionItems.map((item) => {
           return (
-          <Grid
-            item
-            xs={12}
-            md={3.5}
-            minHeight={300}
-            key={item.id}
-            sx={styles.sectionGridItem}
-          >
-            <Stack direction='column' sx={{ alignItems: 'center'}}>
-              {item.icon}
-              <br/>
-              <Typography variant='h5' fontWeight='bold'>{item.stat}</Typography>
-              <Typography>{item.sentence}</Typography>
-            </Stack>
-          </Grid>
+            <Grid
+              item
+              xs={12}
+              md={3.5}
+              minHeight={300}
+              key={item.id}
+              sx={styles.sectionGridItem}
+            >
+              <Stack direction='column' sx={{ alignItems: 'center' }}>
+                {item.icon}
+                <br />
+                <Typography variant='h5' fontWeight='bold'>{item.stat}</Typography>
+                <Typography>{item.sentence}</Typography>
+              </Stack>
+            </Grid>
           );
         })}
       </Grid>
     </Box>
-    );
+  );
 };
 
 export default AboutStatSection;

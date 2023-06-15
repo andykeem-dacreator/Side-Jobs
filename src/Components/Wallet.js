@@ -9,7 +9,7 @@ const Wallet = () => {
 
   return (
     <div>
-      Wallet Balance = { user.wallet };
+      Wallet Balance = {user.wallet};
     </div>
   )
 };

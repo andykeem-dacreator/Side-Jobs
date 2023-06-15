@@ -25,23 +25,23 @@ const Review = conn.define('review', {
     unique: true
   }
 }
-// , {
-//   indexes: [
-//     {
-//       unique: true,
-//       fields: ['taskId']
-//     }
-//   ],
-//   validate: {
-//     async uniqueReviewPerTask() {
-//       const existingReview = await Review.findOne({
-//           where: {
-//             taskId: this.taskId
-//           }
-//         });
-//     }
-//   }
-// }
+  // , {
+  //   indexes: [
+  //     {
+  //       unique: true,
+  //       fields: ['taskId']
+  //     }
+  //   ],
+  //   validate: {
+  //     async uniqueReviewPerTask() {
+  //       const existingReview = await Review.findOne({
+  //           where: {
+  //             taskId: this.taskId
+  //           }
+  //         });
+  //     }
+  //   }
+  // }
 );
 
 module.exports = Review;

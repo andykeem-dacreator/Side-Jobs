@@ -37,12 +37,12 @@ import {
   Tooltip,
   MenuItem,
   AdbIcon
- } from '@mui/material';
+} from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { CollectionsOutlined } from '@mui/icons-material';
 
-const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+const ColorModeContext = React.createContext({ toggleColorMode: () => { } });
 // const pages = ['Home', 'Profile', 'Available Jobs', 'Post a Job', 'Jobs I Accepted', 'Created Tasks', 'My Reviews', 'About'];
 // const settings = ['Profile', 'Account', 'Dashboard', ]
 
@@ -76,12 +76,12 @@ const App = () => {
   }, []);
 
 
-  useEffect(()=> {
-    if(!prevAuth.current.id && auth.id){
+  useEffect(() => {
+    if (!prevAuth.current.id && auth.id) {
       console.log('you just logged in.');
       window.socket = new WebSocket(window.location.origin.replace('http', 'ws'));
       window.socket.addEventListener('open', () => {
-        window.socket.send(JSON.stringify({ token: window.localStorage.getItem('token')}));
+        window.socket.send(JSON.stringify({ token: window.localStorage.getItem('token') }));
       });
       window.socket.addEventListener('message', (ev) => {
         const message = JSON.parse(ev.data);
@@ -92,7 +92,7 @@ const App = () => {
       dispatch(fetchOnlineUsers());
 
     }
-    if(prevAuth.current.id && !auth.id){
+    if (prevAuth.current.id && !auth.id) {
       window.socket.close();
     }
   }, [auth]);
@@ -110,10 +110,11 @@ const App = () => {
         <div className="navbar">
           <nav id="menu">
             <GuestNavBar />
-            </nav>
+          </nav>
           <Routes>
             <Route path="/" element={<About />} />
             <Route path="/about" element={<Home />} />
+            <Route path="/tasks" element={<Tasks />} />
             <Route path="/login" element={<Login />} />
           </Routes>
         </div>
@@ -202,18 +203,18 @@ const App = () => {
         }}
       >
         <div className="screenMode">
-            {theme.palette.mode} mode
-            <IconButton
-              sx={{ ml: 1 }}
-              onClick={colorMode.toggleColorMode}
-              color="inherit"
-            >
-              {theme.palette.mode === "dark" ? (
-                <Brightness7Icon />
-              ) : (
-                <Brightness4Icon />
-              )}
-            </IconButton>
+          {theme.palette.mode} mode
+          <IconButton
+            sx={{ ml: 1 }}
+            onClick={colorMode.toggleColorMode}
+            color="inherit"
+          >
+            {theme.palette.mode === "dark" ? (
+              <Brightness7Icon />
+            ) : (
+              <Brightness4Icon />
+            )}
+          </IconButton>
         </div>
         <div className="copyright">
           <img
