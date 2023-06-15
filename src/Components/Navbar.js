@@ -142,16 +142,18 @@ function ResponsiveAppBar() {
             <MenuItem>
               <Link to={"/addTask"} style={{color: 'white' }}>Post A Job</Link>
             </MenuItem>
-            <MenuItem>
+            <MenuItem sx={{flexGrow: 1}}>
               <Link to={"/about"} style={{color: 'white' }}>About</Link>
             </MenuItem>
-
-              <Button
+            <MenuItem>
+              <Typography variant='body2' sx={{fontWeight: 'bold'}}>Hi, {auth.firstName}!</Typography>
+            </MenuItem>
+              {/*<Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
               </Button>
-              
+              */}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
