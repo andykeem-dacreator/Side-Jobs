@@ -5,26 +5,26 @@ const Message = conn.define('message', {
   id: {
     type: UUID,
     primaryKey: true,
-    defaultValue: UUIDV4 
+    defaultValue: UUIDV4,
   },
   txt: {
     type: STRING,
     allowNull: false,
     validate: {
-      notEmpty: true
+      notEmpty: true,
     },
   },
   toId: {
     type: UUID,
-    allowNull: false
+    allowNull: false,
   },
   fromId: {
     type: UUID,
-    allowNull: false
+    allowNull: false,
   },
   taskId: {
     type: UUID,
-  }
+  },
 });
 
 module.exports = Message;

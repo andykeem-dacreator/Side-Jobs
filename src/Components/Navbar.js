@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { useTheme } from '@mui/material'
+import { useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,7 +27,6 @@ function ResponsiveAppBar() {
   const handleLogout = () => {
     dispatch(logout());
   };
-
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -44,7 +43,7 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  const { auth } = useSelector(state => state);
+  const { auth } = useSelector((state) => state);
 
   return (
     <AppBar position="static">
@@ -98,19 +97,18 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-
-            <MenuItem>
-              <Link to={"/"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Home</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to={"/tasks"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Available Jobs</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to={"/addTask"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Post A Job</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to={"/about"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>About</Link>
-            </MenuItem>
+              <MenuItem component={Link} to="/" onClick={handleCloseNavMenu}>
+                Home
+              </MenuItem>
+              <MenuItem component={Link} to="/tasks" onClick={handleCloseNavMenu}>
+                Available Jobs
+              </MenuItem>
+              <MenuItem component={Link} to="/addTask" onClick={handleCloseNavMenu}>
+                Post A Job
+              </MenuItem>
+              <MenuItem component={Link} to="/about" onClick={handleCloseNavMenu}>
+                About
+              </MenuItem>
             </Menu>
           </Box>
           <Typography
@@ -131,27 +129,25 @@ function ResponsiveAppBar() {
           >
             Side Jobs
           </Typography>
-          
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <MenuItem>
-              <Link to={"/"} style={{color: 'white' }}>Home</Link>
+            <MenuItem component={Link} to="/" onClick={handleCloseNavMenu}>
+              Home
             </MenuItem>
-            <MenuItem>
-              <Link to={"/tasks"} style={{color: 'white' }}>Available Jobs</Link>
+            <MenuItem component={Link} to="/tasks" onClick={handleCloseNavMenu}>
+              Available Jobs
             </MenuItem>
-            <MenuItem>
-              <Link to={"/addTask"} style={{color: 'white' }}>Post A Job</Link>
+            <MenuItem component={Link} to="/addTask" onClick={handleCloseNavMenu}>
+              Post A Job
             </MenuItem>
-            <MenuItem>
-              <Link to={"/about"} style={{color: 'white' }}>About</Link>
+            <MenuItem component={Link} to="/about" onClick={handleCloseNavMenu}>
+              About
             </MenuItem>
 
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-              </Button>
-              
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            ></Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -176,27 +172,29 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem>
-                <Link to={"/profile"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Profile</Link>
+              <MenuItem component={Link} to="/profile" onClick={handleCloseUserMenu}>
+                Profile
+              </MenuItem>
+              <MenuItem component={Link} to="/toDoList" onClick={handleCloseUserMenu}>
+                Jobs I Accepted
+              </MenuItem>
+              <MenuItem component={Link} to="/myTasks" onClick={handleCloseUserMenu}>
+                Jobs I posted
+              </MenuItem>
+              <MenuItem component={Link} to="/reviews" onClick={handleCloseUserMenu}>
+                My Reviews
               </MenuItem>
               <MenuItem>
-                <Link to={"/toDoList"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Jobs I Accepted</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to={"/myTasks"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Jobs I posted</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to={"/reviews"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>My Reviews</Link>
-              </MenuItem>
-              <MenuItem>
-                <button onClick={handleLogout} style={{color: 'black'}}>Logout</button>
+                <button onClick={handleLogout} style={{ color: 'black' }}>
+                  Logout
+                </button>
               </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
       </Container>
-      
     </AppBar>
   );
 }
+
 export default ResponsiveAppBar;

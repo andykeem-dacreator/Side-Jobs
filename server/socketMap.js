@@ -1,5 +1,3 @@
-const socketMap = {
-
-};
+const socketMap = {};
 
 module.exports = socketMap;

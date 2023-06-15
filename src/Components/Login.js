@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { attemptLogin, register } from '../store';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [changeForm, setChangeForm] = useState(true);
   const [credentials, setCredentials] = useState({
     username: '',
@@ -22,6 +24,7 @@ const Login = () => {
     ev.preventDefault();
     try {
       await dispatch(attemptLogin(credentials));
+      navigate('/');
     } catch (ex) {
       setError('Invalid combination of username and password');
     }
@@ -33,7 +36,9 @@ const Login = () => {
     try {
       await dispatch(register(updatedCredentials));
     } catch (ex) {
-      setError('Invalid Input, please try again (a user with that username or email may already exist)');
+      setError(
+        'Invalid Input, please try again (a user with that username or email may already exist)'
+      );
     }
   };
 

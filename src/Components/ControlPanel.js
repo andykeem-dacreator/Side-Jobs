@@ -68,7 +68,7 @@ const ControlPanel = () => {
           <div key={task.id}>
             <div className="task-wrapper">
               <div className="task-text">
-                {task.id} {"   "} {task.title}
+                {task.id} {'   '} {task.title}
               </div>
               <div className="task-button">
                 <button onClick={() => handleDeleteTask(task)}>Delete</button>
