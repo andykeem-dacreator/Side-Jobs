@@ -188,10 +188,8 @@ function AdminAppBar() {
               <MenuItem component={Link} to="/controlPanel" onClick={handleCloseUserMenu}>
                 Control Panel
               </MenuItem>
-              <MenuItem>
-                <button onClick={handleLogout} style={{ color: 'black' }}>
-                  Logout
-                </button>
+              <MenuItem onClick={handleLogout}>
+                Logout
               </MenuItem>
             </Menu>
           </Box>

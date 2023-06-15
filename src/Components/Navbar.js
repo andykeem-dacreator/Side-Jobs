@@ -186,10 +186,8 @@ function ResponsiveAppBar() {
               <MenuItem component={Link} to="/reviews" onClick={handleCloseUserMenu}>
                 My Reviews
               </MenuItem>
-              <MenuItem>
-                <button onClick={handleLogout} style={{ color: 'black' }}>
-                  Logout
-                </button>
+              <MenuItem onClick={handleLogout}>
+                Logout
               </MenuItem>
             </Menu>
           </Box>
