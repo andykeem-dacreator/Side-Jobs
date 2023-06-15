@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteUser, fetchUsers, deleteTask, fetchTasks } from '../store';
+import { IconButton, Tooltip, useTheme } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/DeleteOutline';
 
 const ControlPanel = () => {
   const { auth, users, tasks, onlineUsers } = useSelector((state) => state);
@@ -55,7 +57,9 @@ const ControlPanel = () => {
               </div>
               {!user.isAdmin && (
                 <div className="user-button">
-                  <button onClick={() => handleDeleteUser(user)}>Delete</button>
+                  <IconButton onClick={() => handleDeleteUser(user)}>
+                    <DeleteIcon />
+                  </IconButton>
                 </div>
               )}
             </div>
@@ -71,7 +75,9 @@ const ControlPanel = () => {
                 {task.id} {'   '} {task.title}
               </div>
               <div className="task-button">
-                <button onClick={() => handleDeleteTask(task)}>Delete</button>
+                <IconButton onClick={() => handleDeleteTask(task)}>
+                  <DeleteIcon />
+                </IconButton>
               </div>
             </div>
           </div>
