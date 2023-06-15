@@ -389,9 +389,9 @@ li.yours .message-avatar {
 
 .footer .copyright {
   position: absolute;
-  padding-left: 150px;
+  left: 180px;
   display: flex;
-  padding-top: 10px;
+  top: 20.5px;
 }
 
 .footer img {
