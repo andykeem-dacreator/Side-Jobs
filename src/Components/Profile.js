@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 import Wallet from './Wallet';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import UploadIcon from '@mui/icons-material/Upload';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import {

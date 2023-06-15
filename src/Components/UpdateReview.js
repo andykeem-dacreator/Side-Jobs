@@ -1,15 +1,13 @@
 import React, { useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateReview } from '../store';
-import { useParams } from 'react-router-dom';
- import {
-   Modal,
-   FormControl,
-   Rating,
-   TextField,
-   Button,
-   Typography,
-   TextareaAutosize
+import {
+  Modal,
+  FormControl,
+  Rating,
+  TextField,
+  Button,
+  Typography,
 //   IconButton,
 //   DeleteIcon,
 //   Tooltip,

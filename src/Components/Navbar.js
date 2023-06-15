@@ -11,9 +11,10 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+//import AdbIcon from '@mui/icons-material/Adb';
+
 import { useTheme } from '@mui/material'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -21,11 +22,13 @@ function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const theme = useTheme();
-
+  
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  
   const handleLogout = () => {
     dispatch(logout());
+    navigate('/');
   };
 
 

@@ -13,12 +13,14 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useTheme } from '@mui/material'
 import { Link } from 'react-router-dom';
+import Login from './Login'
+import { Dialog, DialogContent } from '@mui/material';
 
 function GuestNavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const theme = useTheme();
-
+  const [openLoginDialog, setOpenLoginDialog] = React.useState(false);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -35,6 +37,7 @@ function GuestNavBar() {
   };
 
   return (
+    <>
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -145,13 +148,25 @@ function GuestNavBar() {
               onClose={handleCloseUserMenu}
             >
               <MenuItem>
-                <Link to={"/login"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}}>Log In</Link>
+                {/*<Link to={"/login"} style={{color: theme.palette.mode === 'dark' ? 'white' : 'black'}} >Log In</Link>*/}
+                <Button onClick={() => setOpenLoginDialog(true)}>Log In</Button>
               </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
+    <Dialog 
+      maxWidth='sm'
+      fullWidth={true}
+      open={openLoginDialog} 
+      onClose={() => setOpenLoginDialog(false)}
+    >
+      <DialogContent>
+        <Login />
+      </DialogContent>
+    </Dialog>
+    </>
   );
 }
 
