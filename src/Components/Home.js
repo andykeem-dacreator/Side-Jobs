@@ -16,8 +16,10 @@ const Home = ()=> {
       <div>
         {/* Welcome { auth.username }!!
         <button onClick={()=> dispatch(logout())}>Logout</button> */}
-        <p style={{ fontFamily: 'Arial, sans-serif', fontWeight: 'bold', fontSize: '20px' }}>
-          With the prices of everything going up, one income source may be hard to live off of. Some might also pay for convenience. Our job borad allows users to post side quests for others to do and get compensated. Add a job or accept a job today!
+        <p 
+          className='introStatement'
+          style={{ fontFamily: 'Arial, sans-serif', fontWeight: 'bold', fontSize: '20px', margin: '10px' }}>
+            Introducing a versatile platform that caters to both job posters and job seekers, this company provides a convenient space for users to post and accept random side jobs. It serves as a go-to resource for individuals seeking additional income opportunities, facilitating the seamless connection between those in need of assistance and those eager to take on extra hustle.
         </p>
       </div>
       <div className='featured' >
