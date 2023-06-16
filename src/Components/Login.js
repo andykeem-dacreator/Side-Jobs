@@ -13,8 +13,12 @@ import {
   InputLabel,
 } from '@mui/material';
 
+import { useNavigate } from 'react-router-dom';
+
+
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [changeForm, setChangeForm] = useState(true);
   const [credentials, setCredentials] = useState({
     username: '',
@@ -35,8 +39,6 @@ const Login = () => {
   };
   
   const onChange = (ev) => {
-    //console.log('ev.target:', ev.target)
-    //console.log('ev.target.value:', ev.target.value)
     setCredentials({ ...credentials, [ev.target.name]: ev.target.value });
   };
   
@@ -48,6 +50,7 @@ const Login = () => {
     ev.preventDefault();
     try {
       await dispatch(attemptLogin(credentials));
+      navigate('/');
     } catch (ex) {
       setError('Invalid combination of username and password');
     }
@@ -63,7 +66,9 @@ const Login = () => {
     try {
       await dispatch(register(updatedCredentials));
     } catch (ex) {
-      setError('Invalid Input, please try again (a user with that username or email may already exist)');
+      setError(
+        'Invalid Input, please try again (a user with that username or email may already exist)'
+      );
     }
   };
 
@@ -75,7 +80,6 @@ const Login = () => {
 
   return (
     <div className='login'>
-      {/*<h1>{changeForm ? 'Login' : 'Create Account'}</h1>*/}
       <Typography variant='h4' sx={{ textAlign: 'center'}}>{changeForm ? 'Login' : 'Create Account'}</Typography>
       <form onSubmit={changeForm ? login : create}>
         <FormControl

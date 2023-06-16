@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import { deleteTask, fetchMessages } from "../store";
-import UpdateTask from "./UpdateTask";
-import MapData from "./MapData";
-import {IconButton, Tooltip, useTheme} from "@mui/material";
-import Chats from "./Chats";
-import Typography from "@mui/material/Typography";
-import DeleteIcon from "@mui/icons-material/DeleteOutlined";
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { deleteTask, fetchMessages } from '../store';
+import UpdateTask from './UpdateTask';
+import MapData from './MapData';
+import { IconButton, Tooltip, useTheme } from '@mui/material';
+import Chats from './Chats';
+import Typography from '@mui/material/Typography';
+import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
 const TaskDetail = () => {
   const { id } = useParams();
@@ -31,12 +33,12 @@ const TaskDetail = () => {
 
   if (!taskDoer) {
     taskDoer = {};
-    taskDoer.firstName = "no one";
+    taskDoer.firstName = 'no one';
   }
 
   const destroy = async (task) => {
     await dispatch(deleteTask(task));
-    navigate("/tasks");
+    navigate('/tasks');
   };
 
   const handleToggleChat = () => {
@@ -49,14 +51,16 @@ const TaskDetail = () => {
       <div className="task-info" id="task-detail-container">
         <div className="task-detail">
           <div className="task-detail-header">
-            <Typography variant='h4'>Job Details</Typography>
+            <Typography variant="h4">Job Details</Typography>
 
             {task.userId === auth.id && !task.taskDoerId ? (
-                    <Tooltip title="Delete Task">
-                      <IconButton onClick={() => destroy(task)} ><DeleteIcon /></IconButton>
-                    </Tooltip>
+              <Tooltip title="Delete Task">
+                <IconButton onClick={() => destroy(task)}>
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
             ) : (
-                ""
+              ''
             )}
           </div>
           <div className="task-title">Title: {task.title}</div>
@@ -69,11 +73,11 @@ const TaskDetail = () => {
           <div className="task-price">Price: ${task.price}</div>
           <div className="taskDoerName">
             Accepted by:
-            {taskDoer.firstName !== "no one" ? (
+            {taskDoer.firstName !== 'no one' ? (
               <Link
                 to={`/users/${task.taskDoerId}`}
                 style={{
-                  color: theme.palette.mode === "dark" ? "white" : "black",
+                  color: theme.palette.mode === 'dark' ? 'white' : 'black',
                 }}
               >
                 {taskDoer.firstName}
@@ -82,13 +86,12 @@ const TaskDetail = () => {
               taskDoer.firstName
             )}
           </div>
-
         </div>
         <div>
           {task.userId === auth.id && !task.isComplete && !task.taskDoerId ? (
             <UpdateTask />
           ) : (
-            ""
+            ''
           )}
           {auth.id === task.userId &&
           task.isComplete &&
@@ -98,16 +101,24 @@ const TaskDetail = () => {
               <button>Leave a Review</button>
             </Link>
           ) : (
-            ""
+            ''
           )}
         </div>
       </div>
       <div id="chats-container">
         {task.taskDoerId && (
           <div>
-          <button id="chats-button" onClick={handleToggleChat}>
-              {isChatOpen ? "Hide Chat" : "Open Chat"}
-            </button>
+            <IconButton
+              id="chats-button"
+              onClick={handleToggleChat}
+              color="primary"
+            >
+              {isChatOpen ? (
+                <ChatBubbleOutlineIcon />
+              ) : (
+                <ChatBubbleIcon />
+              )}
+            </IconButton>
             {isChatOpen && (
               <div className="chats-popup">
                 <Chats taskId={id} task={task} />

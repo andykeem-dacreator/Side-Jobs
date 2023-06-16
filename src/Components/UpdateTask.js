@@ -1,22 +1,22 @@
-import React, { useState, useRef, useEffect } from "react";
-import { updateTask } from "../store";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { TextField, Button, Input } from "@mui/material";
-import Typography from "@mui/material/Typography";
+import React, { useState, useRef, useEffect } from 'react';
+import { updateTask } from '../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { TextField, Button, Input } from '@mui/material';
+import Typography from '@mui/material/Typography';
 
 const UpdateTask = () => {
   const { tasks } = useSelector((state) => state);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [street, setStreet] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zipCode, setZipCode] = useState("");
-  const [country, setCountry] = useState("");
-  const [lat, setLat] = useState("");
-  const [lng, setLng] = useState("");
-  const [price, setPrice] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [street, setStreet] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [country, setCountry] = useState('');
+  const [lat, setLat] = useState('');
+  const [lng, setLng] = useState('');
+  const [price, setPrice] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -26,21 +26,21 @@ const UpdateTask = () => {
     if (input.current) {
       const autocomplete = new google.maps.places.Autocomplete(input.current, {
         fields: [
-          "address_components",
-          "geometry",
-          "icon",
-          "name",
-          "formatted_address",
+          'address_components',
+          'geometry',
+          'icon',
+          'name',
+          'formatted_address',
         ],
       });
-      autocomplete.addListener("place_changed", () => {
+      autocomplete.addListener('place_changed', () => {
         const place = autocomplete.getPlace();
         if (place.address_components) {
-          let Address = place.formatted_address.split(",");
+          let Address = place.formatted_address.split(',');
           setStreet(Address[0]);
           setCity(Address[1]);
-          setState(Address[2].split(" ")[1]);
-          setZipCode(Address[2].split(" ")[2]);
+          setState(Address[2].split(' ')[1]);
+          setZipCode(Address[2].split(' ')[2]);
           setCountry(Address[3]);
           setLat(place.geometry.location.lat);
           setLng(place.geometry.location.lng);
@@ -76,7 +76,7 @@ const UpdateTask = () => {
         price,
       })
     );
-    navigate("/myTasks");
+    navigate('/myTasks');
   };
 
   return (

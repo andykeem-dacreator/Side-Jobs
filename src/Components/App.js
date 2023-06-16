@@ -16,10 +16,16 @@ import AdminNavbar from './AdminNavbar';
 import GuestNavBar from './GuestNavbar';
 import About from './About';
 import { useSelector, useDispatch } from 'react-redux';
-import { loginWithToken, fetchTasks, fetchUsers, fetchReviews, fetchOnlineUsers } from '../store';
+import {
+  loginWithToken,
+  fetchTasks,
+  fetchUsers,
+  fetchReviews,
+  fetchOnlineUsers,
+} from '../store';
 import { Link, Routes, Route } from 'react-router-dom';
-import MyTasks from "./MyTasks";
-const { faker } = require("@faker-js/faker");
+import MyTasks from './MyTasks';
+const { faker } = require('@faker-js/faker');
 import {
   IconButton,
   Box,
@@ -36,8 +42,8 @@ import {
   Button,
   Tooltip,
   MenuItem,
-  AdbIcon
- } from '@mui/material';
+  AdbIcon,
+} from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { CollectionsOutlined } from '@mui/icons-material';
@@ -54,7 +60,6 @@ const App = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
-
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -75,13 +80,16 @@ const App = () => {
     dispatch(fetchReviews());
   }, []);
 
-
-  useEffect(()=> {
-    if(!prevAuth.current.id && auth.id){
+  useEffect(() => {
+    if (!prevAuth.current.id && auth.id) {
       console.log('you just logged in.');
-      window.socket = new WebSocket(window.location.origin.replace('http', 'ws'));
+      window.socket = new WebSocket(
+        window.location.origin.replace('http', 'ws')
+      );
       window.socket.addEventListener('open', () => {
-        window.socket.send(JSON.stringify({ token: window.localStorage.getItem('token')}));
+        window.socket.send(
+          JSON.stringify({ token: window.localStorage.getItem('token') })
+        );
       });
       window.socket.addEventListener('message', (ev) => {
         const message = JSON.parse(ev.data);
@@ -90,9 +98,8 @@ const App = () => {
         }
       });
       dispatch(fetchOnlineUsers());
-
     }
-    if(prevAuth.current.id && !auth.id){
+    if (prevAuth.current.id && !auth.id) {
       window.socket.close();
     }
   }, [auth]);
@@ -106,14 +113,17 @@ const App = () => {
   return (
     <div>
       {/* <h1>Side Quests</h1> */}
-      {auth.id ? '' : (
+      {auth.id ? (
+        ''
+      ) : (
         <div className="navbar">
           <nav id="menu">
             <GuestNavBar />
-            </nav>
+          </nav>
           <Routes>
             <Route path="/" element={<About />} />
             <Route path="/about" element={<Home />} />
+            <Route path="/tasks" element={<Tasks />} />
             {/*<Route path="/login" element={<Login />} />*/}
           </Routes>
         </div>
@@ -163,46 +173,42 @@ const App = () => {
         </div>
       )}
       <footer
-        className='footer'
+        className="footer"
         style={{
-          position: "fixed",
+          position: 'fixed',
           bottom: 0,
-          width: "100%",
-          backgroundColor: "lightgray",
+          width: '100%',
+          backgroundColor: 'lightgray',
         }}
       >
         <div className="screenMode">
-            {theme.palette.mode} mode
-            <IconButton
-              sx={{ ml: 1 }}
-              onClick={colorMode.toggleColorMode}
-              color="inherit"
-            >
-              {theme.palette.mode === "dark" ? (
-                <Brightness7Icon />
-              ) : (
-                <Brightness4Icon />
-              )}
-            </IconButton>
+          {theme.palette.mode} mode
+          <IconButton
+            sx={{ ml: 1 }}
+            onClick={colorMode.toggleColorMode}
+            color="inherit"
+          >
+            {theme.palette.mode === 'dark' ? (
+              <Brightness7Icon />
+            ) : (
+              <Brightness4Icon />
+            )}
+          </IconButton>
         </div>
         <div className="copyright">
-          <img
-            src="https://logos-world.net/wp-content/uploads/2021/08/Copyright-Logo.png"
-          />
-          <div>
-            Copyright
-          </div>
+          <img src="https://logos-world.net/wp-content/uploads/2021/08/Copyright-Logo.png" />
+          <div>Copyright</div>
         </div>
       </footer>
     </div>
   );
 };
 export default function ToggleColorMode() {
-  const [mode, setMode] = React.useState("light");
+  const [mode, setMode] = React.useState('light');
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
       },
     }),
     []

@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteUser, fetchUsers, deleteTask, fetchTasks } from '../store';
+import { IconButton, Tooltip, useTheme } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/DeleteOutline';
 
 const ControlPanel = () => {
   const { auth, users, tasks, onlineUsers } = useSelector((state) => state);
@@ -39,14 +41,14 @@ const ControlPanel = () => {
       <h2>Welcome Admin {auth.firstName}</h2>
       <h3>Online Users ({onlineUsers.length})</h3>
       <ul>
-        {onlineUsers.map((user) => (
-          <li key={user.id}>{user.username}</li>
-        ))}
-      </ul>
+      {onlineUsers.map((user, index) => (
+        <li key={`online-user-${index}`}>{user.username}</li>
+      ))}
+    </ul>
       <div>
         <h3>User Management</h3>
-        {users.map((user) => (
-          <div key={user.id}>
+        {users.map((user, index) => (
+          <div key={`user-${index}`}>
             <div className="user-wrapper">
               <div className="user-text">
                 <Link to={`/users/${user.id}`}>
@@ -55,7 +57,9 @@ const ControlPanel = () => {
               </div>
               {!user.isAdmin && (
                 <div className="user-button">
-                  <button onClick={() => handleDeleteUser(user)}>Delete</button>
+                  <IconButton onClick={() => handleDeleteUser(user)}>
+                    <DeleteIcon />
+                  </IconButton>
                 </div>
               )}
             </div>
@@ -64,14 +68,16 @@ const ControlPanel = () => {
       </div>
       <div>
         <h3>Task Management</h3>
-        {tasks.map((task) => (
-          <div key={task.id}>
+        {tasks.map((task, index) => (
+        <div key={`task-${index}`}>
             <div className="task-wrapper">
               <div className="task-text">
-                {task.id} {"   "} {task.title}
+                {task.id} {'   '} {task.title}
               </div>
               <div className="task-button">
-                <button onClick={() => handleDeleteTask(task)}>Delete</button>
+                <IconButton onClick={() => handleDeleteTask(task)}>
+                  <DeleteIcon />
+                </IconButton>
               </div>
             </div>
           </div>

@@ -14,7 +14,7 @@ const reducer = combineReducers({
   users,
   reviews,
   onlineUsers,
-  messages
+  messages,
 });
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));

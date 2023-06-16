@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link , useNavigate } from 'react-router-dom';
 import {updateTask, updateUser, updateAuth} from "../store";
 import Typography from "@mui/material/Typography";
-
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 const MyTasks = () => {
-    const {users, auth, tasks} = useSelector(state => state);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    let filteredTasks = tasks.filter((task) => task.userId === auth.id)
+  const { users, auth, tasks } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  let filteredTasks = tasks.filter((task) => task.userId === auth.id);
 
     const update = async(task) => {
         const taskDoer = users.find((user) => user.id === task.taskDoerId);
@@ -29,7 +29,7 @@ const MyTasks = () => {
                                     <div className = 'task-price'>Price: ${task.price}</div>
                                     <div className = 'task-location'>Location: {task.city}, {task.state}</div>
                                 </Link>
-                                { task.taskDoerId ? <button onClick={() => update(task)}>Task Complete</button> : ""}
+                                { task.isComplete ? <CheckCircleIcon /> : task.taskDoerId ? <button onClick={() => update(task)}>Task Complete</button> : ""}
                             </div>
                         )
                     })
