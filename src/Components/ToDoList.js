@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 const ToDoList = () => {
   const { auth, tasks } = useSelector((state) => state);
   let filteredTasks = tasks.filter((task) => task.taskDoerId === auth.id);
@@ -18,6 +19,7 @@ const ToDoList = () => {
                 Location: {task.city}, {task.state}
               </div>
             </Link>
+            { task.isComplete ? <CheckCircleIcon /> : ""}
           </div>
         );
       })}

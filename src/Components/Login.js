@@ -3,7 +3,7 @@ import { attemptLogin, register } from '../store';
 import { useDispatch } from 'react-redux';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { 
+import {
   Typography,
   InputAdornment,
   OutlinedInput,
@@ -31,17 +31,17 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
-  
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
   const handleMouseDownPassword = (ev) => {
     ev.preventDefault();
   };
-  
+
   const onChange = (ev) => {
     setCredentials({ ...credentials, [ev.target.name]: ev.target.value });
   };
-  
+
   const onChangeConfirmPassword = (ev) => {
     setConfirmPassword(ev.target.value);
   };
@@ -65,6 +65,7 @@ const Login = () => {
     const updatedCredentials = { ...credentials, avatar: getRandomAvatar() };
     try {
       await dispatch(register(updatedCredentials));
+      navigate('/');
     } catch (ex) {
       setError(
         'Invalid Input, please try again (a user with that username or email may already exist)'
@@ -100,7 +101,7 @@ const Login = () => {
           variant='outlined'
         >
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-          <OutlinedInput 
+          <OutlinedInput
             id="outlined-adornment-password"
             placeholder="password"
             name="password"
@@ -147,9 +148,9 @@ const Login = () => {
                   </IconButton>
                 </InputAdornment>
               }
-              />  
+              />
             </FormControl>
-            <FormControl 
+            <FormControl
               required
               variant='outlined'>
               <InputLabel htmlFor="email">Email</InputLabel>
@@ -191,8 +192,8 @@ const Login = () => {
         )}
         <Button type="submit" variant="contained" >{changeForm ? 'Login' : 'Create Account'}</Button>
       </form>
-      <Button 
-        
+      <Button
+
         onClick={() => setChangeForm(!changeForm)}>
         {changeForm ? 'Create Account' : 'Login'}
       </Button>
