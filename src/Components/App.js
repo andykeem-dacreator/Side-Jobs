@@ -124,7 +124,7 @@ const App = () => {
             <Route path="/" element={<About />} />
             <Route path="/about" element={<Home />} />
             <Route path="/tasks" element={<Tasks />} />
-            <Route path="/login" element={<Login />} />
+            {/*<Route path="/login" element={<Login />} />*/}
           </Routes>
         </div>
       )}
@@ -132,28 +132,6 @@ const App = () => {
         <div className="navbar">
           <nav id="menu">
             <Navbar />
-            {/* <Link to="/" style={{color: theme === 'dark' ? 'white' : 'black'}}>Home</Link>
-            <Link to="/profile" style={{color: theme === 'dark' ? 'white' : 'black'}}>Profile</Link>
-            <div className={`dropdown ${dropdownOpen ? 'open' : ''}`}>
-              <span onClick={toggleDropdown}>Jobs{' '}</span>
-              <div className='dropdown-content'>
-                <li>
-                  <Link to="/tasks">Available Jobs</Link>
-                </li>
-                <li>
-                  <Link to="/addTask">Post a Job</Link>
-                </li>
-                <li>
-                  <Link to="/toDoList">Jobs I Accepted</Link>
-                </li>
-                <li>
-                  <Link to="/myTasks">Created Tasks</Link>
-                </li>
-              </div>
-            </div>
-            <Link to="/reviews">My Reviews</Link>
-            <Link to="/about">About</Link>
-            <Link to='/navtest'>test</Link> */}
           </nav>
           <Routes>
             <Route path="/" element={<About />} />
@@ -176,14 +154,6 @@ const App = () => {
         <div>
           <nav className="navbar">
             <AdminNavbar />
-            {/* <Link to="/" style={{color: theme === 'dark' ? 'white' : 'black'}}>Home</Link>
-            <Link to ="/controlPanel" >Control Panel</Link>
-            <Link to="/profile">Profile</Link>
-            <Link to="/tasks">Available Jobs</Link>
-            <Link to="/addTask">Add Task</Link>
-            <Link to="/reviews">My Reviews</Link>
-            <Link to="/toDoList">To Do List</Link>
-            <Link to="/myTasks">Created Tasks</Link> */}
           </nav>
           <Routes>
             <Route path="/" element={<About />} />

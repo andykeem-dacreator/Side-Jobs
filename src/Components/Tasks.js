@@ -35,6 +35,7 @@ const Tasks = () => {
                 minHeight={300}
                 key={task.id}
                 sx={styles.sectionGridItem}
+                style={{ color: 'black' }}
               >
                 {isGuestMode ? (
                   <>

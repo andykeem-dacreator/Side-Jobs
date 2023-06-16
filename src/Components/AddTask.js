@@ -13,7 +13,7 @@ import {
 import Typography from '@mui/material/Typography';
 
 const AddTask = () => {
-  const { auth } = useSelector((state) => state);
+  const { auth, users } = useSelector((state) => state);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [street, setStreet] = useState('');
@@ -27,6 +27,20 @@ const AddTask = () => {
   const [category, setCategory] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
+
+  function isEnoughMoney(price) {
+    return auth.wallet > price  ;
+  }
+
+  const handleMoney = (ev) => {
+    if (!isEnoughMoney(ev.target.value)) {
+      setError('You Broke!');
+    } else {
+      setError(null);
+    }
+    setPrice(ev.target.value);
+  };
 
   const input = useRef();
   useEffect(() => {
@@ -115,8 +129,10 @@ const AddTask = () => {
           label="Price"
           variant="outlined"
           value={price}
-          onChange={(ev) => setPrice(ev.target.value)}
+          onChange={handleMoney}
           placeholder="Price"
+          error={error && !isEnoughMoney(price)}
+          helperText={error && !isEnoughMoney(price) ? 'You Broke!' : ''}
         />
         <FormControl>
           <InputLabel>Select A Category</InputLabel>
@@ -140,7 +156,7 @@ const AddTask = () => {
           variant="outlined"
           disabled={!title || !description || !price || !category || !street}
         >
-          Add
+          Post
         </Button>
       </form>
     </div>

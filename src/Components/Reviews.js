@@ -59,7 +59,6 @@ const Reviews = () => {
   return (
     <div className="reviews-i-gave">
       <Typography variant="h4">Reviews I Gave</Typography>
-      {/*<List >*/}
       {filteredReviews.map((review) => {
         const createdAt = new Date(review.createdAt);
         const showUpdateForm = showUpdateFormMap[review.id] || false;
@@ -71,8 +70,6 @@ const Reviews = () => {
           <Box key={review.id} sx={{ minWidth: 275 }}>
             <Card variant="outlined">
               <CardContent>
-                {/*<ListItem key={ review.id }
-                >*/}
                 <Stack direction="column">
                   <Stack direction="row">
                     <Avatar src={task.taskDoer.avatar}></Avatar>
@@ -148,7 +145,6 @@ const Reviews = () => {
                     </DialogActions>
                   </Dialog>
                 }
-                {/*</ListItem>*/}
               </CardContent>
 
               <CardActions disableSpacing>
@@ -180,7 +176,6 @@ const Reviews = () => {
           </Box>
         );
       })}
-      {/*</List>*/}
     </div>
   );
 };

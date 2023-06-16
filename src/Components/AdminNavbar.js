@@ -198,11 +198,7 @@ function AdminAppBar() {
               >
                 Jobs I Accepted
               </MenuItem>
-              <MenuItem
-                component={Link}
-                to="/myTasks"
-                onClick={handleCloseUserMenu}
-              >
+              <MenuItem component={Link} to="/myTasks" onClick={handleCloseUserMenu}>
                 Jobs I Posted
               </MenuItem>
               <MenuItem
