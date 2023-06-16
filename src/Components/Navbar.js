@@ -132,7 +132,13 @@ function ResponsiveAppBar() {
               }}
             />
           </Link>
-
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <div style={{ flexGrow: 1 }}></div>
+            <div style={{ display: 'flex', alignItems: 'center', marginRight: '16px' }}>
+              <Typography variant='body2' sx={{fontWeight: 'bold'}}>Hi, {auth.firstName}!</Typography>
+            </div>
+          </Box>
+          
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <MenuItem component={Link} to="/" onClick={handleCloseNavMenu}>
               Home
