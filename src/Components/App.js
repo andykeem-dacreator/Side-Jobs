@@ -104,6 +104,10 @@ const App = () => {
     }
   }, [auth]);
 
+  useEffect(()=> {
+    prevAuth.current = auth;
+  });
+  
   // useEffect(() => {
   //     document.body.className = theme;
   //   }, [theme]);
