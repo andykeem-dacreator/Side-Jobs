@@ -140,31 +140,7 @@ function GuestNavBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar src="DEFAULT_AVATAR_URL" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem>
-                <Button onClick={() => setOpenLoginDialog(true)}>Log In</Button>
-              </MenuItem>
-            </Menu>
+            <Button style={{ color: 'white' }}onClick={() => setOpenLoginDialog(true)}>Log In</Button>
           </Box>
         </Toolbar>
       </Container>
