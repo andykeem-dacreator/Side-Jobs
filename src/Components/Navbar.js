@@ -11,19 +11,22 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+
 import { useTheme } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
+import { Img } from '../styles/styles.js';
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const theme = useTheme();
 
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
   const handleLogout = () => {
     dispatch(logout());
@@ -51,24 +54,20 @@ function ResponsiveAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Side Jobs
-          </Typography>
+          <Link to="/">
+            <Img
+              src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-white-on-transparent-background.png"
+              alt="Side Jobs Logo"
+              style={{ width: 'auto', height: '90px' }}
+              noWrap
+              component="a"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                color: 'inherit',
+              }}
+            />
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -102,35 +101,42 @@ function ResponsiveAppBar() {
               <MenuItem component={Link} to="/" onClick={handleCloseNavMenu}>
                 Home
               </MenuItem>
-              <MenuItem component={Link} to="/tasks" onClick={handleCloseNavMenu}>
+              <MenuItem
+                component={Link}
+                to="/tasks"
+                onClick={handleCloseNavMenu}
+              >
                 Available Jobs
               </MenuItem>
-              <MenuItem component={Link} to="/addTask" onClick={handleCloseNavMenu}>
+              <MenuItem
+                component={Link}
+                to="/addTask"
+                onClick={handleCloseNavMenu}
+              >
                 Post A Job
               </MenuItem>
-              <MenuItem component={Link} to="/about" onClick={handleCloseNavMenu}>
+              <MenuItem
+                component={Link}
+                to="/about"
+                onClick={handleCloseNavMenu}
+              >
                 About
               </MenuItem>
             </Menu>
           </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Side Jobs
-          </Typography>
+          <Link to="/">
+            <Img
+              src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-white-on-transparent-background.png"
+              alt="Side Jobs Logo"
+              style={{ width: 'auto', height: '60px' }}
+              noWrap
+              component="a"
+              sx={{
+                mr: 2,
+                display: { xs: 'flex', md: 'none' },
+              }}
+            />
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <MenuItem component={Link} to="/" onClick={handleCloseNavMenu}>
@@ -139,17 +145,34 @@ function ResponsiveAppBar() {
             <MenuItem component={Link} to="/tasks" onClick={handleCloseNavMenu}>
               Available Jobs
             </MenuItem>
-            <MenuItem component={Link} to="/addTask" onClick={handleCloseNavMenu}>
+            <MenuItem
+              component={Link}
+              to="/addTask"
+              onClick={handleCloseNavMenu}
+            >
               Post A Job
             </MenuItem>
             <MenuItem component={Link} to="/about" onClick={handleCloseNavMenu}>
               About
             </MenuItem>
-
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            ></Button>
+            <div style={{ flexGrow: 1 }}></div>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginRight: '16px',
+              }}
+            >
+              <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                Hi, {auth.firstName}!
+              </Typography>
+            </div>
+            {/*<Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+              </Button>
+              */}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -174,21 +197,35 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem component={Link} to="/profile" onClick={handleCloseUserMenu}>
+              <MenuItem
+                component={Link}
+                to="/profile"
+                onClick={handleCloseUserMenu}
+              >
                 Profile
               </MenuItem>
-              <MenuItem component={Link} to="/toDoList" onClick={handleCloseUserMenu}>
+              <MenuItem
+                component={Link}
+                to="/toDoList"
+                onClick={handleCloseUserMenu}
+              >
                 Jobs I Accepted
               </MenuItem>
-              <MenuItem component={Link} to="/myTasks" onClick={handleCloseUserMenu}>
-                Jobs I posted
+              <MenuItem
+                component={Link}
+                to="/myTasks"
+                onClick={handleCloseUserMenu}
+              >
+                Jobs I Posted
               </MenuItem>
-              <MenuItem component={Link} to="/reviews" onClick={handleCloseUserMenu}>
+              <MenuItem
+                component={Link}
+                to="/reviews"
+                onClick={handleCloseUserMenu}
+              >
                 My Reviews
               </MenuItem>
-              <MenuItem onClick={handleLogout}>
-                Logout
-              </MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </Box>
         </Toolbar>
