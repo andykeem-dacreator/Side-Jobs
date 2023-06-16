@@ -13,148 +13,146 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
-import Login from './Login'
+import Login from './Login';
 import { Dialog, DialogContent } from '@mui/material';
+import { Img } from '../styles/styles.js';
 
 function GuestNavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const theme = useTheme();
   const [openLoginDialog, setOpenLoginDialog] = React.useState(false);
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   return (
     <>
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component={Link}
-            to="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Side Jobs
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              <MenuItem onClick={handleCloseNavMenu} component={Link} to="/">
+      <AppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Link to="/">
+              <Img
+                src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-white-on-transparent-background.png"
+                alt="Side Jobs Logo"
+                style={{ width: 'auto', height: '90px' }}
+                noWrap
+                component="a"
+                sx={{
+                  mr: 2,
+                  display: { xs: 'none', md: 'flex' },
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+              />
+            </Link>
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
+                <MenuItem onClick={handleCloseNavMenu} component={Link} to="/">
+                  Home
+                </MenuItem>
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  component={Link}
+                  to="/tasks"
+                >
+                  Available Jobs
+                </MenuItem>
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  component={Link}
+                  to="/about"
+                >
+                  About
+                </MenuItem>
+              </Menu>
+            </Box>
+            <Link to="/">
+              <Img
+                src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-white-on-transparent-background.png"
+                alt="Side Jobs Logo"
+                style={{ width: 'auto', height: '60px' }}
+                noWrap
+                component="a"
+                sx={{
+                  mr: 2,
+                  display: { xs: 'flex', md: 'none' },
+                }}
+              />
+            </Link>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              <MenuItem component={Link} to="/" onClick={handleCloseNavMenu}>
                 Home
               </MenuItem>
               <MenuItem
-                onClick={handleCloseNavMenu}
                 component={Link}
                 to="/tasks"
+                onClick={handleCloseNavMenu}
               >
                 Available Jobs
               </MenuItem>
               <MenuItem
-                onClick={handleCloseNavMenu}
                 component={Link}
                 to="/about"
+                onClick={handleCloseNavMenu}
               >
                 About
               </MenuItem>
-            </Menu>
-          </Box>
+            </Box>
 
-          <Typography
-            variant="h5"
-            noWrap
-            component={Link}
-            to="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Side Jobs
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <MenuItem component={Link} to="/" onClick={handleCloseNavMenu}>
-              Home
-            </MenuItem>
-            <MenuItem component={Link} to="/tasks" onClick={handleCloseNavMenu}>
-              Available Jobs
-            </MenuItem>
-            <MenuItem component={Link} to="/about" onClick={handleCloseNavMenu}>
-              About
-            </MenuItem>
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Button style={{ color: 'white' }}onClick={() => setOpenLoginDialog(true)}>Log In</Button>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
-    <Dialog 
-      maxWidth='sm'
-      fullWidth={true}
-      open={openLoginDialog} 
-      onClose={() => setOpenLoginDialog(false)}
-    >
-      <DialogContent>
-        <Login />
-      </DialogContent>
-    </Dialog>
+            <Box sx={{ flexGrow: 0 }}>
+              <Button
+                style={{ color: 'white' }}
+                onClick={() => setOpenLoginDialog(true)}
+              >
+                Log In
+              </Button>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <Dialog
+        maxWidth="sm"
+        fullWidth={true}
+        open={openLoginDialog}
+        onClose={() => setOpenLoginDialog(false)}
+      >
+        <DialogContent>
+          <Login />
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

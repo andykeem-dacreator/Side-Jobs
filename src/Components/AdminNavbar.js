@@ -16,12 +16,12 @@ import { useTheme } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
+import { styles, Img } from '../styles/styles.js';
 
 function AdminAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const theme = useTheme();
-
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -51,24 +51,24 @@ function AdminAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component={Link}
-            to="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Side Jobs
-          </Typography>
-
+          <Link to="/">
+            <Img
+              src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-white-on-transparent-background.png"
+              alt="Side Jobs Logo"
+              style={{ width: 'auto', height: '90px' }}
+              noWrap
+              component="a"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            />
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -101,35 +101,42 @@ function AdminAppBar() {
               <MenuItem onClick={handleCloseNavMenu} component={Link} to="/">
                 Home
               </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu} component={Link} to="/tasks">
+              <MenuItem
+                onClick={handleCloseNavMenu}
+                component={Link}
+                to="/tasks"
+              >
                 Available Jobs
               </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu} component={Link} to="/addTask">
+              <MenuItem
+                onClick={handleCloseNavMenu}
+                component={Link}
+                to="/addTask"
+              >
                 Post A Job
               </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu} component={Link} to="/about">
+              <MenuItem
+                onClick={handleCloseNavMenu}
+                component={Link}
+                to="/about"
+              >
                 About
               </MenuItem>
             </Menu>
           </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component={Link}
-            to="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Side Jobs
-          </Typography>
+          <Link to="/">
+            <Img
+              src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-white-on-transparent-background.png"
+              alt="Side Jobs Logo"
+              style={{ width: 'auto', height: '60px' }}
+              noWrap
+              component="a"
+              sx={{
+                mr: 2,
+                display: { xs: 'flex', md: 'none' },
+              }}
+            />
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <div style={{ flexGrow: 1 }}></div>
             <div style={{ display: 'flex', alignItems: 'center', marginRight: '16px' }}>
@@ -144,7 +151,11 @@ function AdminAppBar() {
             <MenuItem component={Link} to="/tasks" onClick={handleCloseNavMenu}>
               Available Jobs
             </MenuItem>
-            <MenuItem component={Link} to="/addTask" onClick={handleCloseNavMenu}>
+            <MenuItem
+              component={Link}
+              to="/addTask"
+              onClick={handleCloseNavMenu}
+            >
               Post A Job
             </MenuItem>
             <MenuItem component={Link} to="/about" onClick={handleCloseNavMenu}>
@@ -183,24 +194,38 @@ function AdminAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem component={Link} to="/profile" onClick={handleCloseUserMenu}>
+              <MenuItem
+                component={Link}
+                to="/profile"
+                onClick={handleCloseUserMenu}
+              >
                 Profile
               </MenuItem>
-              <MenuItem component={Link} to="/toDoList" onClick={handleCloseUserMenu}>
+              <MenuItem
+                component={Link}
+                to="/toDoList"
+                onClick={handleCloseUserMenu}
+              >
                 Jobs I Accepted
               </MenuItem>
               <MenuItem component={Link} to="/myTasks" onClick={handleCloseUserMenu}>
                 Jobs I Posted
               </MenuItem>
-              <MenuItem component={Link} to="/reviews" onClick={handleCloseUserMenu}>
+              <MenuItem
+                component={Link}
+                to="/reviews"
+                onClick={handleCloseUserMenu}
+              >
                 My Reviews
               </MenuItem>
-              <MenuItem component={Link} to="/controlPanel" onClick={handleCloseUserMenu}>
+              <MenuItem
+                component={Link}
+                to="/controlPanel"
+                onClick={handleCloseUserMenu}
+              >
                 Control Panel
               </MenuItem>
-              <MenuItem onClick={handleLogout}>
-                Logout
-              </MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </Box>
         </Toolbar>
