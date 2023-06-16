@@ -14,11 +14,14 @@ const init = async()=> {
 
     const socketServer = new ws.WebSocketServer({ server });
     socketServer.on('connection', (socket)=> {
-      socket.on('close', ()=> {
+      socket.on('close', () => {
         const userId = socket.userId;
         delete socketMap[userId];
         Object.values(socketMap).forEach(value => {
-          value.socket.send(JSON.stringify({ type: 'LOGOUT', user: { id: userId }}));
+          value.socket.send(JSON.stringify({ type: 'LOGOUT', user: { id: userId } }));
+        });
+        socketServer.clients.forEach(client => {
+          client.send(JSON.stringify({ type: 'SET_ONLINE_USERS', onlineUsers: Object.values(socketMap).map(value => value.user) }));
         });
       });
       socket.on('message', async(data) => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid, Typography, Button, Box } from '@mui/material';
-//import team from '../static/images/pexels-fauxels.jpg';
 
 import { styles, Img } from '../styles/styles.js';
 

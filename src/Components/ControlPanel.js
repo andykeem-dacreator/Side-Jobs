@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteUser, fetchUsers, deleteTask, fetchTasks } from '../store';
-import { IconButton, Tooltip, useTheme } from '@mui/material';
+import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 
 const ControlPanel = () => {

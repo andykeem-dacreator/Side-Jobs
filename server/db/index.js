@@ -5,13 +5,11 @@ const Message = require('./Message');
 const { faker } = require('@faker-js/faker');
 const Review = require('./Review');
 
-//User.hasMany(Task);
 User.hasMany(Task, { as: 'createdTasks', foreignKey: 'userId' });
 User.hasMany(Task, { as: 'performedTasks', foreignKey: 'taskDoerId' });
 
 Task.belongsTo(User, { as: 'taskCreator', foreignKey: 'userId' });
 Task.belongsTo(User, { as: 'taskDoer', foreignKey: 'taskDoerId' });
-//Review.belongsTo(User);
 Review.belongsTo(User, {
   as: 'taskCreator',
   foreignKey: 'userId',
@@ -19,7 +17,6 @@ Review.belongsTo(User, {
 });
 Task.hasOne(Review, { onDelete: 'CASCADE' });
 Review.belongsTo(Task, { onDelete: 'CASCADE' });
-//User.hasMany(Review);
 User.hasMany(Review, { onDelete: 'CASCADE' });
 
 Message.belongsTo(User, { as: 'from', onDelete: 'CASCADE' });
@@ -280,7 +277,6 @@ const syncAndSeed = async () => {
       state: 'NV',
       category: 'misc',
       userId: moe.id,
-      // taskDoerId: lucy.id,
       lat: faker.location.latitude({ max: 36.3308, min: 36.084, precision: 5 }),
       lng: faker.location.longitude({
         max: -115.1124,
@@ -297,7 +293,6 @@ const syncAndSeed = async () => {
       state: 'NE',
       category: 'moving',
       userId: andy.id,
-      // taskDoerId: lucy.id,
       lat: faker.location.latitude({
         max: 41.3182,
         min: 41.2079,
@@ -318,7 +313,6 @@ const syncAndSeed = async () => {
       state: 'PA',
       category: 'misc',
       userId: larry.id,
-      // taskDoerId: lucy.id,
       lat: faker.location.latitude({ max: 40.1376, min: 39.867, precision: 5 }),
       lng: faker.location.longitude({
         max: -74.9558,

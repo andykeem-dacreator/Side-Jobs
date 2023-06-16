@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid, Typography, Button, Box } from '@mui/material';
-//import paint from '../../static/images/pexels-pixabay.jpg';
 import { styles, Img } from '../styles/styles.js';
 
 const AboutUs = () => {
