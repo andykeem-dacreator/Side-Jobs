@@ -13,12 +13,14 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
+import Login from './Login'
+import { Dialog, DialogContent } from '@mui/material';
 
 function GuestNavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const theme = useTheme();
-
+  const [openLoginDialog, setOpenLoginDialog] = React.useState(false);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -35,6 +37,7 @@ function GuestNavBar() {
   };
 
   return (
+    <>
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -137,39 +140,22 @@ function GuestNavBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar src="DEFAULT_AVATAR_URL" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem
-                onClick={handleCloseUserMenu}
-                component={Link}
-                to="/login"
-              >
-                Log In
-              </MenuItem>
-            </Menu>
+            <Button style={{ color: 'white' }}onClick={() => setOpenLoginDialog(true)}>Log In</Button>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
+    <Dialog 
+      maxWidth='sm'
+      fullWidth={true}
+      open={openLoginDialog} 
+      onClose={() => setOpenLoginDialog(false)}
+    >
+      <DialogContent>
+        <Login />
+      </DialogContent>
+    </Dialog>
+    </>
   );
 }
 

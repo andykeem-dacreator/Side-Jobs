@@ -3,26 +3,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateReview } from '../store';
 import { useParams } from 'react-router-dom';
 import {
-  Modal,
-  FormControl,
   Rating,
   TextField,
   Button,
-  Typography,
-  TextareaAutosize,
-  //   IconButton,
-  //   DeleteIcon,
-  //   Tooltip,
-  //   EditIcon
-} from '@mui/material';
+ } from '@mui/material';
+
 const UpdateReview = ({ review, onClose }) => {
-  const { auth, reviews, tasks } = useSelector((state) => state);
+  const { auth, reviews } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const [rating, setRating] = useState(0);
   const [title, setTitle] = useState('');
   const [comment, setComment] = useState('');
-  // const task = tasks.find(task => task.taskDoerId === review.taskDoerId);
 
   useEffect(() => {
     if (review) {
@@ -62,7 +54,6 @@ const UpdateReview = ({ review, onClose }) => {
           onChange={(ev) => setRating(Number(ev.target.value))}
           placeholder="rating"
         />
-        {/*<FormControl>*/}
         <TextField
           className="update-review-textfield"
           label="Title"
@@ -70,7 +61,6 @@ const UpdateReview = ({ review, onClose }) => {
           value={title}
           onChange={(ev) => setTitle(ev.target.value)}
         />
-        {/*</FormControl>*/}
         <TextField
           className="update-review-textfield"
           label="Comment"
@@ -80,8 +70,6 @@ const UpdateReview = ({ review, onClose }) => {
           value={comment}
           onChange={(ev) => setComment(ev.target.value)}
         />
-
-        {/*<Button margin='normal' variant="outlined" type="submit">Update</Button>*/}
         <Button variant="outlined" type="submit">
           Update
         </Button>

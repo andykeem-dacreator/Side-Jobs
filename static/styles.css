@@ -79,7 +79,8 @@ a {
 .reviews-i-gave,
 .add-review,
 .profile,
-.tasks-page-layout {
+.tasks-page-layout,
+.login {
   padding: 10px;
 }
 
@@ -93,6 +94,10 @@ a {
 
 .reviews-i-gave {
   padding: 10px;
+}
+
+.login form > * {
+  margin: 10px;
 }
 
 /*Task list*/

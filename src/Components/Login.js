@@ -1,7 +1,20 @@
 import React, { useState } from 'react';
 import { attemptLogin, register } from '../store';
 import { useDispatch } from 'react-redux';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { 
+  Typography,
+  InputAdornment,
+  OutlinedInput,
+  IconButton,
+  Button,
+  FormControl,
+  InputLabel,
+} from '@mui/material';
+
 import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -15,9 +28,22 @@ const Login = () => {
     lastName: '',
   });
   const [error, setError] = useState('');
-
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState('');
+  
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
+  const handleMouseDownPassword = (ev) => {
+    ev.preventDefault();
+  };
+  
   const onChange = (ev) => {
     setCredentials({ ...credentials, [ev.target.name]: ev.target.value });
+  };
+  
+  const onChangeConfirmPassword = (ev) => {
+    setConfirmPassword(ev.target.value);
   };
 
   const login = async (ev) => {
@@ -32,6 +58,10 @@ const Login = () => {
 
   const create = async (ev) => {
     ev.preventDefault();
+    if(credentials.password !== confirmPassword){
+      setError('Passwords do not match');
+      return;
+    }
     const updatedCredentials = { ...credentials, avatar: getRandomAvatar() };
     try {
       await dispatch(register(updatedCredentials));
@@ -49,54 +79,123 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>{changeForm ? 'Login' : 'Create Account'}</h1>
+    <div className='login'>
+      <Typography variant='h4' sx={{ textAlign: 'center'}}>{changeForm ? 'Login' : 'Create Account'}</Typography>
       <form onSubmit={changeForm ? login : create}>
-        <input
+        <FormControl
+          required
+          variant='outlined'
+        >
+          <InputLabel htmlFor="username">Username</InputLabel>
+        <OutlinedInput
+          id="username"
           placeholder="username"
           name="username"
           value={credentials.username}
           onChange={onChange}
         />
-        <input
-          placeholder="password"
-          name="password"
-          value={credentials.password}
-          onChange={onChange}
-        />
+        </FormControl>
+        <FormControl
+          required
+          variant='outlined'
+        >
+          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <OutlinedInput 
+            id="outlined-adornment-password"
+            placeholder="password"
+            name="password"
+            value={credentials.password}
+            onChange={onChange}
+            type={showPassword ? 'text' : 'password'}
+                endAdornment={
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label='toggle password visibility'
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge='end'
+                  >
+                    {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                  </IconButton>
+                </InputAdornment>
+                }
+          />
+          </FormControl>
         {!changeForm && (
           <>
-            <input
-              placeholder="confirm password"
-              name="confirmPassword"
-              value={credentials.confirmPassword || ''}
-              onChange={onChange}
-            />
-            <input
-              placeholder="email"
-              name="email"
-              value={credentials.email || ''}
-              onChange={onChange}
-            />
-            <input
-              placeholder="first name"
-              name="firstName"
-              value={credentials.firstName || ''}
-              onChange={onChange}
-            />
-            <input
-              placeholder="last name"
-              name="lastName"
-              value={credentials.lastName || ''}
-              onChange={onChange}
-            />
+            <FormControl
+              required
+              variant='outlined'
+            >
+              <InputLabel htmlFor="outlined-adornment-confirm-password">Confirm Password</InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-confirm-password"
+                placeholder="confirm password"
+                name="confirmPassword"
+                value={confirmPassword || ''}
+                onChange={onChangeConfirmPassword}
+                type={showConfirmPassword ? 'text' : 'password'}
+                endAdornment={
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label='toggle password visibility'
+                    onClick={handleClickShowConfirmPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge='end'
+                  >
+                    {showConfirmPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              />  
+            </FormControl>
+            <FormControl 
+              required
+              variant='outlined'>
+              <InputLabel htmlFor="email">Email</InputLabel>
+              <OutlinedInput
+                id="email"
+                placeholder="email"
+                name="email"
+                value={credentials.email || ''}
+                onChange={onChange}
+              />
+            </FormControl>
+            <FormControl
+              required
+              variant='outlined'
+            >
+              <InputLabel htmlFor="first-name">First Name</InputLabel>
+              <OutlinedInput
+                id="first-name"
+                placeholder="first name"
+                name="firstName"
+                value={credentials.firstName || ''}
+                onChange={onChange}
+              />
+            </FormControl>
+            <FormControl
+              required
+              variant='outlined'
+            >
+              <InputLabel htmlFor="last-name">Last Name</InputLabel>
+              <OutlinedInput
+                id="last-name"
+                placeholder="last name"
+                name="lastName"
+                value={credentials.lastName || ''}
+                onChange={onChange}
+              />
+            </FormControl>
           </>
         )}
-        <button>{changeForm ? 'Login' : 'Create Account'}</button>
+        <Button type="submit" variant="contained" >{changeForm ? 'Login' : 'Create Account'}</Button>
       </form>
-      <button onClick={() => setChangeForm(!changeForm)}>
+      <Button 
+        
+        onClick={() => setChangeForm(!changeForm)}>
         {changeForm ? 'Create Account' : 'Login'}
-      </button>
+      </Button>
       {error && <p>{error}</p>}
     </div>
   );
