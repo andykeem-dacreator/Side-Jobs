@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createMessage, fetchMessages } from '../store';
 
-const Chats = ({ taskId, task }) => {
+const Chats = ({ taskId, task, withUserName }) => {
   const { messages, auth, users } = useSelector((state) => state);
   const dispatch = useDispatch();
   const chatsContainerRef = useRef(null);
@@ -96,7 +96,7 @@ const Chats = ({ taskId, task }) => {
 
       {chats.length === 0 && (
         <div className="no-chats">
-          <h3>Start a Conversation</h3>
+          <h3>Start a Conversation with {withUserName} </h3>
           <form onSubmit={sendMessage.bind(null, null)}>
             <div className="input-container">
               <input

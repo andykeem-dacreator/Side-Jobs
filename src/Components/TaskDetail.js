@@ -121,7 +121,7 @@ const TaskDetail = () => {
             </IconButton>
             {isChatOpen && (
               <div className="chats-popup">
-                <Chats taskId={id} task={task} />
+              <Chats taskId={id} task={task} withUserName={taskDoer.firstName} />
               </div>
             )}
           </div>
