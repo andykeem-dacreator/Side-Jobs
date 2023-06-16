@@ -80,6 +80,7 @@ a {
 .add-review,
 .profile,
 .tasks-page-layout,
+.myTasks-page-layout,
 .login {
   padding: 10px;
 }
@@ -103,7 +104,7 @@ a {
 /*Task list*/
 .tasks-page-layout {
   font-family: verdana;
-  color: #333;
+  /* color: #333; */
 }
 
 .tasks-container {
@@ -173,6 +174,7 @@ button:hover {
   padding: 20px;
   background-color: #f5f5f5;
   border: 1px solid #ccc;
+  color: black;
 }
 
 .control-panel h1 {
@@ -215,6 +217,7 @@ button:hover {
   background-color: #f5f5f5;
   border: 1px solid #ccc;
   cursor: pointer;
+  color: black;
 }
 
 .control-panel button:hover {
@@ -490,7 +493,7 @@ li.yours .message-avatar {
 
 .myTasks-page-layout {
   font-family: verdana;
-  color: #333;
+  /* color: #333; */
 }
 
 .myTasks-container {
@@ -566,6 +569,7 @@ li.yours .message-avatar {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 9999;
+  color: black;
 }
 
 #task-detail-container {

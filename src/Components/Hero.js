@@ -13,10 +13,12 @@ const Hero = () => {
             Transform your daily work
           </Typography>
           <Typography variant="h6" sx={styles.subtitle}>
-            Looking to earn extra money on the side? Or looking to offload your
-            everyday work to someone else? Look no further. Side Jobs is your
-            go-to destination for unlocking new adventures and financial
-            possibilities.
+            Introducing a versatile platform that caters to both job posters and
+            job seekers, this company provides a convenient space for users to
+            post and accept random side jobs. It serves as a go-to resource for
+            individuals seeking additional income opportunities, facilitating
+            the seamless connection between those in need of assistance and
+            those eager to take on extra hustle.
           </Typography>
         </Grid>
         <Grid item xs={12} md={5}>

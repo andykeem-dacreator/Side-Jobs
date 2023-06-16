@@ -185,7 +185,7 @@ function ResponsiveAppBar() {
                 Jobs I Accepted
               </MenuItem>
               <MenuItem component={Link} to="/myTasks" onClick={handleCloseUserMenu}>
-                Jobs I posted
+                Jobs I Posted
               </MenuItem>
               <MenuItem component={Link} to="/reviews" onClick={handleCloseUserMenu}>
                 My Reviews

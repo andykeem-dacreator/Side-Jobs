@@ -40,13 +40,13 @@ const AboutStatSection = () => {
               key={item.id}
               sx={styles.sectionGridItem}
             >
-              <Stack direction="column" sx={{ alignItems: 'center' }}>
+              <Stack direction="column" sx={{ alignItems: 'center' }} >
                 {item.icon}
                 <br />
-                <Typography variant="h5" fontWeight="bold">
-                  {item.stat}
+                <Typography variant="h5" fontWeight="bold" style={{ color: 'black' }}>
+                  {item.stat}+
                 </Typography>
-                <Typography>{item.sentence}</Typography>
+                <Typography style={{ color: 'black' }}>{item.sentence}</Typography>
               </Stack>
             </Grid>
           );

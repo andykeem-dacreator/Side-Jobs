@@ -259,6 +259,7 @@ const syncAndSeed = async () => {
       category: 'cleaning',
       userId: larry.id,
       taskDoerId: ethyl.id,
+      isComplete: true,
       lat: faker.location.latitude({
         max: 33.8481,
         min: 33.2903,
@@ -390,9 +391,9 @@ const syncAndSeed = async () => {
       taskDoerId: ethyl.id,
     }),
     Review.create({
-      rating: 1,
-      title: 'ROBBER',
-      comment: `${ethyl.firstName} stole stuff from my house!!!`,
+      rating: 5,
+      title: 'good guy',
+      comment: `${ethyl.firstName} is a good man, he didnt pay me to say this`,
       userId: larry.id,
       taskId: task8.id,
       taskDoerId: ethyl.id,
