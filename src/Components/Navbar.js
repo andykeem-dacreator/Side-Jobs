@@ -8,11 +8,8 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-
-import { useTheme } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,8 +18,6 @@ import { Img } from '../styles/styles.js';
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const theme = useTheme();
-
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

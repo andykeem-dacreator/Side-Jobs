@@ -19,22 +19,13 @@ import { Img } from '../styles/styles.js';
 
 function GuestNavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const theme = useTheme();
   const [openLoginDialog, setOpenLoginDialog] = React.useState(false);
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -117,7 +108,7 @@ function GuestNavBar() {
                 component="a"
                 sx={{
                   mr: 2,
-                  display: { xs: 'flex', md: 'none'},
+                  display: { xs: 'flex', md: 'none' },
                 }}
               />
             </Link>

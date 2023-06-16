@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createMessage, fetchMessages } from '../store';
 
 const Chats = ({ taskId, task }) => {
   const { messages, auth, users } = useSelector((state) => state);
   const dispatch = useDispatch();
+  const chatsContainerRef = useRef(null);
 
   useEffect(() => {
     dispatch(fetchMessages(taskId));
@@ -55,9 +56,9 @@ const Chats = ({ taskId, task }) => {
             ? getAvatar(task.taskDoerId)
             : getAvatar(task.userId);
         return (
-          <div key={idx} className="chat-container">
+          <div key={chat.withUser.id} className="chat-container">
             <h3>Chat with {chat.withUser.username}</h3>
-            <ul>
+            <ul ref={chatsContainerRef}>
               {chat.messages.map((message) => {
                 const isLoginUser = message.fromId === auth.id;
                 const messageAvatar = isLoginUser ? auth.avatar : avatar;
@@ -108,6 +109,13 @@ const Chats = ({ taskId, task }) => {
           </form>
         </div>
       )}
+
+      <style jsx>{`
+        #chats ul {
+          max-height: 500px;
+          overflow-y: auto;
+        }
+      `}</style>
     </div>
   );
 };

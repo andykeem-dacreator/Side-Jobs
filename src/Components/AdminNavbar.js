@@ -21,8 +21,7 @@ import { styles, Img } from '../styles/styles.js';
 function AdminAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const theme = useTheme();
-
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
