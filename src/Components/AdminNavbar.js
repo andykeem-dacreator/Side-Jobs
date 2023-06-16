@@ -11,12 +11,10 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import { useTheme } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
-import { styles, Img } from '../styles/styles.js';
+import { Img } from '../styles/styles.js';
 
 function AdminAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -165,11 +163,6 @@ function AdminAppBar() {
             <div style={{ display: 'flex', alignItems: 'center', marginRight: '16px' }}>
               <Typography variant='body2' sx={{fontWeight: 'bold'}}>Hi, {auth.firstName}!</Typography>
             </div>
-            {/*<Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            ></Button>
-            */}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

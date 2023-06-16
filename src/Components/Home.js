@@ -25,8 +25,6 @@ const Home = () => {
         />
       </div>
       <div>
-        {/* Welcome { auth.username }!!
-        <button onClick={()=> dispatch(logout())}>Logout</button> */}
         <p
           className="introStatement"
           style={{
