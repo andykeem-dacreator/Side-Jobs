@@ -187,8 +187,11 @@ const App = () => {
           </IconButton>
         </div>
         <div className="copyright">
-          <img src="https://logos-world.net/wp-content/uploads/2021/08/Copyright-Logo.png" />
+          <img  id='copyright' src="https://logos-world.net/wp-content/uploads/2021/08/Copyright-Logo.png" />
           <div>Copyright</div>
+        </div>
+        <div className='logo_footer'>
+          <img src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-black-on-transparent-background.png" />
         </div>
       </footer>
     </div>

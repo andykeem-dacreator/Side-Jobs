@@ -418,10 +418,23 @@ li.yours .message-avatar {
   top: 20.5px;
 }
 
-.footer img {
+
+.footer #copyright {
   width: 30px;
   height: auto;
   position: center;
+}
+
+.logo_footer {
+  position: absolute;
+  right: 180px;
+  top: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.logo_footer img {
+  width: 180px;
 }
 
 /*post a job  and update a job*/
