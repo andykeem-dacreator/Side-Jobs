@@ -53,7 +53,7 @@ function AdminAppBar() {
             <Img
               src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-white-on-transparent-background.png"
               alt="Side Jobs Logo"
-              style={{ width: 'auto', height: '90px' }}
+              style={{ width: 'auto', height: '64px', marginTop: '10px', marginBottom: '10px' }}
               noWrap
               component="a"
               sx={{
@@ -113,20 +113,14 @@ function AdminAppBar() {
               >
                 Post A Job
               </MenuItem>
-              <MenuItem
-                onClick={handleCloseNavMenu}
-                component={Link}
-                to="/about"
-              >
-                About
-              </MenuItem>
+              
             </Menu>
           </Box>
           <Link to="/">
             <Img
               src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-white-on-transparent-background.png"
               alt="Side Jobs Logo"
-              style={{ width: 'auto', height: '60px' }}
+              style={{ width: 'auto', height: '60px', marginTop: '10px', marginBottom: '10px' }}
               noWrap
               component="a"
               sx={{
@@ -156,9 +150,7 @@ function AdminAppBar() {
             >
               Post A Job
             </MenuItem>
-            <MenuItem component={Link} to="/about" onClick={handleCloseNavMenu}>
-              About
-            </MenuItem>
+            
             <div style={{ flexGrow: 1 }}></div>
             <div style={{ display: 'flex', alignItems: 'center', marginRight: '16px' }}>
               <Typography variant='body2' sx={{fontWeight: 'bold'}}>Hi, {auth.firstName}!</Typography>

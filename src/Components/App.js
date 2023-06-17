@@ -136,7 +136,6 @@ const App = () => {
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/toDoList" element={<ToDoList />} />
             <Route path="/myTasks" element={<MyTasks />} />
-            <Route path="/about" element={<Home />} />
             <Route path="/navtest" element={<Navbar />} />
           </Routes>
         </div>
@@ -158,7 +157,6 @@ const App = () => {
             <Route path="/tasks/:id/review/new" element={<AddReview />} />
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/toDoList" element={<ToDoList />} />
-            <Route path="/about" element={<Home />} />
             <Route path="/myTasks" element={<MyTasks />} />
           </Routes>
         </div>
@@ -188,10 +186,13 @@ const App = () => {
         </div>
         <div className="copyright">
           <img id='copyright' src="https://logos-world.net/wp-content/uploads/2021/08/Copyright-Logo.png" />
-          <div>Side Jobs</div>
+          <div style={{ color: 'black'}}>Copyright</div>
         </div>
         <div className='logo_footer'>
-          <img src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-black-on-transparent-background.png" />
+          <img 
+            src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-black-on-transparent-background.png" 
+          
+          />
         </div>
       </footer>
     </div>
