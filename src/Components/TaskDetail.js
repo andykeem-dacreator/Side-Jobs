@@ -113,15 +113,19 @@ const TaskDetail = () => {
               onClick={handleToggleChat}
               color="primary"
             >
-              {isChatOpen ? (
-                <ChatBubbleOutlineIcon />
-              ) : (
-                <ChatBubbleIcon />
-              )}
+              {isChatOpen ? <ChatBubbleOutlineIcon /> : <ChatBubbleIcon />}
             </IconButton>
             {isChatOpen && (
               <div className="chats-popup">
-              <Chats taskId={id} task={task} withUserName={taskDoer.firstName} />
+                <Chats
+                  taskId={id}
+                  task={task}
+                  withUserName={
+                    task.taskDoerId === auth.id
+                      ? users.find((user) => user.id === task.userId)?.firstName
+                      : users.find((user) => user.id === task.taskDoerId)?.firstName
+                  }
+                />
               </div>
             )}
           </div>
