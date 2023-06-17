@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Home from './Home';
-import Login from './Login';
 import Profile from './Profile';
 import Tasks from './Tasks';
 import TaskDetail from './TaskDetail';
@@ -49,14 +48,11 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { CollectionsOutlined } from '@mui/icons-material';
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
-// const pages = ['Home', 'Profile', 'Available Jobs', 'Post a Job', 'Jobs I Accepted', 'Created Tasks', 'My Reviews', 'About'];
-// const settings = ['Profile', 'Account', 'Dashboard', ]
 
 const App = () => {
   const { auth, reviews } = useSelector((state) => state);
   const prevAuth = useRef(auth);
   const dispatch = useDispatch();
-  // const [theme, setTheme] = useState('light');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
@@ -64,14 +60,6 @@ const App = () => {
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
-
-  // const toggleTheme = () => {
-  //   if (theme === 'light') {
-  //     setTheme('dark');
-  //   } else {
-  //     setTheme('light');
-  //   }
-  //   };
 
   useEffect(() => {
     dispatch(loginWithToken());
@@ -101,18 +89,22 @@ const App = () => {
     }
     if (prevAuth.current.id && !auth.id) {
       window.socket.close();
+      dispatch({ type: 'LOGOUT', user: { id: prevAuth.current.id } });
+      setTimeout(() => {
+        dispatch(fetchOnlineUsers());
+      }, 100);
     }
   }, [auth]);
 
-  // useEffect(() => {
-  //     document.body.className = theme;
-  //   }, [theme]);
+  useEffect(() => {
+    prevAuth.current = auth;
+  });
+
   useEffect(() => {
     document.body.className = theme.palette.mode;
   }, [theme.palette.mode]);
   return (
     <div>
-      {/* <h1>Side Quests</h1> */}
       {auth.id ? (
         ''
       ) : (
@@ -124,7 +116,6 @@ const App = () => {
             <Route path="/" element={<About />} />
             <Route path="/about" element={<Home />} />
             <Route path="/tasks" element={<Tasks />} />
-            {/*<Route path="/login" element={<Login />} />*/}
           </Routes>
         </div>
       )}
@@ -196,8 +187,11 @@ const App = () => {
           </IconButton>
         </div>
         <div className="copyright">
-          <img src="https://logos-world.net/wp-content/uploads/2021/08/Copyright-Logo.png" />
+          <img id='copyright' src="https://logos-world.net/wp-content/uploads/2021/08/Copyright-Logo.png" />
           <div>Side Jobs</div>
+        </div>
+        <div className='logo_footer'>
+          <img src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-black-on-transparent-background.png" />
         </div>
       </footer>
     </div>
@@ -219,9 +213,6 @@ export default function ToggleColorMode() {
       createTheme({
         palette: {
           mode,
-          // virtual: {
-          //   main: faker.color.rgb({ prefix: '#', casing: 'lower' })
-          // }
         },
       }),
     [mode]
@@ -235,5 +226,3 @@ export default function ToggleColorMode() {
     </ColorModeContext.Provider>
   );
 }
-
-//export default App;

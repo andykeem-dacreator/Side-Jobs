@@ -257,6 +257,18 @@ button:hover {
   margin-right: 10px;
 }
 
+.input-container textarea {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  resize: vertical;
+  font-size: 20px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+
 .input-container button {
   flex-shrink: 0;
   padding: 8px 12px;
@@ -274,6 +286,7 @@ button:hover {
 .chat-container {
   margin-bottom: 20px;
   position: relative;
+  max-width: 400px;
 }
 
 .chat-container h3 {
@@ -348,8 +361,11 @@ button:hover {
 
 .message-content {
   background-color: #fafafa;
+  max-width: 80%;
   padding: 8px;
   border-radius: 8px;
+  word-wrap: break-word;
+  overflow-wrap: break-word; 
 }
 
 li.yours .message-wrapper {
@@ -403,10 +419,23 @@ li.yours .message-avatar {
   top: 20.5px;
 }
 
-.footer img {
+
+.footer #copyright {
   width: 30px;
   height: auto;
   position: center;
+}
+
+.logo_footer {
+  position: absolute;
+  right: 180px;
+  top: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.logo_footer img {
+  width: 180px;
 }
 
 /*post a job  and update a job*/
@@ -535,6 +564,12 @@ li.yours .message-avatar {
   margin-left: 8px;
 }
 
+.chat-container ul {
+  list-style-type: none;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 .chat-container form .input-container {
   display: flex;
   align-items: center;
@@ -590,3 +625,4 @@ li.yours .message-avatar {
 .introStatement {
   margin-left: 10px;
 }
+
