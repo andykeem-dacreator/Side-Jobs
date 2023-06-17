@@ -9,6 +9,7 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
+  InputAdornment,
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
@@ -78,6 +79,8 @@ const AddTask = () => {
     'sport',
     'gaming',
     'photography',
+    'beauty',
+    'cleaning'
   ];
   const create = async (ev) => {
     ev.preventDefault();
@@ -133,6 +136,12 @@ const AddTask = () => {
           placeholder="Price (ex: 1000)"
           error={error && !isEnoughMoney(price)}
           helperText={error && isNaN(price) ? 'Enter a Number' : error && !isEnoughMoney(price) ? 'Insufficient Funds!!!' : ''}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">$
+                </InputAdornment>
+            ),
+          }}
         />
         <FormControl>
           <InputLabel>Select A Category</InputLabel>
@@ -143,7 +152,7 @@ const AddTask = () => {
             onChange={(ev) => setCategory(ev.target.value)}
           >
             <MenuItem value="">Select a Category</MenuItem>
-            {categories.map((category) => (
+            {categories.sort().map((category) => (
               <MenuItem key={category} value={category}>
                 {category}
               </MenuItem>
@@ -153,7 +162,7 @@ const AddTask = () => {
         <input className="addressInput" ref={input} />
         <Button
           type="submit"
-          variant="outlined"
+          variant="contained"
           disabled={!title || !description || !price || !category || !street}
         >
           Post

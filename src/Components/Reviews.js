@@ -72,14 +72,14 @@ const Reviews = () => {
               <CardContent>
                 <Stack direction="column">
                   <Stack direction="row">
-                    <Avatar src={task.taskDoer.avatar}></Avatar>
+                    <Link to={`/users/${review.taskDoerId}`}><Avatar src={task.taskDoer.avatar}></Avatar></Link>
 
                     <Typography
                       variant="h6"
                       component="div"
                       sx={{ marginLeft: 2 }}
                     >
-                      To: {task.taskDoer.firstName} {task.taskDoer.lastName[0]}.
+                      To: <Link to={`/users/${review.taskDoerId}`}>{task.taskDoer.firstName} {task.taskDoer.lastName[0]}.</Link>
                     </Typography>
 
                     <div style={{ flexGrow: 1 }}></div>
@@ -110,9 +110,9 @@ const Reviews = () => {
                       component="div"
                       sx={{ marginLeft: 1 }}
                     >
-                      <Link to={`/users/${review.taskDoerId}`}>
+                      {/*<Link to={`/users/${review.taskDoerId}`}>*/}
                         {review.title}
-                      </Link>
+                      {/*</Link>*/}
                     </Typography>
                   </Stack>
                   <Typography variant="body2">

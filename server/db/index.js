@@ -359,7 +359,7 @@ const syncAndSeed = async () => {
   ]);
 
   //reviews for Ethyl
-  const [review1, review3, review7, review8, review9] = await Promise.all([
+  const [review1, review3, review4, review8] = await Promise.all([
     Review.create({
       rating: 5,
       title: 'great job',
@@ -381,7 +381,7 @@ const syncAndSeed = async () => {
       title: faker.lorem.paragraph({ min: 1, max: 1 }),
       comment: faker.lorem.paragraph(3),
       userId: larry.id,
-      taskId: task7.id,
+      taskId: task4.id,
       taskDoerId: ethyl.id,
     }),
     Review.create({
@@ -393,6 +393,18 @@ const syncAndSeed = async () => {
       taskDoerId: ethyl.id,
     }),
   ]);
+  
+  //review for Moe
+  const [review7] = await Promise.all([
+    Review.create({
+      rating: 4,
+      title: 'a pretty decent tutor',
+      comment: `${moe.firstName} is a decent tutor, I was able to pass my SAT with a good score`,
+      userId: ethyl.id,
+      taskId: task7.id,
+      taskDoerId: moe.id,
+    }),
+    ]);
 
   await Promise.all([
     Message.create({
@@ -439,6 +451,7 @@ const syncAndSeed = async () => {
     reviews: {
       review1,
       review3,
+      review4,
       review7,
       review8,
     },

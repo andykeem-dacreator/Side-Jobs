@@ -4,7 +4,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { deleteTask, fetchMessages } from '../store';
 import UpdateTask from './UpdateTask';
 import MapData from './MapData';
-import { IconButton, Tooltip, useTheme } from '@mui/material';
+import { IconButton, Tooltip, useTheme, Card, CardContent } from '@mui/material';
 import Chats from './Chats';
 import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
@@ -38,7 +38,7 @@ const TaskDetail = () => {
 
   const destroy = async (task) => {
     await dispatch(deleteTask(task));
-    navigate('/tasks');
+    navigate('/myTasks');
   };
 
   const handleToggleChat = () => {
@@ -49,12 +49,11 @@ const TaskDetail = () => {
     <div id="page-layout">
       <MapData />
       <div className="task-info" id="task-detail-container">
-        <div className="task-detail">
+        <div className="task-detail" >
           <div className="task-detail-header">
             <Typography variant="h4">Job Details</Typography>
-
             {task.userId === auth.id && !task.taskDoerId ? (
-              <Tooltip title="Delete Task">
+              <Tooltip title="Delete Job">
                 <IconButton onClick={() => destroy(task)}>
                   <DeleteIcon />
                 </IconButton>
@@ -63,29 +62,38 @@ const TaskDetail = () => {
               ''
             )}
           </div>
-          <div className="task-title">Title: {task.title}</div>
-          <div className="task-description">
-            Description: {task.description}
-          </div>
-          <div className="task-location">
-            Location: {task.city}, {task.state}
-          </div>
-          <div className="task-price">Price: ${task.price}</div>
-          <div className="taskDoerName">
-            Accepted by: {' '}
-            {taskDoer.firstName !== 'No one' ? (
-              <Link
-                to={`/users/${task.taskDoerId}`}
-                style={{
-                  color: theme.palette.mode === 'dark' ? 'white' : 'black',
-                }}
-              >
-                { taskDoer.firstName}
-              </Link>
-            ) : (
-              taskDoer.firstName
-            )}
-          </div>
+          <Card>
+            <CardContent>
+              <div className="task-title">Title: {task.title}</div>
+              <div className="task-description">
+                Description: {' '}
+                {task.description}
+              </div>
+              <div className="task-location">
+                <br/>
+                Location: {task.city}, {task.state}
+              </div>
+              <div className="task-price">
+                  Price: ${task.price}
+              </div>
+              <div className="taskDoerName" style={{ fontSize: '16px'}}>
+                <br/>
+                Accepted by: {' '}
+                {taskDoer.firstName !== 'No one' ? (
+                  <Link
+                    to={`/users/${task.taskDoerId}`}
+                    style={{
+                      color: theme.palette.mode === 'dark' ? 'white' : 'black',
+                    }}
+                  >
+                    { taskDoer.firstName}
+                  </Link>
+                ) : (
+                  taskDoer.firstName
+                )}
+              </div>
+            </CardContent>
+          </Card>
         </div>
         <div
           style={{ marginTop: '50px' }}
