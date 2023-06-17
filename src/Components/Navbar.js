@@ -53,7 +53,7 @@ function ResponsiveAppBar() {
             <Img
               src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-white-on-transparent-background.png"
               alt="Side Jobs Logo"
-              style={{ width: 'auto', height: '90px' }}
+              style={{ width: 'auto', height: '64px', marginTop: '10px', marginBottom: '10px' }}
               noWrap
               component="a"
               sx={{
@@ -110,20 +110,14 @@ function ResponsiveAppBar() {
               >
                 Post A Job
               </MenuItem>
-              <MenuItem
-                component={Link}
-                to="/about"
-                onClick={handleCloseNavMenu}
-              >
-                About
-              </MenuItem>
+              
             </Menu>
           </Box>
           <Link to="/">
             <Img
               src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-white-on-transparent-background.png"
               alt="Side Jobs Logo"
-              style={{ width: 'auto', height: '60px' }}
+              style={{ width: 'auto', height: '60px', marginTop: '10px', marginBottom: '10px' }}
               noWrap
               component="a"
               sx={{
@@ -153,9 +147,7 @@ function ResponsiveAppBar() {
             >
               Post A Job
             </MenuItem>
-            <MenuItem component={Link} to="/about" onClick={handleCloseNavMenu}>
-              About
-            </MenuItem>
+            
             <div style={{ flexGrow: 1 }}></div>
             <div
               style={{

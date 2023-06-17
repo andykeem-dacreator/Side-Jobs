@@ -33,7 +33,7 @@ function GuestNavBar() {
               <Img
                 src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-white-on-transparent-background.png"
                 alt="Side Jobs Logo"
-                style={{ width: 'auto', height: '90px' }}
+                style={{ width: 'auto', height: '64px', marginTop: '10px', marginBottom: '10px' }}
                 noWrap
                 component="a"
                 sx={{
@@ -86,20 +86,14 @@ function GuestNavBar() {
                 >
                   Available Jobs
                 </MenuItem>
-                <MenuItem
-                  onClick={handleCloseNavMenu}
-                  component={Link}
-                  to="/about"
-                >
-                  About
-                </MenuItem>
+                
               </Menu>
             </Box>
             <Link to="/">
               <Img
                 src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-white-on-transparent-background.png"
                 alt="Side Jobs Logo"
-                style={{ width: 'auto', height: '60px' }}
+                style={{ width: 'auto', height: '60px', marginTop: '10px', marginBottom: '10px' }}
                 noWrap
                 component="a"
                 sx={{
@@ -119,13 +113,7 @@ function GuestNavBar() {
               >
                 Available Jobs
               </MenuItem>
-              <MenuItem
-                component={Link}
-                to="/about"
-                onClick={handleCloseNavMenu}
-              >
-                About
-              </MenuItem>
+              
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
