@@ -22,44 +22,32 @@ import {
   fetchReviews,
   fetchOnlineUsers,
 } from '../store';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import MyTasks from './MyTasks';
-const { faker } = require('@faker-js/faker');
+//const { faker } = require('@faker-js/faker');
 import {
   IconButton,
-  Box,
   useTheme,
   ThemeProvider,
   createTheme,
-  AppBar,
-  Toolbar,
-  Typography,
-  Menu,
-  MenuIcon,
-  Container,
-  Avatar,
-  Button,
-  Tooltip,
-  MenuItem,
-  AdbIcon,
 } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { CollectionsOutlined } from '@mui/icons-material';
+//import { CollectionsOutlined } from '@mui/icons-material';
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 const App = () => {
-  const { auth, reviews } = useSelector((state) => state);
+  const { auth } = useSelector((state) => state);
   const prevAuth = useRef(auth);
   const dispatch = useDispatch();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  //const [dropdownOpen, setDropdownOpen] = useState(false);
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
+  // const toggleDropdown = () => {
+  //   setDropdownOpen(!dropdownOpen);
+  // };
 
   useEffect(() => {
     dispatch(loginWithToken());
@@ -191,7 +179,6 @@ const App = () => {
         <div className='logo_footer'>
           <img 
             src="../static/side_jobs_logo/png/side-jobs-high-resolution-logo-black-on-transparent-background.png" 
-          
           />
         </div>
       </footer>

@@ -1,9 +1,13 @@
 import React from 'react';
-import { Grid, Typography, Button, Box } from '@mui/material';
+import { Grid, Typography, Button, Box, Dialog, DialogContent } from '@mui/material';
 import { styles, Img } from '../styles/styles.js';
+import Login from './Login';
 
 const AboutUs = () => {
+  const [openLoginDialog, setOpenLoginDialog] = React.useState(false);
+  
   return (
+    <>
     <Box sx={styles.aboutUsContainer}>
       <Grid container spacing={6} sx={styles.gridContainer}>
         <Grid item xs={12} md={5}>
@@ -24,12 +28,24 @@ const AboutUs = () => {
             variant="contained"
             color="primary"
             sx={{ width: '200px', fontSize: '16px' }}
+            onClick={() => setOpenLoginDialog(true)}
           >
-            Contact Us
+            Sign Up
           </Button>
         </Grid>
       </Grid>
     </Box>
+    <Dialog
+      maxWidth="sm"
+      fullWidth={true}
+      open={openLoginDialog}
+      onClose={() => setOpenLoginDialog(false)}
+    >
+      <DialogContent>
+        <Login defaultForm={true}/>
+      </DialogContent>
+    </Dialog>
+    </>
   );
 };
 

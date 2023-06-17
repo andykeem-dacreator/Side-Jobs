@@ -16,10 +16,10 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 
-const Login = () => {
+const Login = ({ defaultForm }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [changeForm, setChangeForm] = useState(true);
+  const [changeForm, setChangeForm] = useState(!defaultForm);
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
@@ -37,7 +37,11 @@ const Login = () => {
   const handleMouseDownPassword = (ev) => {
     ev.preventDefault();
   };
-
+  
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  };
+  
   const onChange = (ev) => {
     setCredentials({ ...credentials, [ev.target.name]: ev.target.value });
   };
@@ -51,6 +55,7 @@ const Login = () => {
     try {
       await dispatch(attemptLogin(credentials));
       navigate('/');
+      scrollToTop();
     } catch (ex) {
       setError('Invalid combination of username and password');
     }
@@ -66,6 +71,8 @@ const Login = () => {
     try {
       await dispatch(register(updatedCredentials));
       navigate('/');
+      scrollToTop();
+      
     } catch (ex) {
       setError(
         'Invalid Input, please try again (a user with that username or email may already exist)'
@@ -78,7 +85,8 @@ const Login = () => {
       Math.random() * 1000
     )}`;
   };
-
+  
+  
   return (
     <div className='login'>
       <Typography variant='h4' sx={{ textAlign: 'center'}}>{changeForm ? 'Login' : 'Create Account'}</Typography>
