@@ -35,7 +35,7 @@ const AddTask = () => {
 
   const handleMoney = (ev) => {
     if (!isEnoughMoney(ev.target.value)) {
-      setError('You Broke!');
+      setError('Insufficient Funds!!!');
     } else {
       setError(null);
     }
@@ -130,9 +130,9 @@ const AddTask = () => {
           variant="outlined"
           value={price}
           onChange={handleMoney}
-          placeholder="Price"
+          placeholder="Price (ex: 1000)"
           error={error && !isEnoughMoney(price)}
-          helperText={error && !isEnoughMoney(price) ? 'You Broke!' : ''}
+          helperText={error && isNaN(price) ? 'Enter a Number' : error && !isEnoughMoney(price) ? 'Insufficient Funds!!!' : ''}
         />
         <FormControl>
           <InputLabel>Select A Category</InputLabel>

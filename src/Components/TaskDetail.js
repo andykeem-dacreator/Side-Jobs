@@ -33,7 +33,7 @@ const TaskDetail = () => {
 
   if (!taskDoer) {
     taskDoer = {};
-    taskDoer.firstName = 'no one';
+    taskDoer.firstName = 'No one';
   }
 
   const destroy = async (task) => {
@@ -72,22 +72,24 @@ const TaskDetail = () => {
           </div>
           <div className="task-price">Price: ${task.price}</div>
           <div className="taskDoerName">
-            Accepted by:
-            {taskDoer.firstName !== 'no one' ? (
+            Accepted by: {' '}
+            {taskDoer.firstName !== 'No one' ? (
               <Link
                 to={`/users/${task.taskDoerId}`}
                 style={{
                   color: theme.palette.mode === 'dark' ? 'white' : 'black',
                 }}
               >
-                {taskDoer.firstName}
+                { taskDoer.firstName}
               </Link>
             ) : (
               taskDoer.firstName
             )}
           </div>
         </div>
-        <div>
+        <div
+          style={{ marginTop: '50px' }}
+        >
           {task.userId === auth.id && !task.isComplete && !task.taskDoerId ? (
             <UpdateTask />
           ) : (
