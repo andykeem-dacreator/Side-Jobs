@@ -92,11 +92,18 @@ a {
 .profile form > * {
   margin: 10px;
 }
+.profile {
+  margin-bottom: 60px;
+}
 
 .reviews-i-gave {
   padding: 10px;
+  margin-bottom: 60px;
 }
 
+.public-profile {
+  margin-bottom: 60px;
+}
 .login form > * {
   margin: 10px;
 }
@@ -105,6 +112,7 @@ a {
 .tasks-page-layout {
   font-family: verdana;
   /* color: #333; */
+  margin-bottom: 60px;
 }
 
 .tasks-container {
@@ -170,11 +178,12 @@ button:hover {
 .control-panel {
   font-family: Arial, sans-serif;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 0 auto 70px;
   padding: 20px;
   background-color: #f5f5f5;
   border: 1px solid #ccc;
   color: black;
+  
 }
 
 .control-panel h1 {
@@ -368,20 +377,12 @@ li.yours .message-avatar {
 }
 
 .footer {
-  /* height: 10px; */
-  /* position: fixed;
-  padding: 8px;
-  display: flex;
-  justify-content: space-between; */
-  /* align-items: end; */
-  position: fixed;
-  bottom: 0;
   right: 0;
   left: 0;
   font-size: 16px;
   padding: 10px 32px;
   display: flex;
-  box-shadow: 0 4px 40px -8px rgb(0, 51, 98);
+  /*box-shadow: 0px -3px 4px rgba(0, 0, 0, 0.05);*/
   overflow: hidden;
   font-family: 'Oswald', serif;
   z-index: 500;
@@ -412,7 +413,8 @@ li.yours .message-avatar {
 .add-task > * {
   text-align: center;
   max-width: 33%;
-  margin: 0 auto;
+  /*margin: 0 auto;*/
+  margin: 0 auto 60px;
   font-weight: lighter;
 }
 
@@ -494,6 +496,7 @@ li.yours .message-avatar {
 .myTasks-page-layout {
   font-family: verdana;
   /* color: #333; */
+  margin-bottom: 60px;
 }
 
 .myTasks-container {

@@ -178,7 +178,7 @@ const App = () => {
           position: 'fixed',
           bottom: 0,
           width: '100%',
-          backgroundColor: 'lightgray',
+          backgroundColor: '#F4F4F4',
         }}
       >
         <div className="screenMode">
@@ -197,7 +197,7 @@ const App = () => {
         </div>
         <div className="copyright">
           <img src="https://logos-world.net/wp-content/uploads/2021/08/Copyright-Logo.png" />
-          <div>Copyright</div>
+          <div>Side Jobs</div>
         </div>
       </footer>
     </div>
