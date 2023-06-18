@@ -110,7 +110,7 @@ const Chats = ({ taskId, task, withUserName }) => {
         </div>
       )}
 
-      <style jsx>{`
+      <style jsx="true">{`
         #chats ul {
           max-height: 500px;
           overflow-y: auto;

@@ -13,14 +13,14 @@ app.post('/', async (req, res, next) => {
   }
 });
 
-app.post('/register', async (req, res, next) => {
-  try {
-    const user = await User.create(req.body);
-    res.send(user.generateToken());
-  } catch (ex) {
-    next(ex);
-  }
-});
+// app.post('/register', async (req, res, next) => {
+//   try {
+//     const user = await User.create(req.body);
+//     res.send(user.generateToken());
+//   } catch (ex) {
+//     next(ex);
+//   }
+// });
 
 app.get('/', isLoggedIn, (req, res, next) => {
   try {

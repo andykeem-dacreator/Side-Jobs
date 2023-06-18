@@ -30,6 +30,13 @@ app.get('/:id', async (req, res, next) => {
     next(ex);
   }
 });
+app.post('/', async (req, res, next) => {
+  try {
+    res.status(201).send(await User.create(req.body));
+  } catch (error) {
+    next(error);
+  }
+});
 
 app.put('/:id', async (req, res, next) => {
   try {
