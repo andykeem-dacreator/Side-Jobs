@@ -11,6 +11,9 @@ const users = (state = [], action) => {
       return user;
     });
   }
+  if (action.type === 'CREATE_USER') {
+    return [...state, action.user];
+  }
   if (action.type === 'DELETE_USER') {
     return state.filter((user) => user.id !== action.user.id);
   }
@@ -21,6 +24,13 @@ export const fetchUsers = () => {
   return async (dispatch) => {
     const response = await axios.get('/api/users');
     dispatch({ type: 'SET_USERS', users: response.data });
+  };
+};
+
+export const createUser = (user) => {
+  return async (dispatch) => {
+    const response = await axios.post('/api/users', user);
+    dispatch({ type: 'CREATE_USER', user: response.data });
   };
 };
 

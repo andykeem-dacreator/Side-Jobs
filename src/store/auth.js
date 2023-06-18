@@ -33,13 +33,13 @@ export const attemptLogin = (credentials) => {
   };
 };
 
-export const register = (credentials) => {
-  return async (dispatch) => {
-    const response = await axios.post('/api/auth/register', credentials);
-    window.localStorage.setItem('token', response.data);
-    dispatch(loginWithToken());
-  };
-};
+// export const register = (credentials) => {
+//   return async (dispatch) => {
+//     const response = await axios.post('/api/auth/register', credentials);
+//     window.localStorage.setItem('token', response.data);
+//     dispatch(loginWithToken());
+//   };
+// };
 
 export const updateAuth = (user) => {
   return async (dispatch) => {

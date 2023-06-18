@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { attemptLogin, register } from '../store';
+import { attemptLogin, register, createUser } from '../store';
 import { useDispatch } from 'react-redux';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -37,11 +37,11 @@ const Login = ({ defaultForm }) => {
   const handleMouseDownPassword = (ev) => {
     ev.preventDefault();
   };
-  
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   };
-  
+
   const onChange = (ev) => {
     setCredentials({ ...credentials, [ev.target.name]: ev.target.value });
   };
@@ -69,10 +69,11 @@ const Login = ({ defaultForm }) => {
     }
     const updatedCredentials = { ...credentials, avatar: getRandomAvatar() };
     try {
-      await dispatch(register(updatedCredentials));
+      await dispatch(createUser(updatedCredentials));
+      await dispatch(attemptLogin(updatedCredentials));
       navigate('/');
       scrollToTop();
-      
+
     } catch (ex) {
       setError(
         'Invalid Input, please try again (a user with that username or email may already exist)'
@@ -85,8 +86,8 @@ const Login = ({ defaultForm }) => {
       Math.random() * 1000
     )}`;
   };
-  
-  
+
+
   return (
     <div className='login'>
       <Typography variant='h4' sx={{ textAlign: 'center'}}>{changeForm ? 'Login' : 'Create Account'}</Typography>
