@@ -82,14 +82,18 @@ const Chats = ({ taskId, task, withUserName }) => {
                 );
               })}
             </ul>
+            {/*<div className='form-container' style={{ height: '76px'}}>*/}
             <form onSubmit={sendMessage.bind(null, chat)}>
               <div className="input-container">
+                <div className="input-div">
                 <input
                   placeholder={`send message to ${chat.withUser.username}`}
                 />
+                </div>
                 <button type="submit">Send</button>
               </div>
             </form>
+            {/*</div>*/}
           </div>
         );
       })}
