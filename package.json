@@ -1,6 +1,7 @@
 {
   "name": "fs-app-template-flex-hooks",
   "version": "1.0.0",
+  "homepage": "https://andykeem-dacreator.github.io/side-jobs/",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,7 +11,8 @@
     "test:dev": "DATABASE_URL=postgres://localhost/acme_test_db npm run test -- --watch",
     "test:dev:quiet": "QUIET=true npm run test:dev",
     "start:dev": "JWT=felix nodemon server/index.js --ignore dist/ --ignore src/ & npm run build:dev",
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
@@ -41,6 +43,7 @@
     "chai": "^4.3.6",
     "concurrently": "^8.0.1",
     "dotenv-webpack": "^8.0.1",
+    "gh-pages": "^6.1.1",
     "mocha": "^10.1.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.8",
