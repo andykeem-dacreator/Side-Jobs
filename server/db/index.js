@@ -4,6 +4,7 @@ const Task = require("./Task");
 const Message = require("./Message");
 const { faker } = require("@faker-js/faker");
 const Review = require("./Review");
+require("dotenv").config();
 
 User.hasMany(Task, { as: "createdTasks", foreignKey: "userId" });
 User.hasMany(Task, { as: "performedTasks", foreignKey: "taskDoerId" });
