@@ -1,11 +1,12 @@
 <html>
   <head>
     <title>Side Jobs</title>
-    <script
-      async
-      src="https://maps.googleapis.com/maps/api/js?key={process.env.REACT_APP_API_KEY}&libraries=places&callback=initMap"
-      defer
-    ></script>
+    <script>
+      const googleMapsApiKey = `${process.env.REACT_APP_API_KEY}`;
+      document.write(
+        `<script async src="https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places&callback=initMap" defer></script>`
+      );
+    </script>
     <script src="/dist/main.js" defer></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link
