@@ -2,7 +2,6 @@ const { expect } = require("chai");
 const { syncAndSeed, User } = require("../server/db");
 const jwt = require("jsonwebtoken");
 const app = require("supertest")(require("../server/app"));
-require("dotenv").config();
 
 describe("The Login Process", () => {
   let seed;

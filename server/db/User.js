@@ -5,7 +5,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const JWT = process.env.JWT;
 const socketMap = require("../socketMap");
-require("dotenv").config();
 
 const User = conn.define("user", {
   id: {

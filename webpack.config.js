@@ -2,11 +2,6 @@ const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   devtool: "source-map",
-  resolve: {
-    fallback: {
-      crypto: require.resolve("crypto-browserify"),
-    },
-  },
   plugins: [new Dotenv()],
   module: {
     rules: [

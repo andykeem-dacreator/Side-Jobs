@@ -3,7 +3,6 @@ const app = express();
 const path = require("path");
 const socketMap = require("./socketMap");
 const { isLoggedIn } = require("./api/middleware");
-require("dotenv").config();
 app.use(express.json({ limit: "50mb" }));
 
 app.use("/dist", express.static(path.join(__dirname, "../dist")));

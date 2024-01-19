@@ -2,6 +2,7 @@ const app = require("./app");
 const { syncAndSeed, User } = require("./db");
 const ws = require("ws");
 require("dotenv").config();
+
 const socketMap = require("./socketMap");
 
 const init = async () => {

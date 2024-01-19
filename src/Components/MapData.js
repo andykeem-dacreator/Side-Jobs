@@ -7,7 +7,7 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-require("dotenv").config();
+// require("dotenv").config();
 
 const MapData = () => {
   const { tasks } = useSelector((state) => state);
