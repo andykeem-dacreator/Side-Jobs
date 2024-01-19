@@ -2,9 +2,9 @@
   <head>
     <title>Side Jobs</title>
     <script
-    src={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY}&libraries=places`}
-    async
-    defer
+      async
+      src="https://maps.googleapis.com/maps/api/js?key={process.env.REACT_APP_API_KEY}&libraries=places&callback=initMap"
+      defer
     ></script>
     <script src="/dist/main.js" defer></script>
     <link rel="stylesheet" href="/static/styles.css" />
