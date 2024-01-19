@@ -1,11 +1,12 @@
-const express = require('express');
+const express = require("express");
 const app = express.Router();
-const { User } = require('../db');
-const { isLoggedIn } = require('./middleware');
+const { User } = require("../db");
+const { isLoggedIn } = require("./middleware");
+const jwt = require("jsonwebtoken");
 
 module.exports = app;
 
-app.post('/', async (req, res, next) => {
+app.post("/", async (req, res, next) => {
   try {
     res.send(await User.authenticate(req.body));
   } catch (ex) {
@@ -22,7 +23,7 @@ app.post('/', async (req, res, next) => {
 //   }
 // });
 
-app.get('/', isLoggedIn, (req, res, next) => {
+app.get("/", isLoggedIn, (req, res, next) => {
   try {
     res.send(req.user);
   } catch (ex) {
@@ -30,7 +31,7 @@ app.get('/', isLoggedIn, (req, res, next) => {
   }
 });
 
-app.put('/', isLoggedIn, async (req, res, next) => {
+app.put("/", isLoggedIn, async (req, res, next) => {
   try {
     const user = req.user;
     await user.update(req.body);

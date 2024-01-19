@@ -1,6 +1,7 @@
 const app = require("./app");
 const { syncAndSeed, User } = require("./db");
 const ws = require("ws");
+//comment or uncomment this to change port
 require("dotenv").config();
 
 const socketMap = require("./socketMap");
