@@ -7,6 +7,7 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
+
 // require("dotenv").config();
 
 const MapData = () => {
@@ -15,7 +16,7 @@ const MapData = () => {
   const [activeMarker, setActiveMarker] = useState(null);
   const task = tasks.find((task) => task.id === id);
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_API_KEY,
+    apiKey: process.env.REACT_APP_API_KEY,
   });
   const handleMarkerClick = (marker) => {
     setActiveMarker(marker);
