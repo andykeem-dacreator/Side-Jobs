@@ -84,6 +84,25 @@ const MapData = () => {
     }
   }, [isLoaded, center]);
 
+  useEffect(() => {
+    if (!isLoaded) {
+      const script = document.createElement("script");
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY}&libraries=places&callback=initMap`;
+      script.defer = true;
+      script.async = true;
+
+      document.head.appendChild(script);
+
+      script.onload = () => {
+        setIsLoaded(true);
+      };
+
+      script.onerror = () => {
+        setIsError(true);
+      };
+    }
+  }, [isLoaded]);
+
   if (loadError) {
     return <div>Error loading Google Maps</div>;
   }
