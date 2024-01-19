@@ -3,7 +3,7 @@ const { faker } = require("@faker-js/faker");
 const { STRING, UUID, UUIDV4, TEXT, BOOLEAN, FLOAT } = conn.Sequelize;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT = process.env.JWT_SECRET;
 const socketMap = require("../socketMap");
 
 const User = conn.define("user", {
@@ -108,7 +108,7 @@ User.addHook("beforeSave", async (user) => {
 
 User.findByToken = async function (token) {
   try {
-    const { id } = jwt.verify(token, JWT_SECRET);
+    const { id } = jwt.verify(token, JWT);
     const user = await this.findByPk(id);
     if (user) {
       return user;
